@@ -1,14 +1,19 @@
-> [!IMPORTANT]
-> DO NOT FORK, please download this repository and import it to your personal account.
+# c/side interview challenge
 
+## Developer info
 
-# cside-interview Template
+- Full name: Juan Marcos Rigoli
+- Email: [marcos@rigoli.dev](mailto:marcos@rigoli.dev)
+- Contact info: https://rigoli.dev
 
-Thanks for applying to c/side! While basic, this template resembles high-level of what c/side's fullstack experience would look like. This defines a very good starting point for your homework assignment so you can focus on writing the application rather than making the foundation of the app.
+## Test this app
 
-## What you are building
+The application is available at: https://cside-challenge.github.dev for a limited time.
+There were warnings against having public access to this deployed challenge to avoid exposing secret tokens on a frontend app, however this is not the case since this instance is using a (Proxy)[https://github.com/rijuma/cside-github-proxy] to cirvumvent this.
 
-You are building a simple application that displays information about a GitHub repository. The application should be able to do the following:
+## Challenge requirements
+
+This coding challenge consists of building a simple application that displays information about a GitHub repository. The application should be able to do the following:
 
 - Search any repository on GitHub
 - Display the basic information about the repository
@@ -30,36 +35,23 @@ You are building a simple application that displays information about a GitHub r
         - Comment's created at
         - Comment's body
 
+The application needs to communicate with [GitHub's GraphQL API](https://docs.github.com/en/graphql). I will use a (self-hosted API Gateway)[https://github.com/rijuma/cside-github-proxy] as a Token Proxy between the frontend and the GraphQL application. This is just for protection and it's not a requirement, since there will be no internal logic and the application wouldn't know about this (only the endpoint address will be different).
+
 ## Getting Started / Good-to-Know
 
-> [!IMPORTANT]
-> This template SHOULD NOT BE PUBLISHED ONLINE. Since this is a frontend-only application, if you publish it online, your GitHub token will be publicly available via the Network tab of the browser's developer tools. 
+> [!NOTICE]
+> This challenge is about creating a frontend-only application, and it was advised to not publish this publicly since it would expose github tokens to the browser, creating a security issue.
+> I do want to, however, to be able to deploy this into a public domian for a quick access to the reviewers. To circumvent the security issues, I'll also create a simple API Gateway to hold the secrets and a simple validation to avoid exposure.
+> This is not part of the challenge and I don't demand extra points for it. The source for this gateway will be at https://github.com/rijuma/cside-github-proxy.
 
-This template uses:
-- [Vite](https://vitejs.dev/)
-- [React](https://reactjs.org/)
-- [Relay](https://relay.dev/)
-- [Tailwind](https://tailwindcss.com/)
+This template provided by c/side provides integration with `Vite`, `React`, `Relay`, `Tailwind`, `TanStack Router` and `Biome` out of the box. However, the requirements states that _"You are free to use whatever you'd like for UI. We personally use build most of our components in house, but do use [Radix UI](https://www.radix-ui.com/) for some components."_.
+Based on this statement and the freedom of choice, I understand that c/side does not particularly uses `Tailwind CSS` and since `Radix UI` has not a direct dependency on `Tailwind CSS` (can be added but is not required) I'll choose not to use it. I do have experience on the framework, it's just a personal choice.
+
+The stack will be then:
+
+- [Vite](https://vitejs.dev)
+- [React](https://reactjs.org)
+- [Relay](https://relay.dev)
+- [Radix UI](https://www.radix-ui.com)
 - [TanStack Router](https://tanstack.com/router/v1)
-- [Biome](https://biomejs.dev/)
-
-> [!NOTE]
-> There is not a design system for this. You are free to use whatever you'd like for UI. We personally use build most of our components in house, but do use [Radix UI](https://www.radix-ui.com/) for some components. Also note that this does not need to be particularly pretty, but should not look subjectively bad either.
-
-You can add as many packages as you'd like, but you must adhere to using Vite, React and Relay at the minimum.
-
-To get started, follow these steps:
-
-1. Clone this repository
-2. Rename/duplicate the `.env.example` file to `.env`
-   1. Create a GitHub token with at the very least the `repo` and `user` scopes
-   2. Copy the token and paste it into the `.env` file
-3. Run `pnpm install` to install the dependencies
-4. Run `pnpm dev` to start the development server
-   1. This runs Vite in development mode and relay's compiler in watch mode. Any changes you make to a query/mutation/fragment will be automatically compiled and the application will be updated.
-5. Open your browser to `http://localhost:5173`
-6. Get to cooking!
-
-
-> [!NOTE]
-> You are not creating an API for this application. But rather interacting with GitHub's GraphQL API (Read the docs [here](https://docs.github.com/en/graphql)). At c/side, you will be creating queries and mutations for the API, but for the sake of your time, we will be interacting with GitHub's API.
+- [Biome](https://biomejs.dev)
