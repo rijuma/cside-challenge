@@ -1,4 +1,4 @@
-# c/side interview challenge
+# c/side Interview Challenge
 
 ## Developer info
 
@@ -55,3 +55,8 @@ The stack will be then:
 - [Radix UI](https://www.radix-ui.com)
 - [TanStack Router](https://tanstack.com/router/v1)
 - [Biome](https://biomejs.dev)
+
+Check the live version at: https://cside-challenge.github.dev
+
+> [!NOTICE]
+> The `Dockerfile`, the `compose.yml` and some variables on `.env.example` are just part of the configuration for the server to be deployed on a VPS using nginx as a reverse-proxy. You don't need these to run the project locally.
