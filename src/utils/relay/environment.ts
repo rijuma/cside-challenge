@@ -17,6 +17,11 @@ async function fetchRelay(
 ) {
 	const proxyUrl = `${import.meta.env.VITE_GH_PROXY_URL}` || null;
 
+	if (proxyUrl && import.meta.env.VITE_GH_TOKEN)
+		throw new Error(
+			"You are using a GitHub proxy. Please remove VITE_GH_PROXY_URL from the env vars, since it's a security risk.",
+		);
+
 	const options = {
 		method: "POST",
 		headers: {
