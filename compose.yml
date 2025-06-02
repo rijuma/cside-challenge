@@ -11,7 +11,7 @@ services:
     environment:
       VIRTUAL_HOST: cside-challenge.rigoli.dev
       VIRTUAL_PORT: 8080
-# networks:
-#   default:
-#     external: true
-#     name: proxy
+networks:
+  default:
+    external: true
+    name: proxy
