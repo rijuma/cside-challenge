@@ -60,3 +60,15 @@ Check the live version at: https://cside-challenge.github.dev
 
 > [!NOTICE]
 > The `Dockerfile`, the `compose.yml` and some variables on `.env.example` are just part of the configuration for the server to be deployed on a VPS using nginx as a reverse-proxy. You don't need these to run the project locally.
+
+# Mockup
+
+To have a rough idea of how to show the information I've made a Excalidraw sketch with two views, the one when you open a github project and another one with an issue.
+
+Basically, it will have a preview where at the bottom it will show the issue list. When clicking on an issue it will take you to the right side.
+
+It will probably evolve into a better UI than this scribble, especially to move around other issues (maybe prev/next) and to be able to close it and go back to the list. This is just to start.
+
+[Open in ExcaliDraw](https://excalidraw.com/#json=qc8K3VXTOOBISBZisRJ0H,z0dCYL4QnZHJ1mV2BAzwRw) - Be mindful that it could overwrite any current drawing you might have in Excalidraw currently.
+
+![Sketch](docs/ui-sketch.svg)
