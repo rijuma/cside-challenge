@@ -18,6 +18,7 @@
     "@tanstack/react-router": "^1.120.13",
     "@tanstack/react-router-devtools": "^1.120.13",
     "@tanstack/router-plugin": "^1.120.13",
+    "radix-ui": "^1.4.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "relay-runtime": "^18.2.0",
