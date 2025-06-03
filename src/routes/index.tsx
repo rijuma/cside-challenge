@@ -1,3 +1,4 @@
+import { RootLayout } from "@/layouts";
 import type { routesQuery } from "@/utils/relay/__generated__/routesQuery.graphql";
 import { createFileRoute } from "@tanstack/react-router";
 import { graphql, loadQuery, usePreloadedQuery } from "react-relay";
@@ -28,8 +29,8 @@ function App() {
 	const data = usePreloadedQuery<routesQuery>(INDEX_QUERY, preloadedQuery);
 
 	return (
-		<div>
+		<RootLayout>
 			<h1>Hello, {data.viewer.name}</h1>
-		</div>
+		</RootLayout>
 	);
 }

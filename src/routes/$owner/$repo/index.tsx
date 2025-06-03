@@ -2,7 +2,9 @@ import { repositoryQuery, useRepositoryData } from "@/queries";
 import { createFileRoute } from "@tanstack/react-router";
 import { loadQuery } from "react-relay";
 
+import { Repository } from "@/components/repository";
 import { RepositoryProvider } from "@/context/repository";
+import { RootLayout } from "@/layouts";
 import type { repositoryQuery as RepositoryQuery } from "@/utils/relay/__generated__/repositoryQuery.graphql";
 
 export const Route = createFileRoute("/$owner/$repo/")({
@@ -28,11 +30,14 @@ function Repo() {
 
 	return (
 		<RepositoryProvider value={repositoryData}>
-			<div>
-				<h1>
-					Hello, {owner}, nice repo: {repo}
-				</h1>
-			</div>
+			<RootLayout>
+				<div>
+					<h1>
+						Hello, {owner}, nice repo: {repo}
+					</h1>
+					<Repository />
+				</div>
+			</RootLayout>
 		</RepositoryProvider>
 	);
 }
