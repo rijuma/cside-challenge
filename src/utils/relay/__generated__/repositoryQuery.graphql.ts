@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<465727eb0de8747c247ab2ac6d535e9d>>
+ * @generated SignedSource<<678f5d39c89c32955cdf54ad3a31aa78>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -15,6 +15,9 @@ export type repositoryQuery$variables = {
 };
 export type repositoryQuery$data = {
   readonly repository: {
+    readonly branches: {
+      readonly totalCount: number;
+    } | null | undefined;
     readonly collaborators: {
       readonly nodes: ReadonlyArray<{
         readonly avatarUrl: any;
@@ -31,10 +34,10 @@ export type repositoryQuery$data = {
     } | null | undefined;
     readonly description: string | null | undefined;
     readonly forkCount: number;
-    readonly name: string;
-    readonly refs: {
+    readonly issues: {
       readonly totalCount: number;
-    } | null | undefined;
+    };
+    readonly name: string;
     readonly stargazerCount: number;
   } | null | undefined;
 };
@@ -106,7 +109,7 @@ v6 = [
   }
 ],
 v7 = {
-  "alias": null,
+  "alias": "branches",
   "args": [
     {
       "kind": "Literal",
@@ -146,6 +149,16 @@ v9 = {
   "storageKey": null
 },
 v10 = {
+  "alias": null,
+  "args": null,
+  "concreteType": "IssueConnection",
+  "kind": "LinkedField",
+  "name": "issues",
+  "plural": false,
+  "selections": (v6/*: any*/),
+  "storageKey": null
+},
+v11 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
@@ -219,7 +232,8 @@ return {
               }
             ],
             "storageKey": null
-          }
+          },
+          (v10/*: any*/)
         ],
         "storageKey": null
       }
@@ -271,11 +285,11 @@ return {
                     "storageKey": null
                   },
                   (v8/*: any*/),
-                  (v10/*: any*/)
+                  (v11/*: any*/)
                 ],
                 "storageKey": null
               },
-              (v10/*: any*/)
+              (v11/*: any*/)
             ],
             "storageKey": null
           },
@@ -297,30 +311,31 @@ return {
                 "selections": [
                   (v9/*: any*/),
                   (v2/*: any*/),
-                  (v10/*: any*/)
+                  (v11/*: any*/)
                 ],
                 "storageKey": null
               }
             ],
             "storageKey": null
           },
-          (v10/*: any*/)
+          (v10/*: any*/),
+          (v11/*: any*/)
         ],
         "storageKey": null
       }
     ]
   },
   "params": {
-    "cacheID": "dd8053f688d49b3c373e95f28e491ee1",
+    "cacheID": "12f622191ecf7d49336bf184b76bee47",
     "id": null,
     "metadata": {},
     "name": "repositoryQuery",
     "operationKind": "query",
-    "text": "query repositoryQuery(\n  $owner: String!\n  $repo: String!\n) {\n  repository(owner: $owner, name: $repo) {\n    name\n    description\n    stargazerCount\n    forkCount\n    refs(refPrefix: \"refs/heads/\") {\n      totalCount\n    }\n    defaultBranchRef {\n      name\n      target {\n        __typename\n        ... on Commit {\n          history {\n            totalCount\n          }\n        }\n        id\n      }\n      id\n    }\n    collaborators {\n      nodes {\n        avatarUrl\n        name\n        id\n      }\n    }\n    id\n  }\n}\n"
+    "text": "query repositoryQuery(\n  $owner: String!\n  $repo: String!\n) {\n  repository(owner: $owner, name: $repo) {\n    name\n    description\n    stargazerCount\n    forkCount\n    branches: refs(refPrefix: \"refs/heads/\") {\n      totalCount\n    }\n    defaultBranchRef {\n      name\n      target {\n        __typename\n        ... on Commit {\n          history {\n            totalCount\n          }\n        }\n        id\n      }\n      id\n    }\n    collaborators {\n      nodes {\n        avatarUrl\n        name\n        id\n      }\n    }\n    issues {\n      totalCount\n    }\n    id\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "b6bddab6478faead75f8f872f4af59e5";
+(node as any).hash = "e3a7656bf5fa00f939eede53c1bf935e";
 
 export default node;

@@ -4,9 +4,9 @@ import ReactDOM from "react-dom/client";
 
 import { routeTree } from "./routeTree.gen";
 
-import reportWebVitals from "./reportWebVitals.ts";
+// import reportWebVitals from "./reportWebVitals";
 import "./styles.css";
-import relayEnvironment from "./utils/relay/environment.ts";
+import relayEnvironment from "./utils/relay/environment";
 
 const router = createRouter({
 	routeTree,
@@ -16,7 +16,7 @@ const router = createRouter({
 	defaultPreload: "intent",
 	scrollRestoration: true,
 	defaultStructuralSharing: true,
-	defaultPreloadStaleTime: 0,
+	defaultPreloadStaleTime: 5_000,
 });
 
 declare module "@tanstack/react-router" {
@@ -39,4 +39,4 @@ if (rootElement && !rootElement.innerHTML) {
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// reportWebVitals();

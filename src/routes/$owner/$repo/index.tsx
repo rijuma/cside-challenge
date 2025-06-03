@@ -13,20 +13,20 @@ export const Route = createFileRoute("/$owner/$repo/")({
 	loader: async ({ params, context: { relayEnvironment } }) => {
 		const { owner, repo } = params;
 
-		const preloadedQuery = await loadQuery<RepositoryQuery>(
+		const queryRef = await loadQuery<RepositoryQuery>(
 			relayEnvironment,
 			repositoryQuery,
 			{ owner, repo },
 			{ fetchPolicy: "store-and-network" },
 		);
 
-		return { owner, repo, preloadedQuery };
+		return { owner, repo, queryRef };
 	},
 });
 
 function Repo() {
-	const { owner, repo, preloadedQuery } = Route.useLoaderData();
-	const repositoryData = useRepositoryData(preloadedQuery);
+	const { owner, repo, queryRef } = Route.useLoaderData();
+	const repositoryData = useRepositoryData(queryRef);
 
 	return (
 		<RepositoryProvider value={repositoryData}>

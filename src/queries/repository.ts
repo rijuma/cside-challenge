@@ -11,7 +11,7 @@ export const repositoryQuery = graphql`
       description,
       stargazerCount,
       forkCount,
-      refs(refPrefix:"refs/heads/") {
+      branches:refs(refPrefix:"refs/heads/") {
         totalCount
       }
       defaultBranchRef {
@@ -30,16 +30,19 @@ export const repositoryQuery = graphql`
           name
         }
       }
+      issues {
+        totalCount
+      }
     }
   }
 `;
 
 export const useRepositoryData = (
-	preloadedQuery: PreloadedQuery<RepositoryQuery>,
+	queryRef: PreloadedQuery<RepositoryQuery>,
 ): Repository => {
 	const { repository } = usePreloadedQuery<RepositoryQuery>(
 		repositoryQuery,
-		preloadedQuery,
+		queryRef,
 	);
 
 	if (!repository) throw new Error("Missing repository data");
@@ -47,31 +50,34 @@ export const useRepositoryData = (
 	const {
 		name,
 		description,
-		stargazerCount: starCount,
-		refs,
-		forkCount,
-		defaultBranchRef,
+		branches,
 		collaborators,
+		defaultBranchRef,
+		forkCount,
+		stargazerCount: starCount,
+		issues,
 	} = repository;
 
 	const mainBranch = defaultBranchRef?.name || "master";
-	const branchCount = refs?.totalCount || 0;
+	const branchCount = branches?.totalCount || 0;
+	const issueCount = issues?.totalCount || 0;
 	const commitCount = defaultBranchRef?.target?.history?.totalCount || 0;
 
 	const contributors =
 		collaborators?.nodes?.filter(Boolean).map((c) => ({
 			avatarUrl: c?.avatarUrl || "",
 			name: c?.name || "(unknown)",
-		})) || [];
+		})) || null; // Null means insufficient permissions
 
 	return {
 		name,
-		mainBranch,
 		description: description || undefined,
-		starCount,
-		forkCount,
 		branchCount,
 		commitCount,
 		contributors,
+		forkCount,
+		issueCount,
+		mainBranch,
+		starCount,
 	} satisfies Repository;
 };
