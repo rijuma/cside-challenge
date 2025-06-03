@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<dc7ccfa1e0e1dfae083a662cd0764c8c>>
+ * @generated SignedSource<<465727eb0de8747c247ab2ac6d535e9d>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -9,11 +9,11 @@
 // @ts-nocheck
 
 import { ConcreteRequest } from 'relay-runtime';
-export type RepoQuery$variables = {
+export type repositoryQuery$variables = {
   owner: string;
   repo: string;
 };
-export type RepoQuery$data = {
+export type repositoryQuery$data = {
   readonly repository: {
     readonly collaborators: {
       readonly nodes: ReadonlyArray<{
@@ -32,12 +32,15 @@ export type RepoQuery$data = {
     readonly description: string | null | undefined;
     readonly forkCount: number;
     readonly name: string;
+    readonly refs: {
+      readonly totalCount: number;
+    } | null | undefined;
     readonly stargazerCount: number;
   } | null | undefined;
 };
-export type RepoQuery = {
-  response: RepoQuery$data;
-  variables: RepoQuery$variables;
+export type repositoryQuery = {
+  response: repositoryQuery$data;
+  variables: repositoryQuery$variables;
 };
 
 const node: ConcreteRequest = (function(){
@@ -93,7 +96,32 @@ v5 = {
   "name": "forkCount",
   "storageKey": null
 },
-v6 = {
+v6 = [
+  {
+    "alias": null,
+    "args": null,
+    "kind": "ScalarField",
+    "name": "totalCount",
+    "storageKey": null
+  }
+],
+v7 = {
+  "alias": null,
+  "args": [
+    {
+      "kind": "Literal",
+      "name": "refPrefix",
+      "value": "refs/heads/"
+    }
+  ],
+  "concreteType": "RefConnection",
+  "kind": "LinkedField",
+  "name": "refs",
+  "plural": false,
+  "selections": (v6/*: any*/),
+  "storageKey": "refs(refPrefix:\"refs/heads/\")"
+},
+v8 = {
   "kind": "InlineFragment",
   "selections": [
     {
@@ -103,29 +131,21 @@ v6 = {
       "kind": "LinkedField",
       "name": "history",
       "plural": false,
-      "selections": [
-        {
-          "alias": null,
-          "args": null,
-          "kind": "ScalarField",
-          "name": "totalCount",
-          "storageKey": null
-        }
-      ],
+      "selections": (v6/*: any*/),
       "storageKey": null
     }
   ],
   "type": "Commit",
   "abstractKey": null
 },
-v7 = {
+v9 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "avatarUrl",
   "storageKey": null
 },
-v8 = {
+v10 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
@@ -137,7 +157,7 @@ return {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
-    "name": "RepoQuery",
+    "name": "repositoryQuery",
     "selections": [
       {
         "alias": null,
@@ -151,6 +171,7 @@ return {
           (v3/*: any*/),
           (v4/*: any*/),
           (v5/*: any*/),
+          (v7/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -168,7 +189,7 @@ return {
                 "name": "target",
                 "plural": false,
                 "selections": [
-                  (v6/*: any*/)
+                  (v8/*: any*/)
                 ],
                 "storageKey": null
               }
@@ -191,7 +212,7 @@ return {
                 "name": "nodes",
                 "plural": true,
                 "selections": [
-                  (v7/*: any*/),
+                  (v9/*: any*/),
                   (v2/*: any*/)
                 ],
                 "storageKey": null
@@ -210,7 +231,7 @@ return {
   "operation": {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
-    "name": "RepoQuery",
+    "name": "repositoryQuery",
     "selections": [
       {
         "alias": null,
@@ -224,6 +245,7 @@ return {
           (v3/*: any*/),
           (v4/*: any*/),
           (v5/*: any*/),
+          (v7/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -248,12 +270,12 @@ return {
                     "name": "__typename",
                     "storageKey": null
                   },
-                  (v6/*: any*/),
-                  (v8/*: any*/)
+                  (v8/*: any*/),
+                  (v10/*: any*/)
                 ],
                 "storageKey": null
               },
-              (v8/*: any*/)
+              (v10/*: any*/)
             ],
             "storageKey": null
           },
@@ -273,32 +295,32 @@ return {
                 "name": "nodes",
                 "plural": true,
                 "selections": [
-                  (v7/*: any*/),
+                  (v9/*: any*/),
                   (v2/*: any*/),
-                  (v8/*: any*/)
+                  (v10/*: any*/)
                 ],
                 "storageKey": null
               }
             ],
             "storageKey": null
           },
-          (v8/*: any*/)
+          (v10/*: any*/)
         ],
         "storageKey": null
       }
     ]
   },
   "params": {
-    "cacheID": "e6e4d08ef871f26220ff3d973803b6db",
+    "cacheID": "dd8053f688d49b3c373e95f28e491ee1",
     "id": null,
     "metadata": {},
-    "name": "RepoQuery",
+    "name": "repositoryQuery",
     "operationKind": "query",
-    "text": "query RepoQuery(\n  $owner: String!\n  $repo: String!\n) {\n  repository(owner: $owner, name: $repo) {\n    name\n    description\n    stargazerCount\n    forkCount\n    defaultBranchRef {\n      name\n      target {\n        __typename\n        ... on Commit {\n          history {\n            totalCount\n          }\n        }\n        id\n      }\n      id\n    }\n    collaborators {\n      nodes {\n        avatarUrl\n        name\n        id\n      }\n    }\n    id\n  }\n}\n"
+    "text": "query repositoryQuery(\n  $owner: String!\n  $repo: String!\n) {\n  repository(owner: $owner, name: $repo) {\n    name\n    description\n    stargazerCount\n    forkCount\n    refs(refPrefix: \"refs/heads/\") {\n      totalCount\n    }\n    defaultBranchRef {\n      name\n      target {\n        __typename\n        ... on Commit {\n          history {\n            totalCount\n          }\n        }\n        id\n      }\n      id\n    }\n    collaborators {\n      nodes {\n        avatarUrl\n        name\n        id\n      }\n    }\n    id\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "ddfd14059c7006835ec9fded6e88649f";
+(node as any).hash = "b6bddab6478faead75f8f872f4af59e5";
 
 export default node;

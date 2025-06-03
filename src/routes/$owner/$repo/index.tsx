@@ -1,33 +1,9 @@
-import type { RepoQuery } from "@/utils/relay/__generated__/RepoQuery.graphql";
+import { repositoryQuery, useRepositoryData } from "@/queries";
 import { createFileRoute } from "@tanstack/react-router";
-import { graphql, loadQuery, usePreloadedQuery } from "react-relay";
+import { loadQuery } from "react-relay";
 
-const REPO_QUERY = graphql`
-  query RepoQuery($owner: String!, $repo: String!) {
-    repository(owner: $owner, name: $repo) {
-      name,
-      description,
-      stargazerCount,
-      forkCount,
-      defaultBranchRef {
-        name,
-        target {
-          ... on Commit {
-            history {
-              totalCount
-            }
-          }
-        }
-      }
-      collaborators {
-        nodes {
-          avatarUrl,
-          name
-        }
-      }
-    }
-  }
-`;
+import { RepositoryProvider } from "@/context/repository";
+import type { repositoryQuery as RepositoryQuery } from "@/utils/relay/__generated__/repositoryQuery.graphql";
 
 export const Route = createFileRoute("/$owner/$repo/")({
 	component: Repo,
@@ -35,28 +11,28 @@ export const Route = createFileRoute("/$owner/$repo/")({
 	loader: async ({ params, context: { relayEnvironment } }) => {
 		const { owner, repo } = params;
 
-		const preloadedData = await loadQuery<RepoQuery>(
+		const preloadedQuery = await loadQuery<RepositoryQuery>(
 			relayEnvironment,
-			REPO_QUERY,
+			repositoryQuery,
 			{ owner, repo },
 			{ fetchPolicy: "store-and-network" },
 		);
 
-		return { owner, repo, preloadedData };
+		return { owner, repo, preloadedQuery };
 	},
 });
 
 function Repo() {
-	const { owner, repo, preloadedData } = Route.useLoaderData();
-	const data = usePreloadedQuery<RepoQuery>(REPO_QUERY, preloadedData);
+	const { owner, repo, preloadedQuery } = Route.useLoaderData();
+	const repositoryData = useRepositoryData(preloadedQuery);
 
 	return (
-		<div>
-			<h1>
-				Hello, {owner}, nice repo: {repo}
-			</h1>
-
-			<pre>{JSON.stringify(data, null, 2)}</pre>
-		</div>
+		<RepositoryProvider value={repositoryData}>
+			<div>
+				<h1>
+					Hello, {owner}, nice repo: {repo}
+				</h1>
+			</div>
+		</RepositoryProvider>
 	);
 }

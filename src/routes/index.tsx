@@ -1,6 +1,6 @@
+import type { routesQuery } from "@/utils/relay/__generated__/routesQuery.graphql";
 import { createFileRoute } from "@tanstack/react-router";
 import { graphql, loadQuery, usePreloadedQuery } from "react-relay";
-import type { routesQuery } from "../utils/relay/__generated__/routesQuery.graphql";
 
 const INDEX_QUERY = graphql`
   query routesQuery {
