@@ -1,0 +1,12 @@
+@use "sass:meta";
+
+@layer radix, utils;
+
+@layer radix {
+  /* Radix classes here */
+  @include meta.load-css("~/@radix-ui/themes/styles.css");
+}
+
+@layer utils {
+  /* Utility classes here */
+}

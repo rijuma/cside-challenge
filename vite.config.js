@@ -1,4 +1,3 @@
-import tailwindcss from "@tailwindcss/vite";
 import viteReact from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
@@ -11,7 +10,6 @@ export default defineConfig({
 	plugins: [
 		TanStackRouterVite({ autoCodeSplitting: true }),
 		viteReact(),
-		tailwindcss(),
 		relay,
 	],
 	test: {
@@ -23,6 +21,7 @@ export default defineConfig({
 	},
 	resolve: {
 		alias: {
+			"~": resolve(__dirname, "./node_modules"),
 			"@": resolve(__dirname, "./src"),
 		},
 	},

@@ -3,7 +3,6 @@
   "typescript": true,
   "projectName": ".",
   "mode": "file-router",
-  "tailwind": true,
   "packageManager": "pnpm",
   "toolchain": "biome",
   "variableValues": {},
