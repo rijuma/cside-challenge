@@ -12,6 +12,13 @@ export default defineConfig({
 		viteReact(),
 		relay,
 	],
+	css: {
+		preprocessorOptions: {
+			scss: {
+				additionalData: "@use '@/styles/scss/globals.scss' as *;",
+			},
+		},
+	},
 	test: {
 		globals: true,
 		environment: "jsdom",

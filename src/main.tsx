@@ -5,7 +5,7 @@ import ReactDOM from "react-dom/client";
 import { routeTree } from "./routeTree.gen";
 
 // import reportWebVitals from "./reportWebVitals";
-import "./styles.scss";
+import "./styles/main.scss";
 import relayEnvironment from "./utils/relay/environment";
 
 const router = createRouter({
