@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<7e0b39dc4ffda044156324a1943d1828>>
+ * @generated SignedSource<<ee71e8e559cf0aba88efbf5e14b509ed>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -11,9 +11,9 @@
 import { ConcreteRequest } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
 export type issueQuery$variables = {
-  name: string;
   number: number;
   owner: string;
+  slug: string;
 };
 export type issueQuery$data = {
   readonly repository: {
@@ -37,23 +37,23 @@ const node: ConcreteRequest = (function(){
 var v0 = {
   "defaultValue": null,
   "kind": "LocalArgument",
-  "name": "name"
+  "name": "number"
 },
 v1 = {
   "defaultValue": null,
   "kind": "LocalArgument",
-  "name": "number"
+  "name": "owner"
 },
 v2 = {
   "defaultValue": null,
   "kind": "LocalArgument",
-  "name": "owner"
+  "name": "slug"
 },
 v3 = [
   {
     "kind": "Variable",
     "name": "name",
-    "variableName": "name"
+    "variableName": "slug"
   },
   {
     "kind": "Variable",
@@ -177,9 +177,9 @@ return {
   "kind": "Request",
   "operation": {
     "argumentDefinitions": [
+      (v1/*: any*/),
       (v2/*: any*/),
-      (v0/*: any*/),
-      (v1/*: any*/)
+      (v0/*: any*/)
     ],
     "kind": "Operation",
     "name": "issueQuery",
@@ -339,16 +339,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "e446c5a3d662144488a3128de89629c0",
+    "cacheID": "29750ad6a0a0216ff70d958532fd2285",
     "id": null,
     "metadata": {},
     "name": "issueQuery",
     "operationKind": "query",
-    "text": "query issueQuery(\n  $owner: String!\n  $name: String!\n  $number: Int!\n) {\n  repository(owner: $owner, name: $name) {\n    issue(number: $number) {\n      number\n      title\n      commentCount: comments {\n        totalCount\n      }\n      details: bodyHTML\n      ...issueCommentsPaginatedFragment\n      id\n    }\n    id\n  }\n}\n\nfragment issueCommentsPaginatedFragment on Issue {\n  comments(first: 10) {\n    edges {\n      node {\n        id\n        contents: bodyHTML\n        author {\n          __typename\n          url\n          avatarUrl\n          login\n          ... on Node {\n            __isNode: __typename\n            id\n          }\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
+    "text": "query issueQuery(\n  $owner: String!\n  $slug: String!\n  $number: Int!\n) {\n  repository(owner: $owner, name: $slug) {\n    issue(number: $number) {\n      number\n      title\n      commentCount: comments {\n        totalCount\n      }\n      details: bodyHTML\n      ...issueCommentsPaginatedFragment\n      id\n    }\n    id\n  }\n}\n\nfragment issueCommentsPaginatedFragment on Issue {\n  comments(first: 10) {\n    edges {\n      node {\n        id\n        contents: bodyHTML\n        author {\n          __typename\n          url\n          avatarUrl\n          login\n          ... on Node {\n            __isNode: __typename\n            id\n          }\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
   }
 };
 })();
 
-(node as any).hash = "bdbad36e7558d992a205cd9327011b40";
+(node as any).hash = "93a9b15173602e1067d81fcc24cc77d1";
 
 export default node;

@@ -1,3 +1,4 @@
+import type { Comment } from "@/types/comment";
 import type { issueCommentsPaginatedFragment$key } from "@/utils/relay/__generated__/issueCommentsPaginatedFragment.graphql";
 import type { issueQuery as IssueQuery } from "@/utils/relay/__generated__/issueQuery.graphql";
 import { type PreloadedQuery, usePaginationFragment } from "react-relay";
@@ -28,19 +29,30 @@ export const issueCommentsFragmentQuery = graphql`
   }
 `;
 
-export const useRepositoryIssuesData = (
-	queryRef: PreloadedQuery<IssueQuery>,
-) => {
+export const useIssueCommentsData = (queryRef: PreloadedQuery<IssueQuery>) => {
 	const issueData = useIssueData(queryRef);
 	const handlers = usePaginationFragment(
 		issueCommentsFragmentQuery,
 		issueData._ref as issueCommentsPaginatedFragment$key,
 	);
 
-	const { data, ...rest } = handlers;
+	const {
+		data: { comments: data },
+		...rest
+	} = handlers;
 
-	const comments = {
-		...data,
-	};
+	const comments = (data.edges
+		?.map((edge) => {
+			const data = edge?.node;
+			if (!data) return null;
+			return {
+				id: data.id,
+				author: data.author?.login || "(unknown)",
+				avatarUrl: data.author?.avatarUrl || "",
+				url: data.author?.avatarUrl || "",
+				details: data.contents || "",
+			};
+		})
+		.filter(Boolean) || []) as Comment[];
 	return { comments, ...rest };
 };

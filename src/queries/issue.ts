@@ -4,9 +4,9 @@ import { graphql } from "relay-runtime";
 import type { Issue } from "@/types/issue";
 import type { issueQuery as IssueQuery } from "@/utils/relay/__generated__/issueQuery.graphql";
 
-export const repositoryQuery = graphql`
-  query issueQuery($owner: String!, $name: String!, $number: Int!) {
-  repository(owner: $owner, name: $name) {
+export const issueQuery = graphql`
+  query issueQuery($owner: String!, $slug: String!, $number: Int!) {
+  repository(owner: $owner, name: $slug) {
     issue(number: $number) {
       number
       title
@@ -21,7 +21,7 @@ export const repositoryQuery = graphql`
 `;
 
 export const useIssueData = (queryRef: PreloadedQuery<IssueQuery>): Issue => {
-	const result = usePreloadedQuery<IssueQuery>(repositoryQuery, queryRef);
+	const result = usePreloadedQuery<IssueQuery>(issueQuery, queryRef);
 
 	const issue = result?.repository?.issue;
 
