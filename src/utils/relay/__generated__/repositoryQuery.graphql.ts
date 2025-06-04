@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<0b044037b8c7183a36dc432a3411ea07>>
+ * @generated SignedSource<<33490adeeefd5497cb909eb35bb0e0c6>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -33,7 +33,7 @@ export type repositoryQuery$data = {
         };
       } | null | undefined;
     } | null | undefined;
-    readonly description: string | null | undefined;
+    readonly description: any;
     readonly forkCount: number;
     readonly id: string;
     readonly issueCount: {
@@ -44,7 +44,7 @@ export type repositoryQuery$data = {
       readonly login: string;
     };
     readonly stargazerCount: number;
-    readonly " $fragmentSpreads": FragmentRefs<"issuesPaginatedFragment">;
+    readonly " $fragmentSpreads": FragmentRefs<"repositoryIssuesPaginatedFragment">;
   } | null | undefined;
 };
 export type repositoryQuery = {
@@ -99,10 +99,10 @@ v4 = {
   "storageKey": null
 },
 v5 = {
-  "alias": null,
+  "alias": "description",
   "args": null,
   "kind": "ScalarField",
-  "name": "description",
+  "name": "descriptionHTML",
   "storageKey": null
 },
 v6 = {
@@ -277,7 +277,7 @@ return {
           {
             "args": null,
             "kind": "FragmentSpread",
-            "name": "issuesPaginatedFragment"
+            "name": "repositoryIssuesPaginatedFragment"
           }
         ],
         "storageKey": null
@@ -401,14 +401,14 @@ return {
                         "alias": null,
                         "args": null,
                         "kind": "ScalarField",
-                        "name": "title",
+                        "name": "url",
                         "storageKey": null
                       },
                       {
-                        "alias": "description",
+                        "alias": null,
                         "args": null,
                         "kind": "ScalarField",
-                        "name": "body",
+                        "name": "title",
                         "storageKey": null
                       },
                       {
@@ -448,7 +448,13 @@ return {
                                 "storageKey": null
                               },
                               (v3/*: any*/),
-                              (v5/*: any*/),
+                              {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "description",
+                                "storageKey": null
+                              },
                               (v2/*: any*/)
                             ],
                             "storageKey": null
@@ -514,16 +520,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "bb50f0a7c370ae209cb94344f8d68b68",
+    "cacheID": "95c9d88e5b735528c2cf7d269260ad74",
     "id": null,
     "metadata": {},
     "name": "repositoryQuery",
     "operationKind": "query",
-    "text": "query repositoryQuery(\n  $owner: String!\n  $slug: String!\n) {\n  repository(owner: $owner, name: $slug) {\n    id\n    name\n    owner {\n      __typename\n      login\n      id\n    }\n    description\n    stargazerCount\n    forkCount\n    branches: refs(refPrefix: \"refs/heads/\") {\n      totalCount\n    }\n    defaultBranchRef {\n      name\n      target {\n        __typename\n        ... on Commit {\n          history {\n            totalCount\n          }\n        }\n        id\n      }\n      id\n    }\n    issueCount: issues {\n      totalCount\n    }\n    collaborators {\n      nodes {\n        avatarUrl\n        name\n        id\n      }\n    }\n    ...issuesPaginatedFragment\n  }\n}\n\nfragment issuesPaginatedFragment on Repository {\n  issues(first: 10) {\n    edges {\n      node {\n        title\n        description: body\n        createdAt\n        tags: labels(first: 99) {\n          nodes {\n            color\n            name\n            description\n            id\n          }\n        }\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
+    "text": "query repositoryQuery(\n  $owner: String!\n  $slug: String!\n) {\n  repository(owner: $owner, name: $slug) {\n    id\n    name\n    owner {\n      __typename\n      login\n      id\n    }\n    description: descriptionHTML\n    stargazerCount\n    forkCount\n    branches: refs(refPrefix: \"refs/heads/\") {\n      totalCount\n    }\n    defaultBranchRef {\n      name\n      target {\n        __typename\n        ... on Commit {\n          history {\n            totalCount\n          }\n        }\n        id\n      }\n      id\n    }\n    issueCount: issues {\n      totalCount\n    }\n    collaborators {\n      nodes {\n        avatarUrl\n        name\n        id\n      }\n    }\n    ...repositoryIssuesPaginatedFragment\n  }\n}\n\nfragment repositoryIssuesPaginatedFragment on Repository {\n  issues(first: 10) {\n    edges {\n      node {\n        url\n        title\n        createdAt\n        tags: labels(first: 99) {\n          nodes {\n            color\n            name\n            description\n            id\n          }\n        }\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
   }
 };
 })();
 
-(node as any).hash = "d56d2d259ca3aca37501fec628b14483";
+(node as any).hash = "09403dcdc55f71cf229779f9ebb7e0bc";
 
 export default node;

@@ -12,7 +12,7 @@ export const repositoryQuery = graphql`
       owner {
         login
       }
-      description,
+      description: descriptionHTML,
       stargazerCount,
       forkCount,
       branches:refs(refPrefix:"refs/heads/") {
@@ -37,7 +37,7 @@ export const repositoryQuery = graphql`
           name
         }
       }
-      ...issuesPaginatedFragment
+      ...repositoryIssuesPaginatedFragment
     }
   }
 `;
@@ -50,7 +50,7 @@ export const useRepositoryData = (
 		queryRef,
 	);
 
-	if (!repository) throw new Error("Missing repository data");
+	if (!repository) throw new Error("Repository does not exists.");
 
 	const {
 		id,
@@ -88,6 +88,6 @@ export const useRepositoryData = (
 		issueCount,
 		mainBranch,
 		starCount,
-		_ref: repository,
+		_ref: repository, // This is the original unaltered payload to handle paginations
 	} satisfies Repository;
 };

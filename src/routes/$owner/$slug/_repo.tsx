@@ -3,7 +3,7 @@ import { repositoryQuery, useRepositoryData } from "@/queries";
 import { Outlet, createFileRoute } from "@tanstack/react-router";
 import { loadQuery } from "react-relay";
 
-import { useRepositoryIssuesData } from "@/queries/issues";
+import { useRepositoryIssuesData } from "@/queries/repository-issues";
 import type { repositoryQuery as RepositoryQuery } from "@/utils/relay/__generated__/repositoryQuery.graphql";
 
 export const Route = createFileRoute("/$owner/$slug/_repo")({

@@ -1,3 +1,5 @@
+import type { repositoryIssuesPaginatedFragment$key } from "@/utils/relay/__generated__/repositoryIssuesPaginatedFragment.graphql";
+
 export type Repository = {
 	id: string;
 	slug: string;
@@ -15,5 +17,5 @@ export type Repository = {
 				name: string;
 		  }[]
 		| null;
-	_ref: unknown;
+	_ref: repositoryIssuesPaginatedFragment$key;
 };

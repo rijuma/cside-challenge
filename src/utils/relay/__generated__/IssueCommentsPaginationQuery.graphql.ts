@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<8e8689a376b95ec6ddbde23958b0e845>>
+ * @generated SignedSource<<2733cdc149a8383e4b0f51bb8c7c67b7>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,19 +10,19 @@
 
 import { ConcreteRequest } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type RepositoryIssuesPaginationQuery$variables = {
+export type IssueCommentsPaginationQuery$variables = {
   count?: number | null | undefined;
   cursor?: string | null | undefined;
   id: string;
 };
-export type RepositoryIssuesPaginationQuery$data = {
+export type IssueCommentsPaginationQuery$data = {
   readonly node: {
-    readonly " $fragmentSpreads": FragmentRefs<"repositoryIssuesPaginatedFragment">;
+    readonly " $fragmentSpreads": FragmentRefs<"issueCommentsPaginatedFragment">;
   } | null | undefined;
 };
-export type RepositoryIssuesPaginationQuery = {
-  response: RepositoryIssuesPaginationQuery$data;
-  variables: RepositoryIssuesPaginationQuery$variables;
+export type IssueCommentsPaginationQuery = {
+  response: IssueCommentsPaginationQuery$data;
+  variables: IssueCommentsPaginationQuery$variables;
 };
 
 const node: ConcreteRequest = (function(){
@@ -81,7 +81,7 @@ return {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
-    "name": "RepositoryIssuesPaginationQuery",
+    "name": "IssueCommentsPaginationQuery",
     "selections": [
       {
         "alias": null,
@@ -105,7 +105,7 @@ return {
               }
             ],
             "kind": "FragmentSpread",
-            "name": "repositoryIssuesPaginatedFragment"
+            "name": "issueCommentsPaginatedFragment"
           }
         ],
         "storageKey": null
@@ -118,7 +118,7 @@ return {
   "operation": {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
-    "name": "RepositoryIssuesPaginationQuery",
+    "name": "IssueCommentsPaginationQuery",
     "selections": [
       {
         "alias": null,
@@ -136,15 +136,15 @@ return {
               {
                 "alias": null,
                 "args": (v4/*: any*/),
-                "concreteType": "IssueConnection",
+                "concreteType": "IssueCommentConnection",
                 "kind": "LinkedField",
-                "name": "issues",
+                "name": "comments",
                 "plural": false,
                 "selections": [
                   {
                     "alias": null,
                     "args": null,
-                    "concreteType": "IssueEdge",
+                    "concreteType": "IssueCommentEdge",
                     "kind": "LinkedField",
                     "name": "edges",
                     "plural": true,
@@ -152,83 +152,60 @@ return {
                       {
                         "alias": null,
                         "args": null,
-                        "concreteType": "Issue",
+                        "concreteType": "IssueComment",
                         "kind": "LinkedField",
                         "name": "node",
                         "plural": false,
                         "selections": [
+                          (v3/*: any*/),
                           {
-                            "alias": null,
+                            "alias": "contents",
                             "args": null,
                             "kind": "ScalarField",
-                            "name": "url",
+                            "name": "bodyHTML",
                             "storageKey": null
                           },
                           {
                             "alias": null,
                             "args": null,
-                            "kind": "ScalarField",
-                            "name": "title",
-                            "storageKey": null
-                          },
-                          {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "createdAt",
-                            "storageKey": null
-                          },
-                          {
-                            "alias": "tags",
-                            "args": [
-                              {
-                                "kind": "Literal",
-                                "name": "first",
-                                "value": 99
-                              }
-                            ],
-                            "concreteType": "LabelConnection",
+                            "concreteType": null,
                             "kind": "LinkedField",
-                            "name": "labels",
+                            "name": "author",
                             "plural": false,
                             "selections": [
+                              (v2/*: any*/),
                               {
                                 "alias": null,
                                 "args": null,
-                                "concreteType": "Label",
-                                "kind": "LinkedField",
-                                "name": "nodes",
-                                "plural": true,
+                                "kind": "ScalarField",
+                                "name": "url",
+                                "storageKey": null
+                              },
+                              {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "avatarUrl",
+                                "storageKey": null
+                              },
+                              {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "login",
+                                "storageKey": null
+                              },
+                              {
+                                "kind": "InlineFragment",
                                 "selections": [
-                                  {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "color",
-                                    "storageKey": null
-                                  },
-                                  {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "name",
-                                    "storageKey": null
-                                  },
-                                  {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "description",
-                                    "storageKey": null
-                                  },
                                   (v3/*: any*/)
                                 ],
-                                "storageKey": null
+                                "type": "Node",
+                                "abstractKey": "__isNode"
                               }
                             ],
-                            "storageKey": "labels(first:99)"
+                            "storageKey": null
                           },
-                          (v3/*: any*/),
                           (v2/*: any*/)
                         ],
                         "storageKey": null
@@ -276,12 +253,12 @@ return {
                 "args": (v4/*: any*/),
                 "filters": null,
                 "handle": "connection",
-                "key": "Repository_issues",
+                "key": "Issue_comments",
                 "kind": "LinkedHandle",
-                "name": "issues"
+                "name": "comments"
               }
             ],
-            "type": "Repository",
+            "type": "Issue",
             "abstractKey": null
           }
         ],
@@ -290,16 +267,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "42e09fa179e802d1932c745b4ba08f08",
+    "cacheID": "7a1aaa613ef9912bb85b290cbf5a913c",
     "id": null,
     "metadata": {},
-    "name": "RepositoryIssuesPaginationQuery",
+    "name": "IssueCommentsPaginationQuery",
     "operationKind": "query",
-    "text": "query RepositoryIssuesPaginationQuery(\n  $count: Int = 10\n  $cursor: String\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...repositoryIssuesPaginatedFragment_1G22uz\n    id\n  }\n}\n\nfragment repositoryIssuesPaginatedFragment_1G22uz on Repository {\n  issues(first: $count, after: $cursor) {\n    edges {\n      node {\n        url\n        title\n        createdAt\n        tags: labels(first: 99) {\n          nodes {\n            color\n            name\n            description\n            id\n          }\n        }\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
+    "text": "query IssueCommentsPaginationQuery(\n  $count: Int = 10\n  $cursor: String\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...issueCommentsPaginatedFragment_1G22uz\n    id\n  }\n}\n\nfragment issueCommentsPaginatedFragment_1G22uz on Issue {\n  comments(first: $count, after: $cursor) {\n    edges {\n      node {\n        id\n        contents: bodyHTML\n        author {\n          __typename\n          url\n          avatarUrl\n          login\n          ... on Node {\n            __isNode: __typename\n            id\n          }\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
   }
 };
 })();
 
-(node as any).hash = "9179fb41ae9b46dc5bc51bf2fc68b37c";
+(node as any).hash = "516d0fd711619a17053a56add4768363";
 
 export default node;

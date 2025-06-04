@@ -16,7 +16,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as OwnerSlugRepoImport } from './routes/$owner/$slug/_repo'
 import { Route as OwnerSlugRepoIndexImport } from './routes/$owner/$slug/_repo/index'
-import { Route as OwnerSlugRepoIssueImport } from './routes/$owner/$slug/_repo/$issue'
+import { Route as OwnerSlugRepoIssuesIssueImport } from './routes/$owner/$slug/_repo/issues/$issue'
 
 // Create Virtual Routes
 
@@ -47,9 +47,9 @@ const OwnerSlugRepoIndexRoute = OwnerSlugRepoIndexImport.update({
   getParentRoute: () => OwnerSlugRepoRoute,
 } as any)
 
-const OwnerSlugRepoIssueRoute = OwnerSlugRepoIssueImport.update({
-  id: '/$issue',
-  path: '/$issue',
+const OwnerSlugRepoIssuesIssueRoute = OwnerSlugRepoIssuesIssueImport.update({
+  id: '/issues/$issue',
+  path: '/issues/$issue',
   getParentRoute: () => OwnerSlugRepoRoute,
 } as any)
 
@@ -78,18 +78,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OwnerSlugRepoImport
       parentRoute: typeof OwnerSlugRoute
     }
-    '/$owner/$slug/_repo/$issue': {
-      id: '/$owner/$slug/_repo/$issue'
-      path: '/$issue'
-      fullPath: '/$owner/$slug/$issue'
-      preLoaderRoute: typeof OwnerSlugRepoIssueImport
-      parentRoute: typeof OwnerSlugRepoImport
-    }
     '/$owner/$slug/_repo/': {
       id: '/$owner/$slug/_repo/'
       path: '/'
       fullPath: '/$owner/$slug/'
       preLoaderRoute: typeof OwnerSlugRepoIndexImport
+      parentRoute: typeof OwnerSlugRepoImport
+    }
+    '/$owner/$slug/_repo/issues/$issue': {
+      id: '/$owner/$slug/_repo/issues/$issue'
+      path: '/issues/$issue'
+      fullPath: '/$owner/$slug/issues/$issue'
+      preLoaderRoute: typeof OwnerSlugRepoIssuesIssueImport
       parentRoute: typeof OwnerSlugRepoImport
     }
   }
@@ -98,13 +98,13 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface OwnerSlugRepoRouteChildren {
-  OwnerSlugRepoIssueRoute: typeof OwnerSlugRepoIssueRoute
   OwnerSlugRepoIndexRoute: typeof OwnerSlugRepoIndexRoute
+  OwnerSlugRepoIssuesIssueRoute: typeof OwnerSlugRepoIssuesIssueRoute
 }
 
 const OwnerSlugRepoRouteChildren: OwnerSlugRepoRouteChildren = {
-  OwnerSlugRepoIssueRoute: OwnerSlugRepoIssueRoute,
   OwnerSlugRepoIndexRoute: OwnerSlugRepoIndexRoute,
+  OwnerSlugRepoIssuesIssueRoute: OwnerSlugRepoIssuesIssueRoute,
 }
 
 const OwnerSlugRepoRouteWithChildren = OwnerSlugRepoRoute._addFileChildren(
@@ -126,14 +126,14 @@ const OwnerSlugRouteWithChildren = OwnerSlugRoute._addFileChildren(
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$owner/$slug': typeof OwnerSlugRepoRouteWithChildren
-  '/$owner/$slug/$issue': typeof OwnerSlugRepoIssueRoute
   '/$owner/$slug/': typeof OwnerSlugRepoIndexRoute
+  '/$owner/$slug/issues/$issue': typeof OwnerSlugRepoIssuesIssueRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$owner/$slug': typeof OwnerSlugRepoIndexRoute
-  '/$owner/$slug/$issue': typeof OwnerSlugRepoIssueRoute
+  '/$owner/$slug/issues/$issue': typeof OwnerSlugRepoIssuesIssueRoute
 }
 
 export interface FileRoutesById {
@@ -141,22 +141,26 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/$owner/$slug': typeof OwnerSlugRouteWithChildren
   '/$owner/$slug/_repo': typeof OwnerSlugRepoRouteWithChildren
-  '/$owner/$slug/_repo/$issue': typeof OwnerSlugRepoIssueRoute
   '/$owner/$slug/_repo/': typeof OwnerSlugRepoIndexRoute
+  '/$owner/$slug/_repo/issues/$issue': typeof OwnerSlugRepoIssuesIssueRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/$owner/$slug' | '/$owner/$slug/$issue' | '/$owner/$slug/'
+  fullPaths:
+    | '/'
+    | '/$owner/$slug'
+    | '/$owner/$slug/'
+    | '/$owner/$slug/issues/$issue'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/$owner/$slug' | '/$owner/$slug/$issue'
+  to: '/' | '/$owner/$slug' | '/$owner/$slug/issues/$issue'
   id:
     | '__root__'
     | '/'
     | '/$owner/$slug'
     | '/$owner/$slug/_repo'
-    | '/$owner/$slug/_repo/$issue'
     | '/$owner/$slug/_repo/'
+    | '/$owner/$slug/_repo/issues/$issue'
   fileRoutesById: FileRoutesById
 }
 
@@ -197,16 +201,16 @@ export const routeTree = rootRoute
       "filePath": "$owner/$slug/_repo.tsx",
       "parent": "/$owner/$slug",
       "children": [
-        "/$owner/$slug/_repo/$issue",
-        "/$owner/$slug/_repo/"
+        "/$owner/$slug/_repo/",
+        "/$owner/$slug/_repo/issues/$issue"
       ]
-    },
-    "/$owner/$slug/_repo/$issue": {
-      "filePath": "$owner/$slug/_repo/$issue.tsx",
-      "parent": "/$owner/$slug/_repo"
     },
     "/$owner/$slug/_repo/": {
       "filePath": "$owner/$slug/_repo/index.tsx",
+      "parent": "/$owner/$slug/_repo"
+    },
+    "/$owner/$slug/_repo/issues/$issue": {
+      "filePath": "$owner/$slug/_repo/issues/$issue.tsx",
       "parent": "/$owner/$slug/_repo"
     }
   }

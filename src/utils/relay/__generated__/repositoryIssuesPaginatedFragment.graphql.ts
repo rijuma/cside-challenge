@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<2fbe60925548c30cf43a33dbef18267a>>
+ * @generated SignedSource<<8464ebf2e22cb07885a68f814bd43222>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,13 +10,12 @@
 
 import { ReaderFragment } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type issuesPaginatedFragment$data = {
+export type repositoryIssuesPaginatedFragment$data = {
   readonly id: string;
   readonly issues: {
     readonly edges: ReadonlyArray<{
       readonly node: {
         readonly createdAt: any;
-        readonly description: string;
         readonly tags: {
           readonly nodes: ReadonlyArray<{
             readonly color: string;
@@ -25,14 +24,15 @@ export type issuesPaginatedFragment$data = {
           } | null | undefined> | null | undefined;
         } | null | undefined;
         readonly title: string;
+        readonly url: any;
       } | null | undefined;
     } | null | undefined> | null | undefined;
   };
-  readonly " $fragmentType": "issuesPaginatedFragment";
+  readonly " $fragmentType": "repositoryIssuesPaginatedFragment";
 };
-export type issuesPaginatedFragment$key = {
-  readonly " $data"?: issuesPaginatedFragment$data;
-  readonly " $fragmentSpreads": FragmentRefs<"issuesPaginatedFragment">;
+export type repositoryIssuesPaginatedFragment$key = {
+  readonly " $data"?: repositoryIssuesPaginatedFragment$data;
+  readonly " $fragmentSpreads": FragmentRefs<"repositoryIssuesPaginatedFragment">;
 };
 
 import RepositoryIssuesPaginationQuery_graphql from './RepositoryIssuesPaginationQuery.graphql';
@@ -83,7 +83,7 @@ return {
       }
     }
   },
-  "name": "issuesPaginatedFragment",
+  "name": "repositoryIssuesPaginatedFragment",
   "selections": [
     {
       "alias": "issues",
@@ -113,14 +113,14 @@ return {
                   "alias": null,
                   "args": null,
                   "kind": "ScalarField",
-                  "name": "title",
+                  "name": "url",
                   "storageKey": null
                 },
                 {
-                  "alias": "description",
+                  "alias": null,
                   "args": null,
                   "kind": "ScalarField",
-                  "name": "body",
+                  "name": "title",
                   "storageKey": null
                 },
                 {
@@ -240,6 +240,6 @@ return {
 };
 })();
 
-(node as any).hash = "3b61b6ff8b1e9f76827379cdcbf0a439";
+(node as any).hash = "9179fb41ae9b46dc5bc51bf2fc68b37c";
 
 export default node;

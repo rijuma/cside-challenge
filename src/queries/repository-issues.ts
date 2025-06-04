@@ -1,11 +1,11 @@
-import type { issuesPaginatedFragment$key } from "@/utils/relay/__generated__/issuesPaginatedFragment.graphql";
+import type { repositoryIssuesPaginatedFragment$key } from "@/utils/relay/__generated__/repositoryIssuesPaginatedFragment.graphql";
 import type { repositoryQuery } from "@/utils/relay/__generated__/repositoryQuery.graphql";
 import { type PreloadedQuery, usePaginationFragment } from "react-relay";
 import { graphql } from "relay-runtime";
 import { useRepositoryData } from "./repository";
 
 export const repositoryIssuesFragmentQuery = graphql`
-  fragment issuesPaginatedFragment on Repository
+  fragment repositoryIssuesPaginatedFragment on Repository
     @argumentDefinitions(
       cursor: { type: "String" }
       count: { type: "Int", defaultValue: 10 }
@@ -15,15 +15,15 @@ export const repositoryIssuesFragmentQuery = graphql`
     @connection(key: "Repository_issues") {
       edges {
         node {
+          url
           title
-          description:body
           createdAt
           tags:labels(first:99) {
-              nodes {
-                color
-                name
-                description
-              }
+            nodes {
+              color
+              name
+              description
+            }
           }
         }
       }
@@ -37,8 +37,14 @@ export const useRepositoryIssuesData = (
 	const repoData = useRepositoryData(queryRef);
 	const handlers = usePaginationFragment(
 		repositoryIssuesFragmentQuery,
-		repoData._ref as issuesPaginatedFragment$key,
+		repoData._ref as repositoryIssuesPaginatedFragment$key,
 	);
 
-	return { handlers };
+	const { data, ...rest } = handlers;
+
+	const issue = {
+		...data,
+		_ref: data.issues,
+	};
+	return { issue, ...rest };
 };
