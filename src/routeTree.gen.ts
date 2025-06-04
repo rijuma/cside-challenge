@@ -8,11 +8,19 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import { createFileRoute } from '@tanstack/react-router'
+
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
-import { Route as OwnerRepoIndexImport } from './routes/$owner/$repo/index'
+import { Route as OwnerSlugRepoImport } from './routes/$owner/$slug/_repo'
+import { Route as OwnerSlugRepoIndexImport } from './routes/$owner/$slug/_repo/index'
+import { Route as OwnerSlugRepoIssueImport } from './routes/$owner/$slug/_repo/$issue'
+
+// Create Virtual Routes
+
+const OwnerSlugImport = createFileRoute('/$owner/$slug')()
 
 // Create/Update Routes
 
@@ -22,10 +30,27 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const OwnerRepoIndexRoute = OwnerRepoIndexImport.update({
-  id: '/$owner/$repo/',
-  path: '/$owner/$repo/',
+const OwnerSlugRoute = OwnerSlugImport.update({
+  id: '/$owner/$slug',
+  path: '/$owner/$slug',
   getParentRoute: () => rootRoute,
+} as any)
+
+const OwnerSlugRepoRoute = OwnerSlugRepoImport.update({
+  id: '/_repo',
+  getParentRoute: () => OwnerSlugRoute,
+} as any)
+
+const OwnerSlugRepoIndexRoute = OwnerSlugRepoIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => OwnerSlugRepoRoute,
+} as any)
+
+const OwnerSlugRepoIssueRoute = OwnerSlugRepoIssueImport.update({
+  id: '/$issue',
+  path: '/$issue',
+  getParentRoute: () => OwnerSlugRepoRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -39,51 +64,110 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/$owner/$repo/': {
-      id: '/$owner/$repo/'
-      path: '/$owner/$repo'
-      fullPath: '/$owner/$repo'
-      preLoaderRoute: typeof OwnerRepoIndexImport
+    '/$owner/$slug': {
+      id: '/$owner/$slug'
+      path: '/$owner/$slug'
+      fullPath: '/$owner/$slug'
+      preLoaderRoute: typeof OwnerSlugImport
       parentRoute: typeof rootRoute
+    }
+    '/$owner/$slug/_repo': {
+      id: '/$owner/$slug/_repo'
+      path: '/$owner/$slug'
+      fullPath: '/$owner/$slug'
+      preLoaderRoute: typeof OwnerSlugRepoImport
+      parentRoute: typeof OwnerSlugRoute
+    }
+    '/$owner/$slug/_repo/$issue': {
+      id: '/$owner/$slug/_repo/$issue'
+      path: '/$issue'
+      fullPath: '/$owner/$slug/$issue'
+      preLoaderRoute: typeof OwnerSlugRepoIssueImport
+      parentRoute: typeof OwnerSlugRepoImport
+    }
+    '/$owner/$slug/_repo/': {
+      id: '/$owner/$slug/_repo/'
+      path: '/'
+      fullPath: '/$owner/$slug/'
+      preLoaderRoute: typeof OwnerSlugRepoIndexImport
+      parentRoute: typeof OwnerSlugRepoImport
     }
   }
 }
 
 // Create and export the route tree
 
+interface OwnerSlugRepoRouteChildren {
+  OwnerSlugRepoIssueRoute: typeof OwnerSlugRepoIssueRoute
+  OwnerSlugRepoIndexRoute: typeof OwnerSlugRepoIndexRoute
+}
+
+const OwnerSlugRepoRouteChildren: OwnerSlugRepoRouteChildren = {
+  OwnerSlugRepoIssueRoute: OwnerSlugRepoIssueRoute,
+  OwnerSlugRepoIndexRoute: OwnerSlugRepoIndexRoute,
+}
+
+const OwnerSlugRepoRouteWithChildren = OwnerSlugRepoRoute._addFileChildren(
+  OwnerSlugRepoRouteChildren,
+)
+
+interface OwnerSlugRouteChildren {
+  OwnerSlugRepoRoute: typeof OwnerSlugRepoRouteWithChildren
+}
+
+const OwnerSlugRouteChildren: OwnerSlugRouteChildren = {
+  OwnerSlugRepoRoute: OwnerSlugRepoRouteWithChildren,
+}
+
+const OwnerSlugRouteWithChildren = OwnerSlugRoute._addFileChildren(
+  OwnerSlugRouteChildren,
+)
+
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/$owner/$repo': typeof OwnerRepoIndexRoute
+  '/$owner/$slug': typeof OwnerSlugRepoRouteWithChildren
+  '/$owner/$slug/$issue': typeof OwnerSlugRepoIssueRoute
+  '/$owner/$slug/': typeof OwnerSlugRepoIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/$owner/$repo': typeof OwnerRepoIndexRoute
+  '/$owner/$slug': typeof OwnerSlugRepoIndexRoute
+  '/$owner/$slug/$issue': typeof OwnerSlugRepoIssueRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/$owner/$repo/': typeof OwnerRepoIndexRoute
+  '/$owner/$slug': typeof OwnerSlugRouteWithChildren
+  '/$owner/$slug/_repo': typeof OwnerSlugRepoRouteWithChildren
+  '/$owner/$slug/_repo/$issue': typeof OwnerSlugRepoIssueRoute
+  '/$owner/$slug/_repo/': typeof OwnerSlugRepoIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/$owner/$repo'
+  fullPaths: '/' | '/$owner/$slug' | '/$owner/$slug/$issue' | '/$owner/$slug/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/$owner/$repo'
-  id: '__root__' | '/' | '/$owner/$repo/'
+  to: '/' | '/$owner/$slug' | '/$owner/$slug/$issue'
+  id:
+    | '__root__'
+    | '/'
+    | '/$owner/$slug'
+    | '/$owner/$slug/_repo'
+    | '/$owner/$slug/_repo/$issue'
+    | '/$owner/$slug/_repo/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  OwnerRepoIndexRoute: typeof OwnerRepoIndexRoute
+  OwnerSlugRoute: typeof OwnerSlugRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  OwnerRepoIndexRoute: OwnerRepoIndexRoute,
+  OwnerSlugRoute: OwnerSlugRouteWithChildren,
 }
 
 export const routeTree = rootRoute
@@ -97,14 +181,33 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/$owner/$repo/"
+        "/$owner/$slug"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/$owner/$repo/": {
-      "filePath": "$owner/$repo/index.tsx"
+    "/$owner/$slug": {
+      "filePath": "$owner/$slug",
+      "children": [
+        "/$owner/$slug/_repo"
+      ]
+    },
+    "/$owner/$slug/_repo": {
+      "filePath": "$owner/$slug/_repo.tsx",
+      "parent": "/$owner/$slug",
+      "children": [
+        "/$owner/$slug/_repo/$issue",
+        "/$owner/$slug/_repo/"
+      ]
+    },
+    "/$owner/$slug/_repo/$issue": {
+      "filePath": "$owner/$slug/_repo/$issue.tsx",
+      "parent": "/$owner/$slug/_repo"
+    },
+    "/$owner/$slug/_repo/": {
+      "filePath": "$owner/$slug/_repo/index.tsx",
+      "parent": "/$owner/$slug/_repo"
     }
   }
 }

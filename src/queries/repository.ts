@@ -5,9 +5,13 @@ import type { Repository } from "@/types/repository";
 import type { repositoryQuery as RepositoryQuery } from "@/utils/relay/__generated__/repositoryQuery.graphql";
 
 export const repositoryQuery = graphql`
-  query repositoryQuery($owner: String!, $repo: String!) {
-    repository(owner: $owner, name: $repo) {
+  query repositoryQuery($owner: String!, $slug: String!) {
+    repository(owner: $owner, name: $slug) {
+      id,
       name,
+      owner {
+        login
+      }
       description,
       stargazerCount,
       forkCount,
@@ -24,15 +28,16 @@ export const repositoryQuery = graphql`
           }
         }
       }
+      issueCount:issues {
+        totalCount
+      }
       collaborators {
         nodes {
           avatarUrl,
           name
         }
       }
-      issues {
-        totalCount
-      }
+      ...issuesPaginatedFragment
     }
   }
 `;
@@ -48,14 +53,16 @@ export const useRepositoryData = (
 	if (!repository) throw new Error("Missing repository data");
 
 	const {
-		name,
+		id,
+		owner: { login: owner },
+		name: slug,
 		description,
 		branches,
 		collaborators,
 		defaultBranchRef,
 		forkCount,
 		stargazerCount: starCount,
-		issues,
+		issueCount: issues,
 	} = repository;
 
 	const mainBranch = defaultBranchRef?.name || "master";
@@ -70,7 +77,9 @@ export const useRepositoryData = (
 		})) || null; // Null means insufficient permissions
 
 	return {
-		name,
+		id,
+		owner,
+		slug,
 		description: description || undefined,
 		branchCount,
 		commitCount,
@@ -79,5 +88,6 @@ export const useRepositoryData = (
 		issueCount,
 		mainBranch,
 		starCount,
+		_ref: repository,
 	} satisfies Repository;
 };

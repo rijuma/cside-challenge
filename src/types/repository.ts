@@ -1,5 +1,7 @@
 export type Repository = {
-	name: string;
+	id: string;
+	slug: string;
+	owner: string;
 	description?: string;
 	branchCount: number;
 	commitCount: number;
@@ -13,4 +15,5 @@ export type Repository = {
 				name: string;
 		  }[]
 		| null;
+	_ref: unknown;
 };
