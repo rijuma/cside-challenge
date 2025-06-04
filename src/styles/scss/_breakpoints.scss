@@ -1,0 +1,44 @@
+// Reference from https://stackoverflow.com/a/67353943/4990758
+@use "sass:map";
+@use "sass:string";
+
+// Radix UI breakpoints: https://www.radix-ui.com/themes/docs/theme/breakpoints
+$bps: (
+  xs: 520px,
+  sm: 768px,
+  md: 1024px,
+  lg: 1280px,
+  xl: 1640px,
+);
+
+/** Helper to build @media query. Use named arguments only! */
+@mixin bp($from: false, $to: false, $mode: screen, $extra: ()) {
+  /** Checking arguments consistency */
+  @each $key in ($from, $to) {
+    @if $key and not map.has-key($bps, $key) {
+      @error "Available values for ($from, $to) args are: #{map.keys($bps)}";
+    }
+  }
+
+  /** Accumulator */
+  $conditions: $mode;
+
+  /** Combining breakpoints dependencies */
+  @each $key, $value in (min-width: $from, max-width: $to) {
+    @if $value {
+      $modifier: if($key == "max-width", -1px, 0px);
+      $condition: " and (#{$key}: #{map.get($bps, $value) - $modifier})";
+      $conditions: string.insert($conditions, $condition, -1);
+    }
+  }
+
+  /** Combining rest dependencies */
+  @each $key, $value in $extra {
+    $condition: " and (#{$key}: #{$value})";
+  }
+
+  /** Building final media query */
+  @media #{$conditions} {
+    @content;
+  }
+}
