@@ -1,4 +1,4 @@
-import type { User } from "@/types/user";
+import type { User } from "@/types";
 import type { userQuery as UserQuery } from "@/utils/relay/__generated__/userQuery.graphql";
 import { type PreloadedQuery, usePreloadedQuery } from "react-relay";
 import { graphql } from "relay-runtime";

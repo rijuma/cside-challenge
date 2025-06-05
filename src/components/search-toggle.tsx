@@ -1,13 +1,13 @@
 import { GitHubLogoIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { Box, Button, Dialog, Flex, Kbd } from "@radix-ui/themes";
 
-import { useEffect, useState } from "react";
+import { type FC, useEffect, useState } from "react";
 import { SearchForm } from "./search-form";
 import styles from "./search-toggle.module.scss";
 
 const SEARCH_KEY_BINDING = "/";
 
-export const SearchToggle = () => {
+export const SearchToggle: FC = () => {
 	const [show, setShow] = useState(false);
 
 	useEffect(() => {
@@ -53,6 +53,9 @@ export const SearchToggle = () => {
 			<Dialog.Root open={show} onOpenChange={() => setShow(false)}>
 				<Dialog.Content align="start">
 					<Dialog.Title>Search GitHub Repository</Dialog.Title>
+					<Dialog.Description hidden>
+						This dialog provides a way to search through GitHub repositories.
+					</Dialog.Description>
 
 					<SearchForm onSelect={() => setShow(false)} />
 

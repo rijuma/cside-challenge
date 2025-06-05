@@ -1,4 +1,4 @@
-import type { Comment } from "@/types/comment";
+import type { Comment } from "@/types";
 import type { issueCommentsPaginatedFragment$key } from "@/utils/relay/__generated__/issueCommentsPaginatedFragment.graphql";
 import type { issueQuery as IssueQuery } from "@/utils/relay/__generated__/issueQuery.graphql";
 import { type PreloadedQuery, usePaginationFragment } from "react-relay";

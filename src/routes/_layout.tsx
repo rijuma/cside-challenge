@@ -1,4 +1,4 @@
-import { RootLayout } from "@/layouts";
+import { UserProvider } from "@/context/user";
 import { LoadingLayout } from "@/layouts/loading";
 import { SiteErrorLayout } from "@/layouts/site-error";
 import { useUserData, userQuery } from "@/queries";
@@ -33,9 +33,11 @@ function App() {
 	const { userQueryRef } = Route.useLoaderData();
 	const user = useUserData(userQueryRef);
 
+	console.log({ user });
+
 	return (
-		<RootLayout user={user}>
+		<UserProvider value={user}>
 			<Outlet />
-		</RootLayout>
+		</UserProvider>
 	);
 }

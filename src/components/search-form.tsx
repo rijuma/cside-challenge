@@ -1,4 +1,4 @@
-import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import { Cross2Icon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import {
 	Box,
 	Button,
@@ -50,6 +50,26 @@ export const SearchForm: FC<Props> = ({ onSelect }: Props) => {
 										onClick={() => handleSelectRepo("/rijuma/rigoli.dev")}
 									>
 										rijuma/rigoli.dev
+									</Button>{" "}
+									<Button
+										type="button"
+										variant="ghost"
+										ml="5"
+										aria-label="Delete this entry"
+									>
+										<Cross2Icon />
+									</Button>
+								</li>
+								<li>
+									<Button
+										type="button"
+										variant="ghost"
+										onClick={() => handleSelectRepo("/rijuma/rigoli.dev")}
+									>
+										rijuma/rigoli.dev
+									</Button>
+									<Button type="button" variant="ghost" ml="5">
+										<Cross2Icon />
 									</Button>
 								</li>
 							</ul>

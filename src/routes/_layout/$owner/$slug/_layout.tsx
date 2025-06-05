@@ -1,4 +1,4 @@
-import { RepositoryProvider } from "@/context/repository";
+import { RepositoryProvider } from "@/context";
 import {
 	repositoryQuery,
 	useRepositoryData,
@@ -7,6 +7,7 @@ import {
 import { Outlet, createFileRoute } from "@tanstack/react-router";
 import { loadQuery } from "react-relay";
 
+import { RootLayout } from "@/layouts";
 import { LoadingLayout } from "@/layouts/loading";
 import type { repositoryQuery as RepositoryQuery } from "@/utils/relay/__generated__/repositoryQuery.graphql";
 
@@ -39,7 +40,9 @@ function RepoLayout() {
 
 	return (
 		<RepositoryProvider value={repositoryData}>
-			<Outlet />
+			<RootLayout>
+				<Outlet />
+			</RootLayout>
 		</RepositoryProvider>
 	);
 }

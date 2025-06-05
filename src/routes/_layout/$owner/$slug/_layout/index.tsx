@@ -1,5 +1,5 @@
 import { Repository } from "@/components/repository";
-import { useRepository } from "@/context/repository";
+import { useRepository } from "@/context";
 import { LoadingLayout } from "@/layouts/loading";
 import { createFileRoute } from "@tanstack/react-router";
 
