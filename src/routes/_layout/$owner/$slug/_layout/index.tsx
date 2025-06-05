@@ -1,0 +1,22 @@
+import { Repository } from "@/components/repository";
+import { useRepository } from "@/context/repository";
+import { createFileRoute } from "@tanstack/react-router";
+
+export const Route = createFileRoute("/_layout/$owner/$slug/_layout/")({
+	component: Repo,
+	pendingComponent: () => <div>Loading...</div>,
+});
+
+function Repo() {
+	const { owner, slug } = useRepository() || {};
+
+	return (
+		<div>
+			<h1>
+				Hello, {owner}, nice repo: {slug}
+			</h1>
+
+			<Repository />
+		</div>
+	);
+}

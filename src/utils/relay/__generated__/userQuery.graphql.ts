@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<94522708f6343245b75f24290ae6626e>>
+ * @generated SignedSource<<d071f4bc527dd941603d7bc5f924c0c6>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -9,15 +9,17 @@
 // @ts-nocheck
 
 import { ConcreteRequest } from 'relay-runtime';
-export type routesQuery$variables = Record<PropertyKey, never>;
-export type routesQuery$data = {
+export type userQuery$variables = Record<PropertyKey, never>;
+export type userQuery$data = {
   readonly viewer: {
+    readonly avatarUrl: any;
+    readonly login: string;
     readonly name: string | null | undefined;
   };
 };
-export type routesQuery = {
-  response: routesQuery$data;
-  variables: routesQuery$variables;
+export type userQuery = {
+  response: userQuery$data;
+  variables: userQuery$variables;
 };
 
 const node: ConcreteRequest = (function(){
@@ -27,13 +29,27 @@ var v0 = {
   "kind": "ScalarField",
   "name": "name",
   "storageKey": null
+},
+v1 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "login",
+  "storageKey": null
+},
+v2 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "avatarUrl",
+  "storageKey": null
 };
 return {
   "fragment": {
     "argumentDefinitions": [],
     "kind": "Fragment",
     "metadata": null,
-    "name": "routesQuery",
+    "name": "userQuery",
     "selections": [
       {
         "alias": null,
@@ -43,7 +59,9 @@ return {
         "name": "viewer",
         "plural": false,
         "selections": [
-          (v0/*: any*/)
+          (v0/*: any*/),
+          (v1/*: any*/),
+          (v2/*: any*/)
         ],
         "storageKey": null
       }
@@ -55,7 +73,7 @@ return {
   "operation": {
     "argumentDefinitions": [],
     "kind": "Operation",
-    "name": "routesQuery",
+    "name": "userQuery",
     "selections": [
       {
         "alias": null,
@@ -66,6 +84,8 @@ return {
         "plural": false,
         "selections": [
           (v0/*: any*/),
+          (v1/*: any*/),
+          (v2/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -79,16 +99,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "d191e72837273be6ed77485c4a67451b",
+    "cacheID": "5863a2801d6dbf91c46a63d318eef1ea",
     "id": null,
     "metadata": {},
-    "name": "routesQuery",
+    "name": "userQuery",
     "operationKind": "query",
-    "text": "query routesQuery {\n  viewer {\n    name\n    id\n  }\n}\n"
+    "text": "query userQuery {\n  viewer {\n    name\n    login\n    avatarUrl\n    id\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "a16fbff518d6b24344df1577a2153dd2";
+(node as any).hash = "f7a4288220f1c3ad898bd508c95accce";
 
 export default node;

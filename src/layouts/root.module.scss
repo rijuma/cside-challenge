@@ -1,7 +1,3 @@
-.test {
-  @include pepe();
-
-  @include bp(md) {
-    font-style: italic;
-  }
+.heading {
+  // background: var(--gray-4);
 }

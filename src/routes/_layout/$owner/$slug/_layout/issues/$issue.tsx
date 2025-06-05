@@ -1,10 +1,9 @@
-import { issueQuery, useIssueData } from "@/queries/issue";
-import { useIssueCommentsData } from "@/queries/issue-comments";
+import { issueQuery, useIssueCommentsData, useIssueData } from "@/queries";
 import type { issueQuery as IssueQuery } from "@/utils/relay/__generated__/issueQuery.graphql";
 import { createFileRoute } from "@tanstack/react-router";
 import { loadQuery } from "react-relay";
 
-export const Route = createFileRoute("/$owner/$slug/_repo/issues/$issue")({
+export const Route = createFileRoute("/_layout/$owner/$slug/_layout/issues/$issue")({
 	component: Issue,
 	beforeLoad: async ({ params, context: { relayEnvironment } }) => {
 		const { owner, slug, issue } = params;

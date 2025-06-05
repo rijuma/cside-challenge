@@ -13,141 +13,174 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as IndexImport } from './routes/index'
-import { Route as OwnerSlugRepoImport } from './routes/$owner/$slug/_repo'
-import { Route as OwnerSlugRepoIndexImport } from './routes/$owner/$slug/_repo/index'
-import { Route as OwnerSlugRepoIssuesIssueImport } from './routes/$owner/$slug/_repo/issues/$issue'
+import { Route as LayoutImport } from './routes/_layout'
+import { Route as LayoutIndexImport } from './routes/_layout/index'
+import { Route as LayoutOwnerSlugLayoutImport } from './routes/_layout/$owner/$slug/_layout'
+import { Route as LayoutOwnerSlugLayoutIndexImport } from './routes/_layout/$owner/$slug/_layout/index'
+import { Route as LayoutOwnerSlugLayoutIssuesIssueImport } from './routes/_layout/$owner/$slug/_layout/issues/$issue'
 
 // Create Virtual Routes
 
-const OwnerSlugImport = createFileRoute('/$owner/$slug')()
+const LayoutOwnerSlugImport = createFileRoute('/_layout/$owner/$slug')()
 
 // Create/Update Routes
 
-const IndexRoute = IndexImport.update({
-  id: '/',
-  path: '/',
+const LayoutRoute = LayoutImport.update({
+  id: '/_layout',
   getParentRoute: () => rootRoute,
 } as any)
 
-const OwnerSlugRoute = OwnerSlugImport.update({
+const LayoutIndexRoute = LayoutIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutOwnerSlugRoute = LayoutOwnerSlugImport.update({
   id: '/$owner/$slug',
   path: '/$owner/$slug',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => LayoutRoute,
 } as any)
 
-const OwnerSlugRepoRoute = OwnerSlugRepoImport.update({
-  id: '/_repo',
-  getParentRoute: () => OwnerSlugRoute,
+const LayoutOwnerSlugLayoutRoute = LayoutOwnerSlugLayoutImport.update({
+  id: '/_layout',
+  getParentRoute: () => LayoutOwnerSlugRoute,
 } as any)
 
-const OwnerSlugRepoIndexRoute = OwnerSlugRepoIndexImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => OwnerSlugRepoRoute,
-} as any)
+const LayoutOwnerSlugLayoutIndexRoute = LayoutOwnerSlugLayoutIndexImport.update(
+  {
+    id: '/',
+    path: '/',
+    getParentRoute: () => LayoutOwnerSlugLayoutRoute,
+  } as any,
+)
 
-const OwnerSlugRepoIssuesIssueRoute = OwnerSlugRepoIssuesIssueImport.update({
-  id: '/issues/$issue',
-  path: '/issues/$issue',
-  getParentRoute: () => OwnerSlugRepoRoute,
-} as any)
+const LayoutOwnerSlugLayoutIssuesIssueRoute =
+  LayoutOwnerSlugLayoutIssuesIssueImport.update({
+    id: '/issues/$issue',
+    path: '/issues/$issue',
+    getParentRoute: () => LayoutOwnerSlugLayoutRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/_layout': {
+      id: '/_layout'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof LayoutImport
+      parentRoute: typeof rootRoute
+    }
+    '/_layout/': {
+      id: '/_layout/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof LayoutIndexImport
+      parentRoute: typeof LayoutImport
     }
-    '/$owner/$slug': {
-      id: '/$owner/$slug'
+    '/_layout/$owner/$slug': {
+      id: '/_layout/$owner/$slug'
       path: '/$owner/$slug'
       fullPath: '/$owner/$slug'
-      preLoaderRoute: typeof OwnerSlugImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof LayoutOwnerSlugImport
+      parentRoute: typeof LayoutImport
     }
-    '/$owner/$slug/_repo': {
-      id: '/$owner/$slug/_repo'
+    '/_layout/$owner/$slug/_layout': {
+      id: '/_layout/$owner/$slug/_layout'
       path: '/$owner/$slug'
       fullPath: '/$owner/$slug'
-      preLoaderRoute: typeof OwnerSlugRepoImport
-      parentRoute: typeof OwnerSlugRoute
+      preLoaderRoute: typeof LayoutOwnerSlugLayoutImport
+      parentRoute: typeof LayoutOwnerSlugRoute
     }
-    '/$owner/$slug/_repo/': {
-      id: '/$owner/$slug/_repo/'
+    '/_layout/$owner/$slug/_layout/': {
+      id: '/_layout/$owner/$slug/_layout/'
       path: '/'
       fullPath: '/$owner/$slug/'
-      preLoaderRoute: typeof OwnerSlugRepoIndexImport
-      parentRoute: typeof OwnerSlugRepoImport
+      preLoaderRoute: typeof LayoutOwnerSlugLayoutIndexImport
+      parentRoute: typeof LayoutOwnerSlugLayoutImport
     }
-    '/$owner/$slug/_repo/issues/$issue': {
-      id: '/$owner/$slug/_repo/issues/$issue'
+    '/_layout/$owner/$slug/_layout/issues/$issue': {
+      id: '/_layout/$owner/$slug/_layout/issues/$issue'
       path: '/issues/$issue'
       fullPath: '/$owner/$slug/issues/$issue'
-      preLoaderRoute: typeof OwnerSlugRepoIssuesIssueImport
-      parentRoute: typeof OwnerSlugRepoImport
+      preLoaderRoute: typeof LayoutOwnerSlugLayoutIssuesIssueImport
+      parentRoute: typeof LayoutOwnerSlugLayoutImport
     }
   }
 }
 
 // Create and export the route tree
 
-interface OwnerSlugRepoRouteChildren {
-  OwnerSlugRepoIndexRoute: typeof OwnerSlugRepoIndexRoute
-  OwnerSlugRepoIssuesIssueRoute: typeof OwnerSlugRepoIssuesIssueRoute
+interface LayoutOwnerSlugLayoutRouteChildren {
+  LayoutOwnerSlugLayoutIndexRoute: typeof LayoutOwnerSlugLayoutIndexRoute
+  LayoutOwnerSlugLayoutIssuesIssueRoute: typeof LayoutOwnerSlugLayoutIssuesIssueRoute
 }
 
-const OwnerSlugRepoRouteChildren: OwnerSlugRepoRouteChildren = {
-  OwnerSlugRepoIndexRoute: OwnerSlugRepoIndexRoute,
-  OwnerSlugRepoIssuesIssueRoute: OwnerSlugRepoIssuesIssueRoute,
+const LayoutOwnerSlugLayoutRouteChildren: LayoutOwnerSlugLayoutRouteChildren = {
+  LayoutOwnerSlugLayoutIndexRoute: LayoutOwnerSlugLayoutIndexRoute,
+  LayoutOwnerSlugLayoutIssuesIssueRoute: LayoutOwnerSlugLayoutIssuesIssueRoute,
 }
 
-const OwnerSlugRepoRouteWithChildren = OwnerSlugRepoRoute._addFileChildren(
-  OwnerSlugRepoRouteChildren,
+const LayoutOwnerSlugLayoutRouteWithChildren =
+  LayoutOwnerSlugLayoutRoute._addFileChildren(
+    LayoutOwnerSlugLayoutRouteChildren,
+  )
+
+interface LayoutOwnerSlugRouteChildren {
+  LayoutOwnerSlugLayoutRoute: typeof LayoutOwnerSlugLayoutRouteWithChildren
+}
+
+const LayoutOwnerSlugRouteChildren: LayoutOwnerSlugRouteChildren = {
+  LayoutOwnerSlugLayoutRoute: LayoutOwnerSlugLayoutRouteWithChildren,
+}
+
+const LayoutOwnerSlugRouteWithChildren = LayoutOwnerSlugRoute._addFileChildren(
+  LayoutOwnerSlugRouteChildren,
 )
 
-interface OwnerSlugRouteChildren {
-  OwnerSlugRepoRoute: typeof OwnerSlugRepoRouteWithChildren
+interface LayoutRouteChildren {
+  LayoutIndexRoute: typeof LayoutIndexRoute
+  LayoutOwnerSlugRoute: typeof LayoutOwnerSlugRouteWithChildren
 }
 
-const OwnerSlugRouteChildren: OwnerSlugRouteChildren = {
-  OwnerSlugRepoRoute: OwnerSlugRepoRouteWithChildren,
+const LayoutRouteChildren: LayoutRouteChildren = {
+  LayoutIndexRoute: LayoutIndexRoute,
+  LayoutOwnerSlugRoute: LayoutOwnerSlugRouteWithChildren,
 }
 
-const OwnerSlugRouteWithChildren = OwnerSlugRoute._addFileChildren(
-  OwnerSlugRouteChildren,
-)
+const LayoutRouteWithChildren =
+  LayoutRoute._addFileChildren(LayoutRouteChildren)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/$owner/$slug': typeof OwnerSlugRepoRouteWithChildren
-  '/$owner/$slug/': typeof OwnerSlugRepoIndexRoute
-  '/$owner/$slug/issues/$issue': typeof OwnerSlugRepoIssuesIssueRoute
+  '': typeof LayoutRouteWithChildren
+  '/': typeof LayoutIndexRoute
+  '/$owner/$slug': typeof LayoutOwnerSlugLayoutRouteWithChildren
+  '/$owner/$slug/': typeof LayoutOwnerSlugLayoutIndexRoute
+  '/$owner/$slug/issues/$issue': typeof LayoutOwnerSlugLayoutIssuesIssueRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/$owner/$slug': typeof OwnerSlugRepoIndexRoute
-  '/$owner/$slug/issues/$issue': typeof OwnerSlugRepoIssuesIssueRoute
+  '/': typeof LayoutIndexRoute
+  '/$owner/$slug': typeof LayoutOwnerSlugLayoutIndexRoute
+  '/$owner/$slug/issues/$issue': typeof LayoutOwnerSlugLayoutIssuesIssueRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/$owner/$slug': typeof OwnerSlugRouteWithChildren
-  '/$owner/$slug/_repo': typeof OwnerSlugRepoRouteWithChildren
-  '/$owner/$slug/_repo/': typeof OwnerSlugRepoIndexRoute
-  '/$owner/$slug/_repo/issues/$issue': typeof OwnerSlugRepoIssuesIssueRoute
+  '/_layout': typeof LayoutRouteWithChildren
+  '/_layout/': typeof LayoutIndexRoute
+  '/_layout/$owner/$slug': typeof LayoutOwnerSlugRouteWithChildren
+  '/_layout/$owner/$slug/_layout': typeof LayoutOwnerSlugLayoutRouteWithChildren
+  '/_layout/$owner/$slug/_layout/': typeof LayoutOwnerSlugLayoutIndexRoute
+  '/_layout/$owner/$slug/_layout/issues/$issue': typeof LayoutOwnerSlugLayoutIssuesIssueRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
+    | ''
     | '/'
     | '/$owner/$slug'
     | '/$owner/$slug/'
@@ -156,22 +189,21 @@ export interface FileRouteTypes {
   to: '/' | '/$owner/$slug' | '/$owner/$slug/issues/$issue'
   id:
     | '__root__'
-    | '/'
-    | '/$owner/$slug'
-    | '/$owner/$slug/_repo'
-    | '/$owner/$slug/_repo/'
-    | '/$owner/$slug/_repo/issues/$issue'
+    | '/_layout'
+    | '/_layout/'
+    | '/_layout/$owner/$slug'
+    | '/_layout/$owner/$slug/_layout'
+    | '/_layout/$owner/$slug/_layout/'
+    | '/_layout/$owner/$slug/_layout/issues/$issue'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  OwnerSlugRoute: typeof OwnerSlugRouteWithChildren
+  LayoutRoute: typeof LayoutRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  OwnerSlugRoute: OwnerSlugRouteWithChildren,
+  LayoutRoute: LayoutRouteWithChildren,
 }
 
 export const routeTree = rootRoute
@@ -184,34 +216,42 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/",
-        "/$owner/$slug"
+        "/_layout"
       ]
     },
-    "/": {
-      "filePath": "index.tsx"
-    },
-    "/$owner/$slug": {
-      "filePath": "$owner/$slug",
+    "/_layout": {
+      "filePath": "_layout.tsx",
       "children": [
-        "/$owner/$slug/_repo"
+        "/_layout/",
+        "/_layout/$owner/$slug"
       ]
     },
-    "/$owner/$slug/_repo": {
-      "filePath": "$owner/$slug/_repo.tsx",
-      "parent": "/$owner/$slug",
+    "/_layout/": {
+      "filePath": "_layout/index.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/$owner/$slug": {
+      "filePath": "_layout/$owner/$slug",
+      "parent": "/_layout",
       "children": [
-        "/$owner/$slug/_repo/",
-        "/$owner/$slug/_repo/issues/$issue"
+        "/_layout/$owner/$slug/_layout"
       ]
     },
-    "/$owner/$slug/_repo/": {
-      "filePath": "$owner/$slug/_repo/index.tsx",
-      "parent": "/$owner/$slug/_repo"
+    "/_layout/$owner/$slug/_layout": {
+      "filePath": "_layout/$owner/$slug/_layout.tsx",
+      "parent": "/_layout/$owner/$slug",
+      "children": [
+        "/_layout/$owner/$slug/_layout/",
+        "/_layout/$owner/$slug/_layout/issues/$issue"
+      ]
     },
-    "/$owner/$slug/_repo/issues/$issue": {
-      "filePath": "$owner/$slug/_repo/issues/$issue.tsx",
-      "parent": "/$owner/$slug/_repo"
+    "/_layout/$owner/$slug/_layout/": {
+      "filePath": "_layout/$owner/$slug/_layout/index.tsx",
+      "parent": "/_layout/$owner/$slug/_layout"
+    },
+    "/_layout/$owner/$slug/_layout/issues/$issue": {
+      "filePath": "_layout/$owner/$slug/_layout/issues/$issue.tsx",
+      "parent": "/_layout/$owner/$slug/_layout"
     }
   }
 }
