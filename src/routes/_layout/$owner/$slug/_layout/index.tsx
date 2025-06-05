@@ -1,10 +1,11 @@
 import { Repository } from "@/components/repository";
 import { useRepository } from "@/context/repository";
+import { LoadingLayout } from "@/layouts/loading";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_layout/$owner/$slug/_layout/")({
 	component: Repo,
-	pendingComponent: () => <div>Loading...</div>,
+	pendingComponent: LoadingLayout,
 });
 
 function Repo() {

@@ -29,7 +29,7 @@ export const SiteHeader = ({ user }: Props) => (
 						<>
 							<Avatar radius="full" size="2" fallback="NN" />
 							<Text size="2" color="red">
-								<Em>Missing token.</Em>
+								<Em>Missing / wrong token.</Em>
 							</Text>
 						</>
 					)}

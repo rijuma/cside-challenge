@@ -7,11 +7,12 @@ import {
 import { Outlet, createFileRoute } from "@tanstack/react-router";
 import { loadQuery } from "react-relay";
 
+import { LoadingLayout } from "@/layouts/loading";
 import type { repositoryQuery as RepositoryQuery } from "@/utils/relay/__generated__/repositoryQuery.graphql";
 
 export const Route = createFileRoute("/_layout/$owner/$slug/_layout")({
 	component: RepoLayout,
-	pendingComponent: () => <div>Loading...</div>,
+	pendingComponent: LoadingLayout,
 	beforeLoad: async ({ params, context: { relayEnvironment } }) => {
 		const { owner, slug } = params;
 

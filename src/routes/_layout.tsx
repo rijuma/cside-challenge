@@ -1,4 +1,6 @@
 import { RootLayout } from "@/layouts";
+import { LoadingLayout } from "@/layouts/loading";
+import { SiteErrorLayout } from "@/layouts/site-error";
 import { useUserData, userQuery } from "@/queries";
 import type { userQuery as UserQuery } from "@/utils/relay/__generated__/userQuery.graphql";
 import { Outlet, createFileRoute } from "@tanstack/react-router";
@@ -6,7 +8,15 @@ import { loadQuery } from "react-relay";
 
 export const Route = createFileRoute("/_layout")({
 	component: App,
-	pendingComponent: () => <div>Loading...</div>,
+	pendingComponent: LoadingLayout,
+	errorComponent: () => (
+		<SiteErrorLayout
+			message={[
+				"Missing / wrong GitHub token.",
+				"Check your environment variables.",
+			]}
+		/>
+	),
 	loader: async ({ context: { relayEnvironment } }) => {
 		const userQueryRef = loadQuery<UserQuery>(
 			relayEnvironment,
