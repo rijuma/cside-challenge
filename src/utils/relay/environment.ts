@@ -1,3 +1,4 @@
+import { proxyUrl } from "@/const";
 import {
 	type CacheConfig,
 	Environment,
@@ -15,8 +16,6 @@ async function fetchRelay(
 	_cacheConfig: CacheConfig,
 	_uploadables?: UploadableMap | null,
 ) {
-	const proxyUrl = `${import.meta.env.VITE_GH_PROXY_URL}` || null;
-
 	if (proxyUrl && import.meta.env.VITE_GH_TOKEN)
 		throw new Error(
 			"You are using a GitHub proxy. Please remove VITE_GH_PROXY_URL from the env vars, since it's a security risk.",

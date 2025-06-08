@@ -18,7 +18,6 @@ export const SearchForm: FC<Props> = ({ onSelect }: Props) => {
 	const [results, setResults] = useState([]);
 
 	const handleSelectRepo = (path: string) => {
-		console.log("Navigate to", path);
 		navigate({ to: path });
 		onSelect?.(path);
 	};
