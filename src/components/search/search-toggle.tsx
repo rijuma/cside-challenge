@@ -2,7 +2,7 @@ import { GitHubLogoIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { Box, Button, Dialog, Flex, Kbd } from "@radix-ui/themes";
 
 import { type FC, useEffect, useState } from "react";
-import { SearchForm } from "./search-form";
+import { SearchForm } from ".";
 import styles from "./search-toggle.module.scss";
 
 const SEARCH_KEY_BINDING = "/";

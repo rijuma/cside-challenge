@@ -3,7 +3,7 @@ import { useUser } from "@/context/user";
 import type { User } from "@/types";
 import { Avatar, Box, Card, Code, Em, Flex, Text } from "@radix-ui/themes";
 import type { FC } from "react";
-import { SearchToggle } from "../search-toggle";
+import { SearchToggle } from "../search/search-toggle";
 import styles from "./site-header.module.scss";
 import { UserMenu } from "./user-menu";
 

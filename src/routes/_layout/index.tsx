@@ -1,4 +1,6 @@
+import { SearchForm } from "@/components/search";
 import { RootLayout } from "@/layouts";
+import { Box, Heading, Text } from "@radix-ui/themes";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_layout/")({
@@ -8,7 +10,12 @@ export const Route = createFileRoute("/_layout/")({
 function RouteComponent() {
 	return (
 		<RootLayout>
-			<div>Hello "/Index"!</div>
+			<Box p="5">
+				<Heading as="h1" mb="3">
+					Search GitHub repository
+				</Heading>
+				<SearchForm />
+			</Box>
 		</RootLayout>
 	);
 }
