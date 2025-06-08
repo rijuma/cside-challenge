@@ -1,6 +1,6 @@
 import { proxyUrl } from "@/const";
 import { useUser } from "@/context/user";
-import { Avatar, Code, Flex, Text } from "@radix-ui/themes";
+import { Avatar, Card, Code, Flex, Text } from "@radix-ui/themes";
 import { Popover } from "radix-ui";
 import { ThemeProvider } from "../theme-provider";
 import styles from "./user-menu.module.scss";
@@ -27,22 +27,24 @@ export const UserMenu: FC = () => {
 				<Popover.Portal>
 					<ThemeProvider>
 						<Popover.Content className={styles.PopoverContent} sideOffset={5}>
-							<Flex direction="column" p="3" gap="1">
-								<Text as="p" size="1" color="gray">
-									Logged in as:
-								</Text>
-
-								<Text as="p" size="2" weight="bold" color="blue">
-									{user.displayName} <Code>{user.username}</Code>
-								</Text>
-								{proxyUrl ? (
+							<Card>
+								<Flex direction="column" gap="1">
 									<Text as="p" size="1" color="gray">
-										<small>
-											(Via: <Code>{proxyUrl}</Code>)
-										</small>
+										Logged in as:
 									</Text>
-								) : null}
-							</Flex>
+
+									<Text as="p" size="2" weight="bold" color="blue">
+										{user.displayName} <Code>{user.username}</Code>
+									</Text>
+									{proxyUrl ? (
+										<Text as="p" size="1" color="gray">
+											<small>
+												(Via: <Code>{proxyUrl}</Code>)
+											</small>
+										</Text>
+									) : null}
+								</Flex>
+							</Card>
 							<Popover.Arrow className={styles.PopoverArrow} />
 						</Popover.Content>
 					</ThemeProvider>
