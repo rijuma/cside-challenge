@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<8e962f8eeaf0916e6b8b4b13e71c7f61>>
+ * @generated SignedSource<<6acd825f2491e3f84dc14fad9d372009>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -11,10 +11,9 @@
 import { ConcreteRequest } from 'relay-runtime';
 export type searchRepositoryQuery$variables = {
   query: string;
-  skip: boolean;
 };
 export type searchRepositoryQuery$data = {
-  readonly search?: {
+  readonly search: {
     readonly nodes: ReadonlyArray<{
       readonly description?: string | null | undefined;
       readonly name?: string;
@@ -37,11 +36,6 @@ var v0 = [
     "defaultValue": null,
     "kind": "LocalArgument",
     "name": "query"
-  },
-  {
-    "defaultValue": null,
-    "kind": "LocalArgument",
-    "name": "skip"
   }
 ],
 v1 = [
@@ -118,56 +112,49 @@ return {
     "name": "searchRepositoryQuery",
     "selections": [
       {
-        "condition": "skip",
-        "kind": "Condition",
-        "passingValue": false,
+        "alias": null,
+        "args": (v1/*: any*/),
+        "concreteType": "SearchResultItemConnection",
+        "kind": "LinkedField",
+        "name": "search",
+        "plural": false,
         "selections": [
           {
             "alias": null,
-            "args": (v1/*: any*/),
-            "concreteType": "SearchResultItemConnection",
+            "args": null,
+            "concreteType": null,
             "kind": "LinkedField",
-            "name": "search",
-            "plural": false,
+            "name": "nodes",
+            "plural": true,
             "selections": [
               {
-                "alias": null,
-                "args": null,
-                "concreteType": null,
-                "kind": "LinkedField",
-                "name": "nodes",
-                "plural": true,
+                "kind": "InlineFragment",
                 "selections": [
+                  (v2/*: any*/),
+                  (v3/*: any*/),
+                  (v4/*: any*/),
+                  (v5/*: any*/),
                   {
-                    "kind": "InlineFragment",
+                    "alias": null,
+                    "args": null,
+                    "concreteType": null,
+                    "kind": "LinkedField",
+                    "name": "owner",
+                    "plural": false,
                     "selections": [
-                      (v2/*: any*/),
-                      (v3/*: any*/),
-                      (v4/*: any*/),
-                      (v5/*: any*/),
-                      {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": null,
-                        "kind": "LinkedField",
-                        "name": "owner",
-                        "plural": false,
-                        "selections": [
-                          (v6/*: any*/)
-                        ],
-                        "storageKey": null
-                      }
+                      (v6/*: any*/)
                     ],
-                    "type": "Repository",
-                    "abstractKey": null
+                    "storageKey": null
                   }
                 ],
-                "storageKey": null
+                "type": "Repository",
+                "abstractKey": null
               }
             ],
             "storageKey": null
           }
-        ]
+        ],
+        "storageKey": null
       }
     ],
     "type": "Query",
@@ -180,81 +167,74 @@ return {
     "name": "searchRepositoryQuery",
     "selections": [
       {
-        "condition": "skip",
-        "kind": "Condition",
-        "passingValue": false,
+        "alias": null,
+        "args": (v1/*: any*/),
+        "concreteType": "SearchResultItemConnection",
+        "kind": "LinkedField",
+        "name": "search",
+        "plural": false,
         "selections": [
           {
             "alias": null,
-            "args": (v1/*: any*/),
-            "concreteType": "SearchResultItemConnection",
+            "args": null,
+            "concreteType": null,
             "kind": "LinkedField",
-            "name": "search",
-            "plural": false,
+            "name": "nodes",
+            "plural": true,
             "selections": [
+              (v7/*: any*/),
               {
-                "alias": null,
-                "args": null,
-                "concreteType": null,
-                "kind": "LinkedField",
-                "name": "nodes",
-                "plural": true,
+                "kind": "InlineFragment",
                 "selections": [
-                  (v7/*: any*/),
+                  (v2/*: any*/),
+                  (v3/*: any*/),
+                  (v4/*: any*/),
+                  (v5/*: any*/),
                   {
-                    "kind": "InlineFragment",
+                    "alias": null,
+                    "args": null,
+                    "concreteType": null,
+                    "kind": "LinkedField",
+                    "name": "owner",
+                    "plural": false,
                     "selections": [
-                      (v2/*: any*/),
-                      (v3/*: any*/),
-                      (v4/*: any*/),
-                      (v5/*: any*/),
-                      {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": null,
-                        "kind": "LinkedField",
-                        "name": "owner",
-                        "plural": false,
-                        "selections": [
-                          (v7/*: any*/),
-                          (v6/*: any*/),
-                          (v8/*: any*/)
-                        ],
-                        "storageKey": null
-                      }
-                    ],
-                    "type": "Repository",
-                    "abstractKey": null
-                  },
-                  {
-                    "kind": "InlineFragment",
-                    "selections": [
+                      (v7/*: any*/),
+                      (v6/*: any*/),
                       (v8/*: any*/)
                     ],
-                    "type": "Node",
-                    "abstractKey": "__isNode"
+                    "storageKey": null
                   }
                 ],
-                "storageKey": null
+                "type": "Repository",
+                "abstractKey": null
+              },
+              {
+                "kind": "InlineFragment",
+                "selections": [
+                  (v8/*: any*/)
+                ],
+                "type": "Node",
+                "abstractKey": "__isNode"
               }
             ],
             "storageKey": null
           }
-        ]
+        ],
+        "storageKey": null
       }
     ]
   },
   "params": {
-    "cacheID": "e99ba646ce0b26307292a9316b3034cb",
+    "cacheID": "420b16d1201ab2a86464f800b0fa355c",
     "id": null,
     "metadata": {},
     "name": "searchRepositoryQuery",
     "operationKind": "query",
-    "text": "query searchRepositoryQuery(\n  $query: String!\n  $skip: Boolean!\n) {\n  search(type: REPOSITORY, query: $query, first: 10) @skip(if: $skip) {\n    nodes {\n      __typename\n      ... on Repository {\n        name\n        nameWithOwner\n        description\n        url\n        owner {\n          __typename\n          login\n          id\n        }\n      }\n      ... on Node {\n        __isNode: __typename\n        id\n      }\n    }\n  }\n}\n"
+    "text": "query searchRepositoryQuery(\n  $query: String!\n) {\n  search(type: REPOSITORY, query: $query, first: 10) {\n    nodes {\n      __typename\n      ... on Repository {\n        name\n        nameWithOwner\n        description\n        url\n        owner {\n          __typename\n          login\n          id\n        }\n      }\n      ... on Node {\n        __isNode: __typename\n        id\n      }\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "8c9788a787ea6302b6e06f4a10f5e8aa";
+(node as any).hash = "0ddf2379ddc38227be9a31a1183d3ca6";
 
 export default node;

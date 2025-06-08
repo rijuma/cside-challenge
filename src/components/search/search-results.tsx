@@ -12,9 +12,11 @@ type Props = {
 export const SearchResults: FC<Props> = ({ query }) => {
 	const searchResults = useLazyLoadQuery(
 		searchRepositoryQuery,
-		{ query, skip: !query }, // If there's no query, we skip it.
+		{ query },
 		{ fetchPolicy: "network-only" },
 	);
+
+	if (!query) return null;
 
 	return <pre>{JSON.stringify(searchResults, null, 2)}</pre>;
 };
