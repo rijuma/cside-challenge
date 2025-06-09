@@ -1,5 +1,4 @@
-import { searchRepositoryQuery } from "@/queries/search-repository";
-import { useLazyLoadQuery } from "react-relay";
+import { useSearchRepositoryData } from "@/queries/search-repository";
 
 import type { FC } from "react";
 
@@ -10,11 +9,7 @@ type Props = {
 };
 
 export const SearchResults: FC<Props> = ({ query }) => {
-	const searchResults = useLazyLoadQuery(
-		searchRepositoryQuery,
-		{ query },
-		{ fetchPolicy: "network-only" },
-	);
+	const searchResults = useSearchRepositoryData(query);
 
 	if (!query) return null;
 
