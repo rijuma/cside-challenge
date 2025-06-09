@@ -5,6 +5,7 @@ import { Link } from "@tanstack/react-router";
 import type { FC } from "react";
 import { Contributors } from "./contributors";
 import styles from "./index.module.scss";
+import { Issues } from "./issues";
 
 /*
 	const issues = useRepositoryIssuesData();
@@ -57,6 +58,8 @@ export const Repository: FC = () => {
 			</Text>
 
 			<Contributors />
+
+			<Issues />
 		</div>
 	);
 };

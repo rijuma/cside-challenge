@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<e48eab1a5c5a9ab4308ca0c9f7148e89>>
+ * @generated SignedSource<<f414af0d1d240c9e6654c293650d599d>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -195,21 +195,46 @@ v14 = {
   "name": "__typename",
   "storageKey": null
 },
-v15 = [
+v15 = {
+  "kind": "Literal",
+  "name": "first",
+  "value": 10
+},
+v16 = [
+  (v15/*: any*/),
   {
     "kind": "Literal",
-    "name": "first",
-    "value": 10
+    "name": "orderBy",
+    "value": {
+      "direction": "DESC",
+      "field": "UPDATED_AT"
+    }
+  },
+  {
+    "kind": "Literal",
+    "name": "states",
+    "value": "OPEN"
   }
 ],
-v16 = {
+v17 = {
+  "kind": "InlineFragment",
+  "selections": [
+    (v2/*: any*/)
+  ],
+  "type": "Node",
+  "abstractKey": "__isNode"
+},
+v18 = [
+  (v15/*: any*/)
+],
+v19 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "cursor",
   "storageKey": null
 },
-v17 = {
+v20 = {
   "alias": null,
   "args": null,
   "concreteType": "PageInfo",
@@ -423,7 +448,7 @@ return {
           },
           {
             "alias": null,
-            "args": (v15/*: any*/),
+            "args": (v16/*: any*/),
             "concreteType": "IssueConnection",
             "kind": "LinkedField",
             "name": "issues",
@@ -465,6 +490,27 @@ return {
                         "args": null,
                         "kind": "ScalarField",
                         "name": "createdAt",
+                        "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": null,
+                        "kind": "LinkedField",
+                        "name": "author",
+                        "plural": false,
+                        "selections": [
+                          (v14/*: any*/),
+                          (v13/*: any*/),
+                          {
+                            "alias": "username",
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "login",
+                            "storageKey": null
+                          },
+                          (v17/*: any*/)
+                        ],
                         "storageKey": null
                       },
                       {
@@ -522,7 +568,7 @@ return {
                         "storageKey": null
                       },
                       {
-                        "alias": "details",
+                        "alias": null,
                         "args": null,
                         "kind": "ScalarField",
                         "name": "bodyHTML",
@@ -530,7 +576,7 @@ return {
                       },
                       {
                         "alias": null,
-                        "args": (v15/*: any*/),
+                        "args": (v18/*: any*/),
                         "concreteType": "IssueCommentConnection",
                         "kind": "LinkedField",
                         "name": "comments",
@@ -572,14 +618,7 @@ return {
                                       (v4/*: any*/),
                                       (v13/*: any*/),
                                       (v5/*: any*/),
-                                      {
-                                        "kind": "InlineFragment",
-                                        "selections": [
-                                          (v2/*: any*/)
-                                        ],
-                                        "type": "Node",
-                                        "abstractKey": "__isNode"
-                                      }
+                                      (v17/*: any*/)
                                     ],
                                     "storageKey": null
                                   },
@@ -587,17 +626,17 @@ return {
                                 ],
                                 "storageKey": null
                               },
-                              (v16/*: any*/)
+                              (v19/*: any*/)
                             ],
                             "storageKey": null
                           },
-                          (v17/*: any*/)
+                          (v20/*: any*/)
                         ],
                         "storageKey": "comments(first:10)"
                       },
                       {
                         "alias": null,
-                        "args": (v15/*: any*/),
+                        "args": (v18/*: any*/),
                         "filters": null,
                         "handle": "connection",
                         "key": "Issue_comments",
@@ -609,18 +648,21 @@ return {
                     ],
                     "storageKey": null
                   },
-                  (v16/*: any*/)
+                  (v19/*: any*/)
                 ],
                 "storageKey": null
               },
-              (v17/*: any*/)
+              (v20/*: any*/)
             ],
-            "storageKey": "issues(first:10)"
+            "storageKey": "issues(first:10,orderBy:{\"direction\":\"DESC\",\"field\":\"UPDATED_AT\"},states:\"OPEN\")"
           },
           {
             "alias": null,
-            "args": (v15/*: any*/),
-            "filters": null,
+            "args": (v16/*: any*/),
+            "filters": [
+              "states",
+              "orderBy"
+            ],
             "handle": "connection",
             "key": "Repository_issues",
             "kind": "LinkedHandle",
@@ -632,12 +674,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "6b3ddce0c6f602afb41b2f906a378d7e",
+    "cacheID": "f5a1d1c6151976bccd7fe4daae936692",
     "id": null,
     "metadata": {},
     "name": "repositoryQuery",
     "operationKind": "query",
-    "text": "query repositoryQuery(\n  $owner: String!\n  $slug: String!\n) {\n  repository(owner: $owner, name: $slug) {\n    id\n    name\n    url\n    owner {\n      __typename\n      login\n      id\n    }\n    descriptionHTML\n    stargazerCount\n    forkCount\n    branches: refs(refPrefix: \"refs/heads/\") {\n      totalCount\n    }\n    defaultBranchRef {\n      name\n      target {\n        __typename\n        ... on Commit {\n          history {\n            totalCount\n          }\n        }\n        id\n      }\n      id\n    }\n    issueCount: issues {\n      totalCount\n    }\n    collaborators {\n      nodes {\n        avatarUrl\n        name\n        url\n        login\n        id\n      }\n    }\n    ...repositoryIssuesPaginatedFragment\n  }\n}\n\nfragment issueCommentsPaginatedFragment on Issue {\n  comments(first: 10) {\n    edges {\n      node {\n        id\n        contents: bodyHTML\n        author {\n          __typename\n          url\n          avatarUrl\n          login\n          ... on Node {\n            __isNode: __typename\n            id\n          }\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment repositoryIssuesPaginatedFragment on Repository {\n  issues(first: 10) {\n    edges {\n      node {\n        number\n        url\n        title\n        createdAt\n        tags: labels(first: 99) {\n          nodes {\n            color\n            name\n            description\n            id\n          }\n        }\n        commentCount: comments {\n          totalCount\n        }\n        details: bodyHTML\n        ...issueCommentsPaginatedFragment\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
+    "text": "query repositoryQuery(\n  $owner: String!\n  $slug: String!\n) {\n  repository(owner: $owner, name: $slug) {\n    id\n    name\n    url\n    owner {\n      __typename\n      login\n      id\n    }\n    descriptionHTML\n    stargazerCount\n    forkCount\n    branches: refs(refPrefix: \"refs/heads/\") {\n      totalCount\n    }\n    defaultBranchRef {\n      name\n      target {\n        __typename\n        ... on Commit {\n          history {\n            totalCount\n          }\n        }\n        id\n      }\n      id\n    }\n    issueCount: issues {\n      totalCount\n    }\n    collaborators {\n      nodes {\n        avatarUrl\n        name\n        url\n        login\n        id\n      }\n    }\n    ...repositoryIssuesPaginatedFragment\n  }\n}\n\nfragment issueCommentsPaginatedFragment on Issue {\n  comments(first: 10) {\n    edges {\n      node {\n        id\n        contents: bodyHTML\n        author {\n          __typename\n          url\n          avatarUrl\n          login\n          ... on Node {\n            __isNode: __typename\n            id\n          }\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment repositoryIssuesPaginatedFragment on Repository {\n  issues(first: 10, states: OPEN, orderBy: {field: UPDATED_AT, direction: DESC}) {\n    edges {\n      node {\n        number\n        url\n        title\n        createdAt\n        author {\n          __typename\n          avatarUrl\n          username: login\n          ... on Node {\n            __isNode: __typename\n            id\n          }\n        }\n        tags: labels(first: 99) {\n          nodes {\n            color\n            name\n            description\n            id\n          }\n        }\n        commentCount: comments {\n          totalCount\n        }\n        bodyHTML\n        ...issueCommentsPaginatedFragment\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
   }
 };
 })();

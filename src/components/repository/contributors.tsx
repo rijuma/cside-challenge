@@ -9,7 +9,7 @@ import {
 	Text,
 } from "@radix-ui/themes";
 import { Link } from "@tanstack/react-router";
-import { type FC, type PropsWithChildren, useState } from "react";
+import type { FC, PropsWithChildren } from "react";
 
 type LayoutProps = PropsWithChildren<{
 	count?: number;
@@ -29,12 +29,11 @@ const Layout: FC<LayoutProps> = ({ children, count }) => (
 );
 
 export const Contributors: FC = () => {
-	const [expanded, setExpanded] = useState(false);
 	const repo = useRepository();
 
 	const contributors = repo?.data.contributors;
 
-	if (!contributors)
+	if (!contributors?.length)
 		return (
 			<Layout>
 				<Blockquote color="crimson" size="1" mt="2">

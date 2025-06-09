@@ -5,3 +5,5 @@ export const siteTitle = "c/side - Git it";
 export const searchHistoryEntries = 10;
 
 export const supportEmail = "marcos@rigoli.dev";
+
+export const issueCommentsPerPage = 5;

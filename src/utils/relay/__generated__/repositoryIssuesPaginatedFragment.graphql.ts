@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<0068f73096382472486a33b3d1fe7733>>
+ * @generated SignedSource<<696f68936d246c48519c43bbeaaa20db>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -15,11 +15,15 @@ export type repositoryIssuesPaginatedFragment$data = {
   readonly issues: {
     readonly edges: ReadonlyArray<{
       readonly node: {
+        readonly author: {
+          readonly avatarUrl: any;
+          readonly username: string;
+        } | null | undefined;
+        readonly bodyHTML: any;
         readonly commentCount: {
           readonly totalCount: number;
         };
         readonly createdAt: any;
-        readonly details: any;
         readonly number: number;
         readonly tags: {
           readonly nodes: ReadonlyArray<{
@@ -93,7 +97,21 @@ return {
   "selections": [
     {
       "alias": "issues",
-      "args": null,
+      "args": [
+        {
+          "kind": "Literal",
+          "name": "orderBy",
+          "value": {
+            "direction": "DESC",
+            "field": "UPDATED_AT"
+          }
+        },
+        {
+          "kind": "Literal",
+          "name": "states",
+          "value": "OPEN"
+        }
+      ],
       "concreteType": "IssueConnection",
       "kind": "LinkedField",
       "name": "__Repository_issues_connection",
@@ -141,6 +159,31 @@ return {
                   "args": null,
                   "kind": "ScalarField",
                   "name": "createdAt",
+                  "storageKey": null
+                },
+                {
+                  "alias": null,
+                  "args": null,
+                  "concreteType": null,
+                  "kind": "LinkedField",
+                  "name": "author",
+                  "plural": false,
+                  "selections": [
+                    {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "avatarUrl",
+                      "storageKey": null
+                    },
+                    {
+                      "alias": "username",
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "login",
+                      "storageKey": null
+                    }
+                  ],
                   "storageKey": null
                 },
                 {
@@ -211,7 +254,7 @@ return {
                   "storageKey": null
                 },
                 {
-                  "alias": "details",
+                  "alias": null,
                   "args": null,
                   "kind": "ScalarField",
                   "name": "bodyHTML",
@@ -268,7 +311,7 @@ return {
           "storageKey": null
         }
       ],
-      "storageKey": null
+      "storageKey": "__Repository_issues_connection(orderBy:{\"direction\":\"DESC\",\"field\":\"UPDATED_AT\"},states:\"OPEN\")"
     },
     {
       "alias": null,
@@ -283,6 +326,6 @@ return {
 };
 })();
 
-(node as any).hash = "0feaff7a40c5d880a0ffc4fef5710e80";
+(node as any).hash = "034a8e5934fc7b08da918ec130f6e338";
 
 export default node;

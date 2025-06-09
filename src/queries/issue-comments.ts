@@ -11,7 +11,7 @@ export const issueCommentsFragmentQuery = graphql`
       count: { type: "Int", defaultValue: 10 }
     )
     @refetchable(queryName: "IssueCommentsPaginationQuery")  {
-    comments(first: $count, after: $cursor)
+    comments(first: $count, after: $cursor, orderBy: {field: CREATED_AT, direction: DESC})
     @connection(key: "Issue_comments") {
       edges {
         node {
