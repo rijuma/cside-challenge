@@ -53,7 +53,10 @@ export const useRepositoryData = (
 		queryRef,
 	);
 
-	if (!repository) throw new Error("Repository does not exists.");
+	if (!repository)
+		throw new Error(
+			"Repository does not exists or you don't have read permissions.",
+		);
 
 	const {
 		id,

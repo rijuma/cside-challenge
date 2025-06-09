@@ -1,5 +1,6 @@
 import { supportEmail } from "@/const";
-import { Box, Container, Flex, Heading, Text } from "@radix-ui/themes";
+import { Box, Button, Container, Flex, Heading, Text } from "@radix-ui/themes";
+import { Link } from "@tanstack/react-router";
 import type { FC } from "react";
 
 interface Props {
@@ -40,6 +41,11 @@ export const SiteErrorLayout: FC<Props> = ({ message = "Unknown error" }) => {
 							{supportEmail}
 						</a>
 					</Text>
+				</Box>
+				<Box mt="4">
+					<Link to="/">
+						<Button>Back to home</Button>
+					</Link>
 				</Box>
 			</Flex>
 		</Container>
