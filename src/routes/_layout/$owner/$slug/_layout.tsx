@@ -1,15 +1,15 @@
+import { siteTitle } from "@/const";
 import { RepositoryProvider } from "@/context";
+import { RootLayout } from "@/layouts";
+import { LoadingLayout } from "@/layouts/loading";
 import {
 	repositoryQuery,
 	useRepositoryData,
 	useRepositoryIssuesData,
 } from "@/queries";
+import type { repositoryQuery as RepositoryQuery } from "@/utils/relay/__generated__/repositoryQuery.graphql";
 import { Outlet, createFileRoute } from "@tanstack/react-router";
 import { loadQuery } from "react-relay";
-
-import { RootLayout } from "@/layouts";
-import { LoadingLayout } from "@/layouts/loading";
-import type { repositoryQuery as RepositoryQuery } from "@/utils/relay/__generated__/repositoryQuery.graphql";
 
 export const Route = createFileRoute("/_layout/$owner/$slug/_layout")({
 	component: RepoLayout,
@@ -29,6 +29,13 @@ export const Route = createFileRoute("/_layout/$owner/$slug/_layout")({
 	loader: async ({ context: { repoQueryRef } }) => {
 		return { repoQueryRef };
 	},
+	head: ({ params: { owner, slug } }) => ({
+		meta: [
+			{
+				title: `${siteTitle} - ${owner}/${slug}`,
+			},
+		],
+	}),
 });
 
 function RepoLayout() {
