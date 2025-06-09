@@ -1,7 +1,7 @@
 import { type PreloadedQuery, usePreloadedQuery } from "react-relay";
 import { graphql } from "relay-runtime";
 
-import type { Issue } from "@/types/issue";
+import type { Issue } from "@/types";
 import type { issueQuery as IssueQuery } from "@/utils/relay/__generated__/issueQuery.graphql";
 
 export const issueQuery = graphql`
