@@ -9,14 +9,14 @@ import { loadQuery } from "react-relay";
 export const Route = createFileRoute("/_layout")({
 	component: App,
 	pendingComponent: LoadingLayout,
-	errorComponent: () => (
-		<SiteErrorLayout
-			message={[
-				"Missing / wrong GitHub token.",
-				"Check your environment variables.",
-			]}
-		/>
-	),
+	errorComponent: (error) => {
+		console.log({ error });
+		const message =
+			error?.error?.name === "RelayNetwork"
+				? ["Missing / wrong GitHub token.", "Check your environment variables."]
+				: error.error.message || "Unknown error.";
+		return <SiteErrorLayout message={message} />;
+	},
 	loader: async ({ context: { relayEnvironment } }) => {
 		const userQueryRef = loadQuery<UserQuery>(
 			relayEnvironment,

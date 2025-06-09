@@ -1,10 +1,11 @@
-import type { FC } from "react";
+import type { FC, SVGProps } from "react";
 
-export const CSideLogo: FC = () => (
+export const CSideLogo: FC<SVGProps<SVGSVGElement>> = (props) => (
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		preserveAspectRatio="xMinYMid"
 		viewBox="0 0 497 140"
+		{...props}
 	>
 		<title>c/side Logo</title>
 		<path

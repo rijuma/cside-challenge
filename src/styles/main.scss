@@ -1,24 +1,26 @@
 @use "sass:meta";
 
-@layer radix, base;
+@layer radix, radix-overrides, base;
 
 @layer radix {
   /* Radix classes here */
   @include meta.load-css("~/@radix-ui/themes/styles.css");
 }
 
-@layer base {
-  /* Base classes here */
+// Radix UI Overrides
+@layer radix-overrides {
+  .radix-themes {
+    --cursor-button: pointer;
+    --base-button-height: auto;
+  }
+}
 
+/* General base styling here */
+@layer base {
   body {
     margin: 0;
     min-width: 320px;
     color: var(--gray-12);
-  }
-
-  svg,
-  img {
-    display: block;
   }
 
   ul {
@@ -42,8 +44,12 @@
     text-decoration: underline;
   }
 
-  button {
-    height: auto;
-    min-height: var(--base-button-height);
+  .d-block {
+    display: block;
+  }
+
+  .icon {
+    width: 1em;
+    height: 1em;
   }
 }

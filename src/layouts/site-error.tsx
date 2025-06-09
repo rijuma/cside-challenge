@@ -1,3 +1,4 @@
+import { supportEmail } from "@/const";
 import { Box, Container, Flex, Heading, Text } from "@radix-ui/themes";
 import type { FC } from "react";
 
@@ -27,6 +28,18 @@ export const SiteErrorLayout: FC<Props> = ({ message = "Unknown error" }) => {
 							{line}
 						</Text>
 					))}
+				</Box>
+				<Box>
+					<Text as="p" align="center" size="3" color="gray">
+						If the problem persists, please contact support:{" "}
+						<a
+							href={`mailto: ${supportEmail}`}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							{supportEmail}
+						</a>
+					</Text>
 				</Box>
 			</Flex>
 		</Container>

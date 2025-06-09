@@ -2,9 +2,10 @@ import type { repositoryIssuesPaginatedFragment$key } from "@/utils/relay/__gene
 
 export type Repository = {
 	id: string;
+	url: string;
 	slug: string;
 	owner: string;
-	description?: string;
+	descriptionHTML: string;
 	branchCount: number;
 	commitCount: number;
 	forkCount: number;

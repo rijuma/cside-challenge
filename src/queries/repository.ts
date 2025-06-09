@@ -9,10 +9,11 @@ export const repositoryQuery = graphql`
     repository(owner: $owner, name: $slug) {
       id,
       name,
+      url,
       owner {
         login
       }
-      description: descriptionHTML,
+      descriptionHTML,
       stargazerCount,
       forkCount,
       branches:refs(refPrefix:"refs/heads/") {
@@ -54,9 +55,10 @@ export const useRepositoryData = (
 
 	const {
 		id,
+		url,
 		owner: { login: owner },
 		name: slug,
-		description,
+		descriptionHTML,
 		branches,
 		collaborators,
 		defaultBranchRef,
@@ -78,9 +80,10 @@ export const useRepositoryData = (
 
 	return {
 		id,
+		url,
 		owner,
 		slug,
-		description: description || undefined,
+		descriptionHTML,
 		branchCount,
 		commitCount,
 		contributors,

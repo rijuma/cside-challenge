@@ -6,7 +6,9 @@ import type { FC, PropsWithChildren } from "react";
 export const RootLayout: FC<PropsWithChildren> = ({ children }) => (
 	<Flex direction="column" minHeight="100dvh">
 		<SiteHeader />
-		<Container flexGrow="1">{children}</Container>
+		<Container flexGrow="1" pl="6" pr="6">
+			{children}
+		</Container>
 		<SiteFooter />
 	</Flex>
 );

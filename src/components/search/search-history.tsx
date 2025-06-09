@@ -34,6 +34,7 @@ export const SearchHistory: FC<Props> = ({
 								type="button"
 								variant="ghost"
 								ml="5"
+								title="Delete this entry"
 								aria-label="Delete this entry"
 								onClick={() => onRemoveRepo?.(repo)}
 							>

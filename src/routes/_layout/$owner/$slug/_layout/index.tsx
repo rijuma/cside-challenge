@@ -1,23 +1,20 @@
 import { Repository } from "@/components/repository";
-import { useRepository } from "@/context";
 import { LoadingLayout } from "@/layouts/loading";
+import { Section } from "@radix-ui/themes";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_layout/$owner/$slug/_layout/")({
 	component: Repo,
 	pendingComponent: LoadingLayout,
+	loader: async ({ context: { repoQueryRef } }) => {
+		return { repoQueryRef };
+	},
 });
 
 function Repo() {
-	const { owner, slug } = useRepository() || {};
-
 	return (
-		<div>
-			<h1>
-				Hello, {owner}, nice repo: {slug}
-			</h1>
-
+		<Section pb="0">
 			<Repository />
-		</div>
+		</Section>
 	);
 }

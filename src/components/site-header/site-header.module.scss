@@ -1,4 +1,10 @@
 .heading {
+  --card-border-radius: 0;
   position: sticky;
   inset-block-start: -1px;
+
+  &::after {
+    box-shadow: none;
+    border-bottom: 1px solid var(--gray-6);
+  }
 }

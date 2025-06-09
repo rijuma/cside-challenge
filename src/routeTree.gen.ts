@@ -17,7 +17,6 @@ import { Route as LayoutImport } from './routes/_layout'
 import { Route as LayoutIndexImport } from './routes/_layout/index'
 import { Route as LayoutOwnerSlugLayoutImport } from './routes/_layout/$owner/$slug/_layout'
 import { Route as LayoutOwnerSlugLayoutIndexImport } from './routes/_layout/$owner/$slug/_layout/index'
-import { Route as LayoutOwnerSlugLayoutIssuesIssueImport } from './routes/_layout/$owner/$slug/_layout/issues/$issue'
 
 // Create Virtual Routes
 
@@ -54,13 +53,6 @@ const LayoutOwnerSlugLayoutIndexRoute = LayoutOwnerSlugLayoutIndexImport.update(
     getParentRoute: () => LayoutOwnerSlugLayoutRoute,
   } as any,
 )
-
-const LayoutOwnerSlugLayoutIssuesIssueRoute =
-  LayoutOwnerSlugLayoutIssuesIssueImport.update({
-    id: '/issues/$issue',
-    path: '/issues/$issue',
-    getParentRoute: () => LayoutOwnerSlugLayoutRoute,
-  } as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -101,13 +93,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutOwnerSlugLayoutIndexImport
       parentRoute: typeof LayoutOwnerSlugLayoutImport
     }
-    '/_layout/$owner/$slug/_layout/issues/$issue': {
-      id: '/_layout/$owner/$slug/_layout/issues/$issue'
-      path: '/issues/$issue'
-      fullPath: '/$owner/$slug/issues/$issue'
-      preLoaderRoute: typeof LayoutOwnerSlugLayoutIssuesIssueImport
-      parentRoute: typeof LayoutOwnerSlugLayoutImport
-    }
   }
 }
 
@@ -115,12 +100,10 @@ declare module '@tanstack/react-router' {
 
 interface LayoutOwnerSlugLayoutRouteChildren {
   LayoutOwnerSlugLayoutIndexRoute: typeof LayoutOwnerSlugLayoutIndexRoute
-  LayoutOwnerSlugLayoutIssuesIssueRoute: typeof LayoutOwnerSlugLayoutIssuesIssueRoute
 }
 
 const LayoutOwnerSlugLayoutRouteChildren: LayoutOwnerSlugLayoutRouteChildren = {
   LayoutOwnerSlugLayoutIndexRoute: LayoutOwnerSlugLayoutIndexRoute,
-  LayoutOwnerSlugLayoutIssuesIssueRoute: LayoutOwnerSlugLayoutIssuesIssueRoute,
 }
 
 const LayoutOwnerSlugLayoutRouteWithChildren =
@@ -158,13 +141,11 @@ export interface FileRoutesByFullPath {
   '/': typeof LayoutIndexRoute
   '/$owner/$slug': typeof LayoutOwnerSlugLayoutRouteWithChildren
   '/$owner/$slug/': typeof LayoutOwnerSlugLayoutIndexRoute
-  '/$owner/$slug/issues/$issue': typeof LayoutOwnerSlugLayoutIssuesIssueRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof LayoutIndexRoute
   '/$owner/$slug': typeof LayoutOwnerSlugLayoutIndexRoute
-  '/$owner/$slug/issues/$issue': typeof LayoutOwnerSlugLayoutIssuesIssueRoute
 }
 
 export interface FileRoutesById {
@@ -174,19 +155,13 @@ export interface FileRoutesById {
   '/_layout/$owner/$slug': typeof LayoutOwnerSlugRouteWithChildren
   '/_layout/$owner/$slug/_layout': typeof LayoutOwnerSlugLayoutRouteWithChildren
   '/_layout/$owner/$slug/_layout/': typeof LayoutOwnerSlugLayoutIndexRoute
-  '/_layout/$owner/$slug/_layout/issues/$issue': typeof LayoutOwnerSlugLayoutIssuesIssueRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | ''
-    | '/'
-    | '/$owner/$slug'
-    | '/$owner/$slug/'
-    | '/$owner/$slug/issues/$issue'
+  fullPaths: '' | '/' | '/$owner/$slug' | '/$owner/$slug/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/$owner/$slug' | '/$owner/$slug/issues/$issue'
+  to: '/' | '/$owner/$slug'
   id:
     | '__root__'
     | '/_layout'
@@ -194,7 +169,6 @@ export interface FileRouteTypes {
     | '/_layout/$owner/$slug'
     | '/_layout/$owner/$slug/_layout'
     | '/_layout/$owner/$slug/_layout/'
-    | '/_layout/$owner/$slug/_layout/issues/$issue'
   fileRoutesById: FileRoutesById
 }
 
@@ -241,16 +215,11 @@ export const routeTree = rootRoute
       "filePath": "_layout/$owner/$slug/_layout.tsx",
       "parent": "/_layout/$owner/$slug",
       "children": [
-        "/_layout/$owner/$slug/_layout/",
-        "/_layout/$owner/$slug/_layout/issues/$issue"
+        "/_layout/$owner/$slug/_layout/"
       ]
     },
     "/_layout/$owner/$slug/_layout/": {
       "filePath": "_layout/$owner/$slug/_layout/index.tsx",
-      "parent": "/_layout/$owner/$slug/_layout"
-    },
-    "/_layout/$owner/$slug/_layout/issues/$issue": {
-      "filePath": "_layout/$owner/$slug/_layout/issues/$issue.tsx",
       "parent": "/_layout/$owner/$slug/_layout"
     }
   }

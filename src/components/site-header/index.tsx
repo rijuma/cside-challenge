@@ -15,10 +15,10 @@ export const SiteHeader: FC = () => (
 	<Card variant="surface" className={styles.heading}>
 		<Flex justify="between" align="center">
 			<UserMenu />
-			<Link to="/">
+			<Link to="/" preload={false}>
 				<Button type="button" variant="ghost">
 					<Box width="1.4rem">
-						<CSideLogo />
+						<CSideLogo className="d-block" />
 					</Box>
 					<Text weight="bold" wrap="nowrap">
 						Git it!

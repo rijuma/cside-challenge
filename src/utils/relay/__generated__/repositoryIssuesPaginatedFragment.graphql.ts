@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<8464ebf2e22cb07885a68f814bd43222>>
+ * @generated SignedSource<<0068f73096382472486a33b3d1fe7733>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -15,7 +15,12 @@ export type repositoryIssuesPaginatedFragment$data = {
   readonly issues: {
     readonly edges: ReadonlyArray<{
       readonly node: {
+        readonly commentCount: {
+          readonly totalCount: number;
+        };
         readonly createdAt: any;
+        readonly details: any;
+        readonly number: number;
         readonly tags: {
           readonly nodes: ReadonlyArray<{
             readonly color: string;
@@ -25,6 +30,7 @@ export type repositoryIssuesPaginatedFragment$data = {
         } | null | undefined;
         readonly title: string;
         readonly url: any;
+        readonly " $fragmentSpreads": FragmentRefs<"issueCommentsPaginatedFragment">;
       } | null | undefined;
     } | null | undefined> | null | undefined;
   };
@@ -113,6 +119,13 @@ return {
                   "alias": null,
                   "args": null,
                   "kind": "ScalarField",
+                  "name": "number",
+                  "storageKey": null
+                },
+                {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
                   "name": "url",
                   "storageKey": null
                 },
@@ -180,6 +193,36 @@ return {
                   "storageKey": "labels(first:99)"
                 },
                 {
+                  "alias": "commentCount",
+                  "args": null,
+                  "concreteType": "IssueCommentConnection",
+                  "kind": "LinkedField",
+                  "name": "comments",
+                  "plural": false,
+                  "selections": [
+                    {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "totalCount",
+                      "storageKey": null
+                    }
+                  ],
+                  "storageKey": null
+                },
+                {
+                  "alias": "details",
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "bodyHTML",
+                  "storageKey": null
+                },
+                {
+                  "args": null,
+                  "kind": "FragmentSpread",
+                  "name": "issueCommentsPaginatedFragment"
+                },
+                {
                   "alias": null,
                   "args": null,
                   "kind": "ScalarField",
@@ -240,6 +283,6 @@ return {
 };
 })();
 
-(node as any).hash = "9179fb41ae9b46dc5bc51bf2fc68b37c";
+(node as any).hash = "0feaff7a40c5d880a0ffc4fef5710e80";
 
 export default node;

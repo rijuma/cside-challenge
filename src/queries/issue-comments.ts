@@ -1,9 +1,8 @@
 import type { Comment } from "@/types";
 import type { issueCommentsPaginatedFragment$key } from "@/utils/relay/__generated__/issueCommentsPaginatedFragment.graphql";
-import type { issueQuery as IssueQuery } from "@/utils/relay/__generated__/issueQuery.graphql";
-import { type PreloadedQuery, usePaginationFragment } from "react-relay";
+import { usePaginationFragment } from "react-relay";
 import { graphql } from "relay-runtime";
-import { useIssueData } from "./issue";
+import { useRepositoryIssuesData } from "./repository-issues";
 
 export const issueCommentsFragmentQuery = graphql`
   fragment issueCommentsPaginatedFragment on Issue
@@ -16,32 +15,34 @@ export const issueCommentsFragmentQuery = graphql`
     @connection(key: "Issue_comments") {
       edges {
         node {
-            id
-            contents: bodyHTML
-            author {
-              url
-              avatarUrl
-              login
-            }
+          id
+          contents: bodyHTML
+          author {
+            url
+            avatarUrl
+            login
           }
+        }
       }
     }
   }
 `;
 
-export const useIssueCommentsData = (queryRef: PreloadedQuery<IssueQuery>) => {
-	const issueData = useIssueData(queryRef);
+export const useIssueCommentsData = (issueId: number | null) => {
+	const repositoryIssuesData = useRepositoryIssuesData();
+	const issue = repositoryIssuesData?._ref?.find(
+		(i) => i?.node?.number === issueId,
+	)?.node;
 	const handlers = usePaginationFragment(
 		issueCommentsFragmentQuery,
-		issueData._ref as issueCommentsPaginatedFragment$key,
+		issue as issueCommentsPaginatedFragment$key,
 	);
 
-	const {
-		data: { comments: data },
-		...rest
-	} = handlers;
+	console.log({ handlers });
 
-	const comments = (data.edges
+	const { data, ...rest } = handlers;
+
+	const comments = (data?.comments?.edges
 		?.map((edge) => {
 			const data = edge?.node;
 			if (!data) return null;
