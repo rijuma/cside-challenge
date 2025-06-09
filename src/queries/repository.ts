@@ -34,8 +34,10 @@ export const repositoryQuery = graphql`
       }
       collaborators {
         nodes {
-          avatarUrl,
+          avatarUrl
           name
+          url
+					login
         }
       }
       ...repositoryIssuesPaginatedFragment
@@ -76,6 +78,8 @@ export const useRepositoryData = (
 		collaborators?.nodes?.filter(Boolean).map((c) => ({
 			avatarUrl: c?.avatarUrl || "",
 			name: c?.name || "(unknown)",
+			url: c?.url,
+			username: c?.login || "(unknown)",
 		})) || null; // Null means insufficient permissions
 
 	return {

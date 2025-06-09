@@ -3,6 +3,7 @@ import { ExternalLinkIcon } from "@radix-ui/react-icons";
 import { Box, Flex, Heading, Separator, Text } from "@radix-ui/themes";
 import { Link } from "@tanstack/react-router";
 import type { FC } from "react";
+import { Contributors } from "./contributors";
 import styles from "./index.module.scss";
 
 /*
@@ -54,6 +55,8 @@ export const Repository: FC = () => {
 					<Box>{commitCount} Commits</Box>
 				</Flex>
 			</Text>
+
+			<Contributors />
 		</div>
 	);
 };

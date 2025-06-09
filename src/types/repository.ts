@@ -14,8 +14,10 @@ export type Repository = {
 	starCount: number;
 	contributors:
 		| {
-				avatarUrl: string;
+				username: string;
 				name: string;
+				avatarUrl: string;
+				url: string;
 		  }[]
 		| null;
 	_ref: repositoryIssuesPaginatedFragment$key;
