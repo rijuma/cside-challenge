@@ -50,6 +50,7 @@ export const SearchForm: FC<Props> = ({ onSelect }: Props) => {
 					placeholder="Search repository..."
 					onChange={({ target: { value } }) => searchChange(value)}
 					value={query}
+					autoFocus
 				>
 					<TextField.Slot>
 						<MagnifyingGlassIcon height="16" width="16" />
@@ -74,7 +75,10 @@ export const SearchForm: FC<Props> = ({ onSelect }: Props) => {
 							<Loading />
 						) : (
 							<Suspense fallback={<Loading />}>
-								<SearchResults query={debouncedQuery} />
+								<SearchResults
+									query={debouncedQuery}
+									onSelectRepo={handleSelectRepo}
+								/>
 							</Suspense>
 						)}
 					</>

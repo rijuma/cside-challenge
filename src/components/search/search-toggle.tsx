@@ -3,7 +3,6 @@ import { Box, Button, Dialog, Flex, Kbd } from "@radix-ui/themes";
 
 import { type FC, useEffect, useState } from "react";
 import { SearchForm } from ".";
-import styles from "./search-toggle.module.scss";
 
 const SEARCH_KEY_BINDING = "/";
 
@@ -39,7 +38,6 @@ export const SearchToggle: FC = () => {
 		<Box>
 			<Button
 				variant="surface"
-				className={styles.SearchInput}
 				type="button"
 				onClick={() => setShow(true)}
 				aria-label="Search Github Repository. Press Slash key to search quickly."

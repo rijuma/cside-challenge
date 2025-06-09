@@ -41,4 +41,9 @@
   a:hover {
     text-decoration: underline;
   }
+
+  button {
+    height: auto;
+    min-height: var(--base-button-height);
+  }
 }

@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<6acd825f2491e3f84dc14fad9d372009>>
+ * @generated SignedSource<<3c888d0ba8d5b3c56b8bd73f9bc892f2>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -15,14 +15,16 @@ export type searchRepositoryQuery$variables = {
 export type searchRepositoryQuery$data = {
   readonly search: {
     readonly nodes: ReadonlyArray<{
-      readonly description?: string | null | undefined;
       readonly name?: string;
       readonly nameWithOwner?: string;
       readonly owner?: {
+        readonly avatarUrl: any;
         readonly login: string;
       };
+      readonly shortDescriptionHTML?: any;
       readonly url?: any;
     } | null | undefined> | null | undefined;
+    readonly repositoryCount: number;
   };
 };
 export type searchRepositoryQuery = {
@@ -42,7 +44,7 @@ v1 = [
   {
     "kind": "Literal",
     "name": "first",
-    "value": 10
+    "value": 20
   },
   {
     "kind": "Variable",
@@ -59,45 +61,59 @@ v2 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "name",
+  "name": "repositoryCount",
   "storageKey": null
 },
 v3 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "nameWithOwner",
+  "name": "name",
   "storageKey": null
 },
 v4 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "description",
+  "name": "nameWithOwner",
   "storageKey": null
 },
 v5 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "url",
+  "name": "shortDescriptionHTML",
   "storageKey": null
 },
 v6 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "login",
+  "name": "url",
   "storageKey": null
 },
 v7 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "__typename",
+  "name": "login",
   "storageKey": null
 },
 v8 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "avatarUrl",
+  "storageKey": null
+},
+v9 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "__typename",
+  "storageKey": null
+},
+v10 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
@@ -119,6 +135,7 @@ return {
         "name": "search",
         "plural": false,
         "selections": [
+          (v2/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -130,10 +147,10 @@ return {
               {
                 "kind": "InlineFragment",
                 "selections": [
-                  (v2/*: any*/),
                   (v3/*: any*/),
                   (v4/*: any*/),
                   (v5/*: any*/),
+                  (v6/*: any*/),
                   {
                     "alias": null,
                     "args": null,
@@ -142,7 +159,8 @@ return {
                     "name": "owner",
                     "plural": false,
                     "selections": [
-                      (v6/*: any*/)
+                      (v7/*: any*/),
+                      (v8/*: any*/)
                     ],
                     "storageKey": null
                   }
@@ -174,6 +192,7 @@ return {
         "name": "search",
         "plural": false,
         "selections": [
+          (v2/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -182,14 +201,14 @@ return {
             "name": "nodes",
             "plural": true,
             "selections": [
-              (v7/*: any*/),
+              (v9/*: any*/),
               {
                 "kind": "InlineFragment",
                 "selections": [
-                  (v2/*: any*/),
                   (v3/*: any*/),
                   (v4/*: any*/),
                   (v5/*: any*/),
+                  (v6/*: any*/),
                   {
                     "alias": null,
                     "args": null,
@@ -198,9 +217,10 @@ return {
                     "name": "owner",
                     "plural": false,
                     "selections": [
+                      (v9/*: any*/),
                       (v7/*: any*/),
-                      (v6/*: any*/),
-                      (v8/*: any*/)
+                      (v8/*: any*/),
+                      (v10/*: any*/)
                     ],
                     "storageKey": null
                   }
@@ -211,7 +231,7 @@ return {
               {
                 "kind": "InlineFragment",
                 "selections": [
-                  (v8/*: any*/)
+                  (v10/*: any*/)
                 ],
                 "type": "Node",
                 "abstractKey": "__isNode"
@@ -225,16 +245,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "420b16d1201ab2a86464f800b0fa355c",
+    "cacheID": "774540a6b86e68401cece94368a4bf5c",
     "id": null,
     "metadata": {},
     "name": "searchRepositoryQuery",
     "operationKind": "query",
-    "text": "query searchRepositoryQuery(\n  $query: String!\n) {\n  search(type: REPOSITORY, query: $query, first: 10) {\n    nodes {\n      __typename\n      ... on Repository {\n        name\n        nameWithOwner\n        description\n        url\n        owner {\n          __typename\n          login\n          id\n        }\n      }\n      ... on Node {\n        __isNode: __typename\n        id\n      }\n    }\n  }\n}\n"
+    "text": "query searchRepositoryQuery(\n  $query: String!\n) {\n  search(type: REPOSITORY, query: $query, first: 20) {\n    repositoryCount\n    nodes {\n      __typename\n      ... on Repository {\n        name\n        nameWithOwner\n        shortDescriptionHTML\n        url\n        owner {\n          __typename\n          login\n          avatarUrl\n          id\n        }\n      }\n      ... on Node {\n        __isNode: __typename\n        id\n      }\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "0ddf2379ddc38227be9a31a1183d3ca6";
+(node as any).hash = "551a64525f17a2ecc889bc0b78d3ee86";
 
 export default node;
