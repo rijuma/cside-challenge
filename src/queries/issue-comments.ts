@@ -1,4 +1,4 @@
-import type { Comment } from "@/types";
+import type { IssueComment } from "@/types";
 import type { issueCommentsPaginatedFragment$key } from "@/utils/relay/__generated__/issueCommentsPaginatedFragment.graphql";
 import { usePaginationFragment } from "react-relay";
 import { graphql } from "relay-runtime";
@@ -11,12 +11,13 @@ export const issueCommentsFragmentQuery = graphql`
       count: { type: "Int", defaultValue: 10 }
     )
     @refetchable(queryName: "IssueCommentsPaginationQuery")  {
-    comments(first: $count, after: $cursor, orderBy: {field: CREATED_AT, direction: DESC})
+    comments(first: $count, after: $cursor, orderBy: { field: UPDATED_AT, direction: DESC })
     @connection(key: "Issue_comments") {
       edges {
         node {
           id
-          contents: bodyHTML
+          bodyHTML
+					updatedAt
           author {
             url
             avatarUrl
@@ -38,8 +39,6 @@ export const useIssueCommentsData = (issueId: number | null) => {
 		issue as issueCommentsPaginatedFragment$key,
 	);
 
-	console.log({ handlers });
-
 	const { data, ...rest } = handlers;
 
 	const comments = (data?.comments?.edges
@@ -48,12 +47,13 @@ export const useIssueCommentsData = (issueId: number | null) => {
 			if (!data) return null;
 			return {
 				id: data.id,
-				author: data.author?.login || "(unknown)",
+				username: data.author?.login || "(unknown)",
+				updatedAt: new Date(data.updatedAt),
 				avatarUrl: data.author?.avatarUrl || "",
 				url: data.author?.avatarUrl || "",
-				details: data.contents || "",
+				detailsHTML: data.bodyHTML || "",
 			};
 		})
-		.filter(Boolean) || []) as Comment[];
+		.filter(Boolean) || []) as IssueComment[];
 	return { comments, ...rest };
 };

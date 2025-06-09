@@ -7,19 +7,21 @@ import { Contributors } from "./contributors";
 import styles from "./index.module.scss";
 import { Issues } from "./issues";
 
-/*
-	const issues = useRepositoryIssuesData();
-	const comments = useIssueCommentsData(1);
-	console.log({ issues, comments });
-	*/
-
 export const Repository: FC = () => {
 	const repository = useRepository();
 
 	if (!repository) return null;
 
-	const { owner, slug, url, starCount, forkCount, branchCount, commitCount } =
-		repository.data;
+	const {
+		owner,
+		slug,
+		url,
+		starCount,
+		forkCount,
+		branchCount,
+		commitCount,
+		descriptionHTML,
+	} = repository.data;
 
 	return (
 		<div className={styles.RepositoryHeader}>
@@ -32,6 +34,7 @@ export const Repository: FC = () => {
 					target="_blank"
 					className={styles.RepoLink}
 					rel="noreferrer noopener"
+					aria-label="Open repository in GitHub on a new tab."
 				>
 					{url} <ExternalLinkIcon className="icon" />
 				</Link>
@@ -57,8 +60,24 @@ export const Repository: FC = () => {
 				</Flex>
 			</Text>
 
+			<Heading as="h3" size="2" mt="4">
+				Description
+			</Heading>
+			{!descriptionHTML ? (
+				<Text
+					color="gray"
+					weight="regular"
+					size="3"
+					as="p"
+					// biome-ignore lint/security/noDangerouslySetInnerHtml: It should be safe since it's from GitHub API
+					dangerouslySetInnerHTML={{ __html: descriptionHTML }}
+				/>
+			) : (
+				<Text color="gray" weight="regular" size="2" as="p">
+					<i>(No repository description.)</i>
+				</Text>
+			)}
 			<Contributors />
-
 			<Issues />
 		</div>
 	);

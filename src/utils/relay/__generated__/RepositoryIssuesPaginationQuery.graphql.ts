@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<fb2221da0f0fef5e7a8759c5a0b8a881>>
+ * @generated SignedSource<<3e072c03a1479587f90348e30f2b90a1>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -64,7 +64,15 @@ v3 = {
   "name": "id",
   "storageKey": null
 },
-v4 = [
+v4 = {
+  "kind": "Literal",
+  "name": "orderBy",
+  "value": {
+    "direction": "DESC",
+    "field": "UPDATED_AT"
+  }
+},
+v5 = [
   {
     "kind": "Variable",
     "name": "after",
@@ -75,35 +83,28 @@ v4 = [
     "name": "first",
     "variableName": "count"
   },
-  {
-    "kind": "Literal",
-    "name": "orderBy",
-    "value": {
-      "direction": "DESC",
-      "field": "UPDATED_AT"
-    }
-  },
+  (v4/*: any*/),
   {
     "kind": "Literal",
     "name": "states",
     "value": "OPEN"
   }
 ],
-v5 = {
+v6 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "url",
   "storageKey": null
 },
-v6 = {
+v7 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "avatarUrl",
   "storageKey": null
 },
-v7 = {
+v8 = {
   "kind": "InlineFragment",
   "selections": [
     (v3/*: any*/)
@@ -111,21 +112,29 @@ v7 = {
   "type": "Node",
   "abstractKey": "__isNode"
 },
-v8 = [
+v9 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "bodyHTML",
+  "storageKey": null
+},
+v10 = [
   {
     "kind": "Literal",
     "name": "first",
     "value": 10
-  }
+  },
+  (v4/*: any*/)
 ],
-v9 = {
+v11 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "cursor",
   "storageKey": null
 },
-v10 = {
+v12 = {
   "alias": null,
   "args": null,
   "concreteType": "PageInfo",
@@ -209,7 +218,7 @@ return {
             "selections": [
               {
                 "alias": null,
-                "args": (v4/*: any*/),
+                "args": (v5/*: any*/),
                 "concreteType": "IssueConnection",
                 "kind": "LinkedField",
                 "name": "issues",
@@ -238,7 +247,7 @@ return {
                             "name": "number",
                             "storageKey": null
                           },
-                          (v5/*: any*/),
+                          (v6/*: any*/),
                           {
                             "alias": null,
                             "args": null,
@@ -262,7 +271,7 @@ return {
                             "plural": false,
                             "selections": [
                               (v2/*: any*/),
-                              (v6/*: any*/),
+                              (v7/*: any*/),
                               {
                                 "alias": "username",
                                 "args": null,
@@ -270,7 +279,7 @@ return {
                                 "name": "login",
                                 "storageKey": null
                               },
-                              (v7/*: any*/)
+                              (v8/*: any*/)
                             ],
                             "storageKey": null
                           },
@@ -342,16 +351,10 @@ return {
                             ],
                             "storageKey": null
                           },
+                          (v9/*: any*/),
                           {
                             "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "bodyHTML",
-                            "storageKey": null
-                          },
-                          {
-                            "alias": null,
-                            "args": (v8/*: any*/),
+                            "args": (v10/*: any*/),
                             "concreteType": "IssueCommentConnection",
                             "kind": "LinkedField",
                             "name": "comments",
@@ -374,11 +377,12 @@ return {
                                     "plural": false,
                                     "selections": [
                                       (v3/*: any*/),
+                                      (v9/*: any*/),
                                       {
-                                        "alias": "contents",
+                                        "alias": null,
                                         "args": null,
                                         "kind": "ScalarField",
-                                        "name": "bodyHTML",
+                                        "name": "updatedAt",
                                         "storageKey": null
                                       },
                                       {
@@ -390,8 +394,8 @@ return {
                                         "plural": false,
                                         "selections": [
                                           (v2/*: any*/),
-                                          (v5/*: any*/),
                                           (v6/*: any*/),
+                                          (v7/*: any*/),
                                           {
                                             "alias": null,
                                             "args": null,
@@ -399,7 +403,7 @@ return {
                                             "name": "login",
                                             "storageKey": null
                                           },
-                                          (v7/*: any*/)
+                                          (v8/*: any*/)
                                         ],
                                         "storageKey": null
                                       },
@@ -407,18 +411,20 @@ return {
                                     ],
                                     "storageKey": null
                                   },
-                                  (v9/*: any*/)
+                                  (v11/*: any*/)
                                 ],
                                 "storageKey": null
                               },
-                              (v10/*: any*/)
+                              (v12/*: any*/)
                             ],
-                            "storageKey": "comments(first:10)"
+                            "storageKey": "comments(first:10,orderBy:{\"direction\":\"DESC\",\"field\":\"UPDATED_AT\"})"
                           },
                           {
                             "alias": null,
-                            "args": (v8/*: any*/),
-                            "filters": null,
+                            "args": (v10/*: any*/),
+                            "filters": [
+                              "orderBy"
+                            ],
                             "handle": "connection",
                             "key": "Issue_comments",
                             "kind": "LinkedHandle",
@@ -429,17 +435,17 @@ return {
                         ],
                         "storageKey": null
                       },
-                      (v9/*: any*/)
+                      (v11/*: any*/)
                     ],
                     "storageKey": null
                   },
-                  (v10/*: any*/)
+                  (v12/*: any*/)
                 ],
                 "storageKey": null
               },
               {
                 "alias": null,
-                "args": (v4/*: any*/),
+                "args": (v5/*: any*/),
                 "filters": [
                   "states",
                   "orderBy"
@@ -459,12 +465,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "4a6dcba727ffe938f0ad2555bbbb3187",
+    "cacheID": "eac12f4a44902cb76848ba9cd49a10d8",
     "id": null,
     "metadata": {},
     "name": "RepositoryIssuesPaginationQuery",
     "operationKind": "query",
-    "text": "query RepositoryIssuesPaginationQuery(\n  $count: Int = 10\n  $cursor: String\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...repositoryIssuesPaginatedFragment_1G22uz\n    id\n  }\n}\n\nfragment issueCommentsPaginatedFragment on Issue {\n  comments(first: 10) {\n    edges {\n      node {\n        id\n        contents: bodyHTML\n        author {\n          __typename\n          url\n          avatarUrl\n          login\n          ... on Node {\n            __isNode: __typename\n            id\n          }\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment repositoryIssuesPaginatedFragment_1G22uz on Repository {\n  issues(first: $count, after: $cursor, states: OPEN, orderBy: {field: UPDATED_AT, direction: DESC}) {\n    edges {\n      node {\n        number\n        url\n        title\n        createdAt\n        author {\n          __typename\n          avatarUrl\n          username: login\n          ... on Node {\n            __isNode: __typename\n            id\n          }\n        }\n        tags: labels(first: 99) {\n          nodes {\n            color\n            name\n            description\n            id\n          }\n        }\n        commentCount: comments {\n          totalCount\n        }\n        bodyHTML\n        ...issueCommentsPaginatedFragment\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
+    "text": "query RepositoryIssuesPaginationQuery(\n  $count: Int = 10\n  $cursor: String\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...repositoryIssuesPaginatedFragment_1G22uz\n    id\n  }\n}\n\nfragment issueCommentsPaginatedFragment on Issue {\n  comments(first: 10, orderBy: {field: UPDATED_AT, direction: DESC}) {\n    edges {\n      node {\n        id\n        bodyHTML\n        updatedAt\n        author {\n          __typename\n          url\n          avatarUrl\n          login\n          ... on Node {\n            __isNode: __typename\n            id\n          }\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment repositoryIssuesPaginatedFragment_1G22uz on Repository {\n  issues(first: $count, after: $cursor, states: OPEN, orderBy: {field: UPDATED_AT, direction: DESC}) {\n    edges {\n      node {\n        number\n        url\n        title\n        createdAt\n        author {\n          __typename\n          avatarUrl\n          username: login\n          ... on Node {\n            __isNode: __typename\n            id\n          }\n        }\n        tags: labels(first: 99) {\n          nodes {\n            color\n            name\n            description\n            id\n          }\n        }\n        commentCount: comments {\n          totalCount\n        }\n        bodyHTML\n        ...issueCommentsPaginatedFragment\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
   }
 };
 })();

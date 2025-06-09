@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<a6c69d1b9d951b1b646c3dbe4cac0051>>
+ * @generated SignedSource<<1b2e7c9bce7c90d189cd3c1bb9403eeb>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -19,8 +19,9 @@ export type issueCommentsPaginatedFragment$data = {
           readonly login: string;
           readonly url: any;
         } | null | undefined;
-        readonly contents: any;
+        readonly bodyHTML: any;
         readonly id: string;
+        readonly updatedAt: any;
       } | null | undefined;
     } | null | undefined> | null | undefined;
   };
@@ -91,7 +92,16 @@ return {
   "selections": [
     {
       "alias": "comments",
-      "args": null,
+      "args": [
+        {
+          "kind": "Literal",
+          "name": "orderBy",
+          "value": {
+            "direction": "DESC",
+            "field": "UPDATED_AT"
+          }
+        }
+      ],
       "concreteType": "IssueCommentConnection",
       "kind": "LinkedField",
       "name": "__Issue_comments_connection",
@@ -115,10 +125,17 @@ return {
               "selections": [
                 (v1/*: any*/),
                 {
-                  "alias": "contents",
+                  "alias": null,
                   "args": null,
                   "kind": "ScalarField",
                   "name": "bodyHTML",
+                  "storageKey": null
+                },
+                {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "updatedAt",
                   "storageKey": null
                 },
                 {
@@ -199,7 +216,7 @@ return {
           "storageKey": null
         }
       ],
-      "storageKey": null
+      "storageKey": "__Issue_comments_connection(orderBy:{\"direction\":\"DESC\",\"field\":\"UPDATED_AT\"})"
     },
     (v1/*: any*/)
   ],
@@ -208,6 +225,6 @@ return {
 };
 })();
 
-(node as any).hash = "516d0fd711619a17053a56add4768363";
+(node as any).hash = "869402619c12b9b32d2efcea3e2a292b";
 
 export default node;

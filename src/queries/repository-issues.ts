@@ -11,7 +11,7 @@ export const repositoryIssuesFragmentQuery = graphql`
       count: { type: "Int", defaultValue: 10 }
     )
     @refetchable(queryName: "RepositoryIssuesPaginationQuery")  {
-    issues(first: $count, after: $cursor, states: OPEN, orderBy: {field: UPDATED_AT, direction: DESC})
+    issues(first: $count, after: $cursor, states: OPEN, orderBy: { field: UPDATED_AT, direction: DESC } )
     @connection(key: "Repository_issues") {
       edges {
         node {

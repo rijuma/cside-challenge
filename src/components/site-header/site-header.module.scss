@@ -2,6 +2,8 @@
   --card-border-radius: 0;
   position: sticky;
   inset-block-start: -1px;
+  z-index: 10;
+  box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%);
 
   &::after {
     box-shadow: none;

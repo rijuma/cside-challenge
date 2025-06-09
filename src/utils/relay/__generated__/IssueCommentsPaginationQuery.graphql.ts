@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<2733cdc149a8383e4b0f51bb8c7c67b7>>
+ * @generated SignedSource<<44b9c725a87d4ba0b73414532a988505>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -74,6 +74,14 @@ v4 = [
     "kind": "Variable",
     "name": "first",
     "variableName": "count"
+  },
+  {
+    "kind": "Literal",
+    "name": "orderBy",
+    "value": {
+      "direction": "DESC",
+      "field": "UPDATED_AT"
+    }
   }
 ];
 return {
@@ -159,10 +167,17 @@ return {
                         "selections": [
                           (v3/*: any*/),
                           {
-                            "alias": "contents",
+                            "alias": null,
                             "args": null,
                             "kind": "ScalarField",
                             "name": "bodyHTML",
+                            "storageKey": null
+                          },
+                          {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "updatedAt",
                             "storageKey": null
                           },
                           {
@@ -251,7 +266,9 @@ return {
               {
                 "alias": null,
                 "args": (v4/*: any*/),
-                "filters": null,
+                "filters": [
+                  "orderBy"
+                ],
                 "handle": "connection",
                 "key": "Issue_comments",
                 "kind": "LinkedHandle",
@@ -267,16 +284,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "7a1aaa613ef9912bb85b290cbf5a913c",
+    "cacheID": "9b6315fd74439f8278371501c853e4ae",
     "id": null,
     "metadata": {},
     "name": "IssueCommentsPaginationQuery",
     "operationKind": "query",
-    "text": "query IssueCommentsPaginationQuery(\n  $count: Int = 10\n  $cursor: String\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...issueCommentsPaginatedFragment_1G22uz\n    id\n  }\n}\n\nfragment issueCommentsPaginatedFragment_1G22uz on Issue {\n  comments(first: $count, after: $cursor) {\n    edges {\n      node {\n        id\n        contents: bodyHTML\n        author {\n          __typename\n          url\n          avatarUrl\n          login\n          ... on Node {\n            __isNode: __typename\n            id\n          }\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
+    "text": "query IssueCommentsPaginationQuery(\n  $count: Int = 10\n  $cursor: String\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...issueCommentsPaginatedFragment_1G22uz\n    id\n  }\n}\n\nfragment issueCommentsPaginatedFragment_1G22uz on Issue {\n  comments(first: $count, after: $cursor, orderBy: {field: UPDATED_AT, direction: DESC}) {\n    edges {\n      node {\n        id\n        bodyHTML\n        updatedAt\n        author {\n          __typename\n          url\n          avatarUrl\n          login\n          ... on Node {\n            __isNode: __typename\n            id\n          }\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
   }
 };
 })();
 
-(node as any).hash = "516d0fd711619a17053a56add4768363";
+(node as any).hash = "869402619c12b9b32d2efcea3e2a292b";
 
 export default node;

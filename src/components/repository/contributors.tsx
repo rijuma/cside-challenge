@@ -1,32 +1,8 @@
 import { useRepository } from "@/context";
-import {
-	Avatar,
-	Badge,
-	Blockquote,
-	Box,
-	Flex,
-	Heading,
-	Text,
-} from "@radix-ui/themes";
+import { Avatar, Blockquote, Flex, Text } from "@radix-ui/themes";
 import { Link } from "@tanstack/react-router";
-import type { FC, PropsWithChildren } from "react";
-
-type LayoutProps = PropsWithChildren<{
-	count?: number;
-}>;
-const Layout: FC<LayoutProps> = ({ children, count }) => (
-	<Box>
-		<Heading as="h3" size="2" mt="4">
-			Contributors
-			{count !== undefined ? (
-				<Badge color="gold" ml="2">
-					{count}
-				</Badge>
-			) : null}
-		</Heading>
-		{children}
-	</Box>
-);
+import type { FC } from "react";
+import { DetailSection } from "../ui/detail-section";
 
 export const Contributors: FC = () => {
 	const repo = useRepository();
@@ -35,16 +11,16 @@ export const Contributors: FC = () => {
 
 	if (!contributors?.length)
 		return (
-			<Layout>
+			<DetailSection title="Contributors">
 				<Blockquote color="crimson" size="1" mt="2">
 					You don't have permissions to see the contributors list on this
 					repository.
 				</Blockquote>
-			</Layout>
+			</DetailSection>
 		);
 
 	return (
-		<Layout count={contributors.length}>
+		<DetailSection title="Contributors" badge={`${contributors.length}`}>
 			<Flex gap="2" wrap="wrap" mt="2">
 				{contributors.map(({ url, avatarUrl, username, name }) => (
 					<Link
@@ -67,6 +43,6 @@ export const Contributors: FC = () => {
 					</Link>
 				))}
 			</Flex>
-		</Layout>
+		</DetailSection>
 	);
 };
