@@ -1,3 +1,4 @@
+import { searchHistoryEntries } from "@/const";
 import type { RepositoryHistory } from "@/types";
 import { Cross2Icon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { Flex, IconButton, Section, TextField } from "@radix-ui/themes";
@@ -23,7 +24,10 @@ export const SearchForm: FC<Props> = ({ onSelect }: Props) => {
 	>("repository-search-history", []);
 
 	const handleSelectRepo = (repo: RepositoryHistory) => {
-		const newHistory = [...new Set([repo, ...searchHistory])];
+		const newHistory = [...new Set([repo, ...searchHistory])].slice(
+			0,
+			searchHistoryEntries, // Limit entries.
+		);
 		setSearchHistory(newHistory);
 		navigate({ to: `/${repo.owner}/${repo.slug}` });
 		onSelect?.(repo);
