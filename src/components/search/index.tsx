@@ -8,7 +8,7 @@ import { Loading } from "../ui/loading";
 import { SearchHistory } from "./search-history";
 import { SearchResults } from "./search-results";
 
-const SEARCH_DEBOUNCE_MS = 2000;
+const SEARCH_DEBOUNCE_MS = 500;
 
 export type Props = {
 	onSelect?: (path: RepositoryHistory) => void;
