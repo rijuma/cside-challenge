@@ -4,10 +4,9 @@ export type RepositorySearchResult = {
 };
 
 export type RepositoryResult = {
-	name: string;
+	slug: string;
 	owner: string;
 	ownerAvatar: string;
-	path: string;
 	url: string;
 	descriptionHTML: string;
 };

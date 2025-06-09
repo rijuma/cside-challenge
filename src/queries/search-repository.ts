@@ -41,11 +41,10 @@ export const useSearchRepositoryData = (
 	const nodes = searchResults?.search?.nodes
 		?.filter((item) => Boolean(item))
 		.map((result) => ({
-			name: result?.name || "",
+			slug: result?.name || "",
 			owner: result?.owner?.login,
 			ownerAvatar: result?.owner?.avatarUrl,
 			descriptionHTML: result?.shortDescriptionHTML,
-			path: result?.nameWithOwner,
 			url: result?.url,
 		})) as RepositoryResult[];
 

@@ -1,7 +1,9 @@
+import type { RepositoryHistory } from "@/types";
 import { Cross2Icon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { Flex, IconButton, Section, TextField } from "@radix-ui/themes";
 import { useNavigate } from "@tanstack/react-router";
-import { type FC, Suspense, useEffect, useState } from "react";
+import { useLocalStorage } from "@uidotdev/usehooks";
+import { type FC, Suspense, useEffect, useRef, useState } from "react";
 import { Loading } from "../ui/loading";
 import { SearchHistory } from "./search-history";
 import { SearchResults } from "./search-results";
@@ -9,16 +11,30 @@ import { SearchResults } from "./search-results";
 const SEARCH_DEBOUNCE_MS = 2000;
 
 export type Props = {
-	onSelect?: (path: string) => void;
+	onSelect?: (path: RepositoryHistory) => void;
 };
 export const SearchForm: FC<Props> = ({ onSelect }: Props) => {
+	const inputRef = useRef<HTMLInputElement>(null);
 	const navigate = useNavigate();
 	const [query, setQuery] = useState("");
 	const [debouncedQuery, setDebouncedQuery] = useState("");
+	const [searchHistory, setSearchHistory] = useLocalStorage<
+		RepositoryHistory[]
+	>("repository-search-history", []);
 
-	const handleSelectRepo = (path: string) => {
-		navigate({ to: path });
-		onSelect?.(path);
+	const handleSelectRepo = (repo: RepositoryHistory) => {
+		const newHistory = [...new Set([repo, ...searchHistory])];
+		setSearchHistory(newHistory);
+		navigate({ to: `/${repo.owner}/${repo.slug}` });
+		onSelect?.(repo);
+	};
+
+	const handleRemoveRepo = (repo: RepositoryHistory) => {
+		const newHistory = searchHistory.filter(
+			({ owner, slug }) => owner !== repo.owner || slug !== repo.slug,
+		);
+		setSearchHistory(newHistory);
+		inputRef.current?.focus();
 	};
 
 	// Debaunce search
@@ -47,6 +63,7 @@ export const SearchForm: FC<Props> = ({ onSelect }: Props) => {
 		<Section p="0">
 			<Flex direction="column" gap="3">
 				<TextField.Root
+					ref={inputRef}
 					placeholder="Search repository..."
 					onChange={({ target: { value } }) => searchChange(value)}
 					value={query}
@@ -84,7 +101,11 @@ export const SearchForm: FC<Props> = ({ onSelect }: Props) => {
 					</>
 				) : (
 					// If there's no query, we show search history
-					<SearchHistory history={[]} onSelectRepo={handleSelectRepo} />
+					<SearchHistory
+						history={searchHistory}
+						onSelectRepo={handleSelectRepo}
+						onRemoveRepo={handleRemoveRepo}
+					/>
 				)}
 			</Flex>
 		</Section>

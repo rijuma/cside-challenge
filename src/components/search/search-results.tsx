@@ -2,11 +2,12 @@ import { useSearchRepositoryData } from "@/queries/search-repository";
 import { Avatar, Button, Flex, Heading, Text } from "@radix-ui/themes";
 import styles from "./search-results.module.scss";
 
+import type { RepositoryHistory } from "@/types";
 import type { FC } from "react";
 
 type Props = {
 	query: string;
-	onSelectRepo?: (url: string) => void;
+	onSelectRepo?: (repo: RepositoryHistory) => void;
 };
 
 export const SearchResults: FC<Props> = ({ query, onSelectRepo }) => {
@@ -19,12 +20,12 @@ export const SearchResults: FC<Props> = ({ query, onSelectRepo }) => {
 			<Heading as="h2" size="1">
 				Showing {nodes.length} of {total} results for "{query}":
 			</Heading>
-			{nodes.map(({ ownerAvatar, owner, path, url, descriptionHTML }) => (
+			{nodes.map(({ ownerAvatar, slug, owner, url, descriptionHTML }) => (
 				<Button
 					type="button"
 					variant="surface"
 					key={url}
-					onClick={() => path && onSelectRepo?.(path)}
+					onClick={() => onSelectRepo?.({ slug, owner })}
 					className={styles.SearchResult}
 				>
 					<Flex gap="2">
@@ -38,7 +39,7 @@ export const SearchResults: FC<Props> = ({ query, onSelectRepo }) => {
 						/>
 						<Flex direction="column" align="start">
 							<Text weight="bold" as="p" color="blue">
-								{path}
+								{owner}/{slug}
 							</Text>
 							{descriptionHTML ? (
 								<Text
