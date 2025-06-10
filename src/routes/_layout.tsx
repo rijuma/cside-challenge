@@ -1,4 +1,5 @@
 import { UserProvider } from "@/context/user";
+import { RootLayout } from "@/layouts";
 import { LoadingLayout } from "@/layouts/loading";
 import { SiteErrorLayout } from "@/layouts/site-error";
 import { useUserData, userQuery } from "@/queries";
@@ -37,7 +38,9 @@ function App() {
 
 	return (
 		<UserProvider value={user}>
-			<Outlet />
+			<RootLayout>
+				<Outlet />
+			</RootLayout>
 		</UserProvider>
 	);
 }

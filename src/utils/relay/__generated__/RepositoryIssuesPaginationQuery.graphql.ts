@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<3e072c03a1479587f90348e30f2b90a1>>
+ * @generated SignedSource<<9d87c724c2f7f4aeb5c696cc995d6df6>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -123,7 +123,7 @@ v10 = [
   {
     "kind": "Literal",
     "name": "first",
-    "value": 10
+    "value": 5
   },
   (v4/*: any*/)
 ],
@@ -417,7 +417,7 @@ return {
                               },
                               (v12/*: any*/)
                             ],
-                            "storageKey": "comments(first:10,orderBy:{\"direction\":\"DESC\",\"field\":\"UPDATED_AT\"})"
+                            "storageKey": "comments(first:5,orderBy:{\"direction\":\"DESC\",\"field\":\"UPDATED_AT\"})"
                           },
                           {
                             "alias": null,
@@ -465,12 +465,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "eac12f4a44902cb76848ba9cd49a10d8",
+    "cacheID": "f41b1115e19f6c749d8e45cdee519b4f",
     "id": null,
     "metadata": {},
     "name": "RepositoryIssuesPaginationQuery",
     "operationKind": "query",
-    "text": "query RepositoryIssuesPaginationQuery(\n  $count: Int = 10\n  $cursor: String\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...repositoryIssuesPaginatedFragment_1G22uz\n    id\n  }\n}\n\nfragment issueCommentsPaginatedFragment on Issue {\n  comments(first: 10, orderBy: {field: UPDATED_AT, direction: DESC}) {\n    edges {\n      node {\n        id\n        bodyHTML\n        updatedAt\n        author {\n          __typename\n          url\n          avatarUrl\n          login\n          ... on Node {\n            __isNode: __typename\n            id\n          }\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment repositoryIssuesPaginatedFragment_1G22uz on Repository {\n  issues(first: $count, after: $cursor, states: OPEN, orderBy: {field: UPDATED_AT, direction: DESC}) {\n    edges {\n      node {\n        number\n        url\n        title\n        createdAt\n        author {\n          __typename\n          avatarUrl\n          username: login\n          ... on Node {\n            __isNode: __typename\n            id\n          }\n        }\n        tags: labels(first: 99) {\n          nodes {\n            color\n            name\n            description\n            id\n          }\n        }\n        commentCount: comments {\n          totalCount\n        }\n        bodyHTML\n        ...issueCommentsPaginatedFragment\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
+    "text": "query RepositoryIssuesPaginationQuery(\n  $count: Int = 10\n  $cursor: String\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...repositoryIssuesPaginatedFragment_1G22uz\n    id\n  }\n}\n\nfragment issueCommentsPaginatedFragment on Issue {\n  comments(first: 5, orderBy: {field: UPDATED_AT, direction: DESC}) {\n    edges {\n      node {\n        id\n        bodyHTML\n        updatedAt\n        author {\n          __typename\n          url\n          avatarUrl\n          login\n          ... on Node {\n            __isNode: __typename\n            id\n          }\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment repositoryIssuesPaginatedFragment_1G22uz on Repository {\n  issues(first: $count, after: $cursor, states: OPEN, orderBy: {field: UPDATED_AT, direction: DESC}) {\n    edges {\n      node {\n        number\n        url\n        title\n        createdAt\n        author {\n          __typename\n          avatarUrl\n          username: login\n          ... on Node {\n            __isNode: __typename\n            id\n          }\n        }\n        tags: labels(first: 99) {\n          nodes {\n            color\n            name\n            description\n            id\n          }\n        }\n        commentCount: comments {\n          totalCount\n        }\n        bodyHTML\n        ...issueCommentsPaginatedFragment\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
   }
 };
 })();

@@ -1,7 +1,8 @@
-.IssueItem {
+.IssueItemDetails {
   width: 100%;
   height: auto;
   justify-content: initial;
   padding: var(--space-1) var(--space-2);
   view-transition-name: var(--transition-name);
+  background-color: var(--bronze-1);
 }

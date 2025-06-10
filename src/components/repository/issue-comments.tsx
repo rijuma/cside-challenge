@@ -6,6 +6,7 @@ import { Avatar, Blockquote, Button, Card, Flex, Text } from "@radix-ui/themes";
 import { Link } from "@tanstack/react-router";
 import type { FC } from "react";
 import { DetailSection } from "../ui/detail-section";
+import { HtmlContent } from "../ui/html-content";
 import styles from "./issue-comments.module.scss";
 
 export type Props = {
@@ -29,49 +30,48 @@ export const IssueComments: FC<Props> = ({ issue }) => {
 	return (
 		<DetailSection title="Comments">
 			<Flex direction="column" gap="2" mt="2" pb="8">
-				{comments.map(
-					({ username, avatarUrl, url, id, detailsHTML, updatedAt }) => (
-						<Flex key={id} gap="4">
-							<Avatar
-								src={avatarUrl}
-								fallback={username}
-								title={username}
-								size="3"
-								radius="full"
-							/>
-							<Card style={{ width: "100%" }} className={styles.Card}>
-								<Flex direction="column">
-									<Flex align="start" justify="between">
-										<Text color="bronze" size="1">
-											{username} at {updatedAt.toLocaleString("en-US")}
-										</Text>
-										<Text asChild size="2">
-											<Link
-												to={url}
-												target="_blank"
-												rel="noopener nofollow"
-												className={styles.OpenComment}
-												aria-label="Open comment in GitHub on a new tab."
-											>
-												Open <ExternalLinkIcon className="icon" />
-											</Link>
-										</Text>
+				{comments?.length ? (
+					comments.map(
+						({ username, avatarUrl, url, id, detailsHTML, updatedAt }) => (
+							<Flex key={id} gap="4">
+								<Avatar
+									src={avatarUrl}
+									fallback={username}
+									title={username}
+									size="3"
+									radius="full"
+								/>
+								<Card style={{ width: "100%" }} className={styles.Card}>
+									<Flex direction="column">
+										<Flex align="start" justify="between">
+											<Text color="bronze" size="1">
+												{username} at {updatedAt.toLocaleString("en-US")}
+											</Text>
+											<Text asChild size="2">
+												<Link
+													to={url}
+													target="_blank"
+													rel="noopener nofollow"
+													className={styles.OpenComment}
+													aria-label="Open comment in GitHub on a new tab."
+												>
+													Open <ExternalLinkIcon className="icon" />
+												</Link>
+											</Text>
+										</Flex>
+										<HtmlContent html={detailsHTML} />
 									</Flex>
-									<Text
-										color="gray"
-										weight="regular"
-										size="2"
-										as="p"
-										// biome-ignore lint/security/noDangerouslySetInnerHtml: It should be safe since it's from GitHub API
-										dangerouslySetInnerHTML={{ __html: detailsHTML }}
-									/>
-								</Flex>
-							</Card>
-						</Flex>
-					),
+								</Card>
+							</Flex>
+						),
+					)
+				) : (
+					<Text color="gray" weight="regular" size="1">
+						<i>(No comments)</i>
+					</Text>
 				)}
 
-				{hasNext ? (
+				{comments?.length && hasNext ? (
 					<Button
 						type="button"
 						onClick={() => loadNext(issueCommentsPerPage)}

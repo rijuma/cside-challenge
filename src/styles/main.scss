@@ -58,3 +58,8 @@
     vertical-align: middle;
   }
 }
+
+// Enables View Transitions
+@view-transition {
+  navigation: auto;
+}

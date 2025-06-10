@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<44b9c725a87d4ba0b73414532a988505>>
+ * @generated SignedSource<<6c5bf5f014bf8a525261bd43d2fb0ccf>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -28,7 +28,7 @@ export type IssueCommentsPaginationQuery = {
 const node: ConcreteRequest = (function(){
 var v0 = [
   {
-    "defaultValue": 10,
+    "defaultValue": 5,
     "kind": "LocalArgument",
     "name": "count"
   },
@@ -284,16 +284,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "9b6315fd74439f8278371501c853e4ae",
+    "cacheID": "71db61334920749e94ee71d676735639",
     "id": null,
     "metadata": {},
     "name": "IssueCommentsPaginationQuery",
     "operationKind": "query",
-    "text": "query IssueCommentsPaginationQuery(\n  $count: Int = 10\n  $cursor: String\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...issueCommentsPaginatedFragment_1G22uz\n    id\n  }\n}\n\nfragment issueCommentsPaginatedFragment_1G22uz on Issue {\n  comments(first: $count, after: $cursor, orderBy: {field: UPDATED_AT, direction: DESC}) {\n    edges {\n      node {\n        id\n        bodyHTML\n        updatedAt\n        author {\n          __typename\n          url\n          avatarUrl\n          login\n          ... on Node {\n            __isNode: __typename\n            id\n          }\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
+    "text": "query IssueCommentsPaginationQuery(\n  $count: Int = 5\n  $cursor: String\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...issueCommentsPaginatedFragment_1G22uz\n    id\n  }\n}\n\nfragment issueCommentsPaginatedFragment_1G22uz on Issue {\n  comments(first: $count, after: $cursor, orderBy: {field: UPDATED_AT, direction: DESC}) {\n    edges {\n      node {\n        id\n        bodyHTML\n        updatedAt\n        author {\n          __typename\n          url\n          avatarUrl\n          login\n          ... on Node {\n            __isNode: __typename\n            id\n          }\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
   }
 };
 })();
 
-(node as any).hash = "869402619c12b9b32d2efcea3e2a292b";
+(node as any).hash = "383e307d9e52ea0bdccee537608a1101";
 
 export default node;

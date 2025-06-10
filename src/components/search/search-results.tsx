@@ -4,6 +4,7 @@ import styles from "./search-results.module.scss";
 
 import type { RepositoryHistory } from "@/types";
 import type { FC } from "react";
+import { HtmlContent } from "../ui/html-content";
 
 type Props = {
 	query: string;
@@ -42,13 +43,7 @@ export const SearchResults: FC<Props> = ({ query, onSelectRepo }) => {
 								{owner}/{slug}
 							</Text>
 							{descriptionHTML ? (
-								<Text
-									color="gray"
-									weight="regular"
-									size="1"
-									// biome-ignore lint/security/noDangerouslySetInnerHtml: It should be safe since it's from GitHub API
-									dangerouslySetInnerHTML={{ __html: descriptionHTML }}
-								/>
+								<HtmlContent html={descriptionHTML} />
 							) : (
 								<Text color="gray" weight="regular" size="1">
 									<i>(No description)</i>

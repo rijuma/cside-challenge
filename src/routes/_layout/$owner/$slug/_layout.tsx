@@ -1,6 +1,5 @@
 import { siteTitle } from "@/const";
 import { RepositoryProvider } from "@/context";
-import { RootLayout } from "@/layouts";
 import { LoadingLayout } from "@/layouts/loading";
 import { repositoryQuery, useRepositoryData } from "@/queries";
 import type { repositoryQuery as RepositoryQuery } from "@/utils/relay/__generated__/repositoryQuery.graphql";
@@ -45,9 +44,7 @@ function RepoLayout() {
 
 	return (
 		<RepositoryProvider value={context}>
-			<RootLayout>
-				<Outlet />
-			</RootLayout>
+			<Outlet />
 		</RepositoryProvider>
 	);
 }

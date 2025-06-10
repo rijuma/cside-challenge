@@ -8,7 +8,7 @@ export const issueCommentsFragmentQuery = graphql`
   fragment issueCommentsPaginatedFragment on Issue
     @argumentDefinitions(
       cursor: { type: "String" }
-      count: { type: "Int", defaultValue: 10 }
+      count: { type: "Int", defaultValue: 5 }
     )
     @refetchable(queryName: "IssueCommentsPaginationQuery")  {
     comments(first: $count, after: $cursor, orderBy: { field: UPDATED_AT, direction: DESC })

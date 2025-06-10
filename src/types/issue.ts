@@ -1,5 +1,3 @@
-import type { issueCommentsPaginatedFragment$key } from "@/utils/relay/__generated__/issueCommentsPaginatedFragment.graphql";
-
 export type Issue = {
 	url: string;
 	number: number;
@@ -15,4 +13,5 @@ export type Issue = {
 		description: string;
 		name: string;
 	}[];
+	createdAt: Date;
 };

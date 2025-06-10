@@ -3,6 +3,7 @@ import { ExternalLinkIcon } from "@radix-ui/react-icons";
 import { Box, Flex, Heading, Separator, Text } from "@radix-ui/themes";
 import { Link } from "@tanstack/react-router";
 import type { FC } from "react";
+import { HtmlContent } from "../ui/html-content";
 import { Contributors } from "./contributors";
 import styles from "./index.module.scss";
 import { Issues } from "./issues";
@@ -64,14 +65,7 @@ export const Repository: FC = () => {
 				Description
 			</Heading>
 			{!descriptionHTML ? (
-				<Text
-					color="gray"
-					weight="regular"
-					size="3"
-					as="p"
-					// biome-ignore lint/security/noDangerouslySetInnerHtml: It should be safe since it's from GitHub API
-					dangerouslySetInnerHTML={{ __html: descriptionHTML }}
-				/>
+				<HtmlContent html={descriptionHTML} />
 			) : (
 				<Text color="gray" weight="regular" size="2" as="p">
 					<i>(No repository description.)</i>

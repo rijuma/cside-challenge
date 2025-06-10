@@ -53,6 +53,7 @@ export const useRepositoryIssuesData = () => {
 	const issues = data.issues.edges?.map((i) => ({
 		url: i?.node?.url,
 		title: i?.node?.title,
+		createdAt: new Date(i?.node?.createdAt),
 		number: i?.node?.number,
 		author: i?.node?.author,
 		tags: i?.node?.tags?.nodes,

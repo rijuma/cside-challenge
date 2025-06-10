@@ -1,12 +1,14 @@
-import { issueCommentsPerPage } from "@/const";
+import { issuesPerPage } from "@/const";
 import { useRepository } from "@/context";
 import { useRepositoryIssuesData } from "@/queries";
 import type { Issue } from "@/types";
+import { transition } from "@/utils/transitions";
 import { Blockquote, Button, Flex } from "@radix-ui/themes";
 import { type FC, useState } from "react";
 import { DetailSection } from "../ui/detail-section";
 import { IssueComments } from "./issue-comments";
 import { IssueItem } from "./issue-item";
+import { IssueItemDetails } from "./issue-item-details";
 import styles from "./issues.module.scss";
 
 export const Issues: FC = () => {
@@ -30,21 +32,24 @@ export const Issues: FC = () => {
 	return (
 		<DetailSection title="Issues" badge={`${issues.length} of ${issueCount}`}>
 			<Flex direction="column" gap="2" mt="2" pb="8">
-				{issues
-					.filter((i) => !selected || selected.number === i.number)
-					.map((issue) => (
+				{selected ? (
+					<IssueItemDetails
+						issue={selected}
+						onClose={() => transition(() => setSelected(null))}
+					/>
+				) : (
+					issues.map((issue) => (
 						<IssueItem
 							key={issue.number}
 							issue={issue}
-							onClick={() => setSelected(issue)}
-							onClose={() => setSelected(null)}
-							selected={selected?.number === issue.number}
+							onClick={() => transition(() => setSelected(issue))}
 						/>
-					))}
+					))
+				)}
 				{!selected && hasNext ? (
 					<Button
 						type="button"
-						onClick={() => loadNext(issueCommentsPerPage)}
+						onClick={() => loadNext(issuesPerPage)}
 						loading={isLoadingNext}
 						mt="4"
 						className={styles.IssueMore}

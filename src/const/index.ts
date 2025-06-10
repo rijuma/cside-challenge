@@ -6,4 +6,5 @@ export const searchHistoryEntries = 10;
 
 export const supportEmail = "marcos@rigoli.dev";
 
+export const issuesPerPage = 10;
 export const issueCommentsPerPage = 5;

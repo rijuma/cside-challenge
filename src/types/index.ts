@@ -1,4 +1,4 @@
-export * from "./comment";
+export * from "./issue-comment";
 export * from "./issue";
 export * from "./repository-history";
 export * from "./repository";
