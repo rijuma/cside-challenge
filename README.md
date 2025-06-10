@@ -72,3 +72,15 @@ It will probably evolve into a better UI than this scribble, especially to move 
 [Open in ExcaliDraw](https://excalidraw.com/#json=qc8K3VXTOOBISBZisRJ0H,z0dCYL4QnZHJ1mV2BAzwRw) - Be mindful that it could overwrite any current drawing you might have in Excalidraw currently.
 
 ![Sketch](docs/ui-sketch.svg)
+
+# Final notes
+
+There were some changes on the concepts along the implementation, so the sections are not exactly the same as the drafts above (I had to drop dark mode since the time was way overdue).
+
+I know this could be done much better, but I've enjoyed this challenge tremendously. The nested pagination made me reinforce my GraphQL concepts. I also wasn't familiar with Radix UI, this added up a bit on my delay, but I'm glad that I had the opportunity to use it.
+
+I've done some things that might not be the standard, for example I like to map the data structure into my own instead of reusing the GraphQL responses as-is, and I might have overused the contexts to have more freedom when using fetched data instead of relying on the Router loaders and prop drilling.
+
+I hope whoever evaluates this implementation, finds some useful concepts here and there.
+
+Have a good one!
