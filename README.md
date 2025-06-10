@@ -61,7 +61,7 @@ Check the live version at: https://cside-challenge.github.dev
 > [!NOTE]
 > The `Dockerfile`, the `compose.yml` and some variables on `.env.example` are just part of the configuration for the server to be deployed on a VPS using nginx as a reverse-proxy. You don't need these to run the project locally.
 
-# Mockup
+# Mockup (2025-06-02)
 
 To have a rough idea of how to show the information I've made a Excalidraw sketch with two views, the one when you open a github project and another one with an issue.
 
@@ -73,7 +73,7 @@ It will probably evolve into a better UI than this scribble, especially to move 
 
 ![Sketch](docs/ui-sketch.svg)
 
-# Final notes
+# Final notes (2025-06-09)
 
 There were some changes on the concepts along the implementation, so the sections are not exactly the same as the drafts above (I had to drop dark mode since the time was way overdue).
 
