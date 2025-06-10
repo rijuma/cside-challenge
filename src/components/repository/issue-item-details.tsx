@@ -10,7 +10,7 @@ import {
 	Separator,
 	Text,
 } from "@radix-ui/themes";
-import { Link } from "@tanstack/react-router";
+import { Link, useBlocker } from "@tanstack/react-router";
 import type { FC, MouseEvent } from "react";
 import { HtmlContent } from "../ui/html-content";
 import styles from "./issue-item-details.module.scss";
@@ -22,6 +22,15 @@ export type Props = {
 	onClose?: () => void;
 };
 export const IssueItemDetails: FC<Props> = ({ issue, onClose }) => {
+	useBlocker({
+		shouldBlockFn: () => {
+			if (!onClose) return false;
+
+			onClose?.(); // We close the issue if the user goes back.
+
+			return true;
+		},
+	});
 	const handleClose = (event: MouseEvent<HTMLButtonElement>) => {
 		event.stopPropagation();
 		onClose?.();

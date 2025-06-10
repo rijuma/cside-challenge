@@ -34,7 +34,7 @@ export const IssueItem: FC<Props> = ({ issue, onClick }) => (
 				size="3"
 				radius="full"
 			/>
-			<Flex direction="column" align="start" flexGrow="1">
+			<Flex direction="column" align="start" flexGrow="1" wrap="wrap">
 				<Text asChild align="left">
 					<Heading as="h5" size="3">
 						{issue.title}
