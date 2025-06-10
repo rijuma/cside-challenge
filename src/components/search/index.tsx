@@ -24,7 +24,12 @@ export const SearchForm: FC<Props> = ({ onSelect }: Props) => {
 	>("repository-search-history", []);
 
 	const handleSelectRepo = (repo: RepositoryHistory) => {
-		const newHistory = [...new Set([repo, ...searchHistory])].slice(
+		// We first remove the item from history if it exists.
+		const filteredHistory = searchHistory.filter(
+			({ owner, slug }) => owner !== repo.owner || slug !== repo.slug,
+		);
+		// Then we prepend it.
+		const newHistory = [repo, ...filteredHistory].slice(
 			0,
 			searchHistoryEntries, // Limit entries.
 		);
