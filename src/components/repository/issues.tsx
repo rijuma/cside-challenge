@@ -47,7 +47,10 @@ export const Issues: FC = () => {
 							issue={issue}
 							onClick={async () => {
 								await transition(() => setSelected(issue));
-								detailsRef.current?.scrollIntoView({ behavior: "smooth" });
+								detailsRef.current?.scrollIntoView({
+									block: "start",
+									behavior: "smooth",
+								});
 							}}
 						/>
 					))

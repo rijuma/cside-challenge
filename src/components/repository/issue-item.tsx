@@ -45,12 +45,12 @@ export const IssueItem: FC<Props> = ({ issue, onClick }) => (
 						<Em>#{issue.number}</Em>
 					</Text>
 					<Separator orientation="vertical" />
-					<Text>
+					<Text wrap="nowrap">
 						{issue.commentCount}{" "}
 						{issue.commentCount === 1 ? "comment" : "comments"}
 					</Text>
 					<Separator orientation="vertical" />
-					<Text color="bronze" size="1">
+					<Text color="bronze" size="1" wrap="nowrap">
 						{issue.author.username} at {issue.createdAt.toLocaleString("en-US")}
 					</Text>
 				</Flex>
