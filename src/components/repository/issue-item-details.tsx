@@ -60,7 +60,7 @@ export const IssueItemDetails: FC<Props> = ({ issue, onClose }) => {
 								</Text>
 							</Heading>
 						</Text>
-						<Flex gap="2" align="center">
+						<Flex gap="2" align="center" wrap="wrap">
 							<Text size="1">
 								<Em>#{issue.number}</Em>
 							</Text>
