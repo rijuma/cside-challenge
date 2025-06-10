@@ -34,7 +34,7 @@ export const Issues: FC = () => {
 		<DetailSection title="Issues" badge={`${issues.length} of ${issueCount}`}>
 			<Flex direction="column" gap="2" mt="2" pb="8">
 				{selected ? (
-					<div ref={detailsRef}>
+					<div ref={detailsRef} className={styles.IssueAnchor}>
 						<IssueItemDetails
 							issue={selected}
 							onClose={() => transition(() => setSelected(null))}

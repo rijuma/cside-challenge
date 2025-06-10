@@ -34,13 +34,13 @@ export const IssueItem: FC<Props> = ({ issue, onClick }) => (
 				size="3"
 				radius="full"
 			/>
-			<Flex direction="column" align="start" flexGrow="1" wrap="wrap">
+			<Flex direction="column" align="start" flexGrow="1">
 				<Text asChild align="left">
 					<Heading as="h5" size="3">
 						{issue.title}
 					</Heading>
 				</Text>
-				<Flex gap="2" align="center">
+				<Flex gap="2" align="center" wrap="wrap">
 					<Text size="1">
 						<Em>#{issue.number}</Em>
 					</Text>
