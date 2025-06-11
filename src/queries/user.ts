@@ -16,8 +16,6 @@ export const userQuery = graphql`
 export const useUserData = (queryRef: PreloadedQuery<UserQuery>): User => {
 	const { viewer } = usePreloadedQuery<UserQuery>(userQuery, queryRef);
 
-	console.log({ viewer });
-
 	const username = viewer.login || "Guest";
 	const displayName = viewer.name || "";
 	const avatarUrl = viewer.avatarUrl || "";

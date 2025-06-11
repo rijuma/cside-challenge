@@ -15,8 +15,6 @@ export const SearchToggle: FC = () => {
 		const controller = new AbortController();
 		const { signal } = controller;
 
-		console.log({ show });
-
 		document.addEventListener(
 			"keydown",
 			(event) => {

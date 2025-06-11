@@ -11,7 +11,6 @@ export const Route = createFileRoute("/_layout")({
 	component: App,
 	pendingComponent: LoadingLayout,
 	errorComponent: (error) => {
-		console.log({ error });
 		const message =
 			error?.error?.name === "RelayNetwork"
 				? ["Missing / wrong GitHub token.", "Check your environment variables."]
@@ -33,8 +32,6 @@ export const Route = createFileRoute("/_layout")({
 function App() {
 	const { userQueryRef } = Route.useLoaderData();
 	const user = useUserData(userQueryRef);
-
-	console.log({ user });
 
 	return (
 		<UserProvider value={user}>
