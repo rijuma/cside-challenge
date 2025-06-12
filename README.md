@@ -2,6 +2,8 @@
 
 Live demo at: https://cside-challenge.rigoli.dev
 
+![Preview](docs/preview.webp)
+
 ## Developer info
 
 - Full name: Juan Marcos Rigoli
