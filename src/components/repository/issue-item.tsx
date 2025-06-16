@@ -10,6 +10,7 @@ import {
 } from "@radix-ui/themes";
 import type { FC } from "react";
 import styles from "./issue-item.module.scss";
+import { IssueTags } from "./issue-tags";
 
 export type Props = {
 	issue: Issue;
@@ -54,6 +55,7 @@ export const IssueItem: FC<Props> = ({ issue, onClick }) => (
 						{issue.author.username} at {issue.createdAt.toLocaleString("en-US")}
 					</Text>
 				</Flex>
+				<IssueTags issue={issue} />
 			</Flex>
 		</Flex>
 	</Button>

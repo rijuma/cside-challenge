@@ -1,0 +1,7 @@
+.IssueTag {
+  --fg-color: color-mix(in srgb, var(--color) 30%, white);
+  --bg-color: color-mix(in srgb, var(--color), transparent 75%);
+  border-color: var(--fg-color);
+  color: var(--fg-color);
+  background: var(--bg-color);
+}
