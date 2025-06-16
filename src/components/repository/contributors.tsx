@@ -13,8 +13,7 @@ export const Contributors: FC = () => {
 		return (
 			<DetailSection title="Contributors">
 				<Blockquote color="crimson" size="1" mt="2">
-					You don't have permissions to see the contributors list on this
-					repository.
+					You don't have permissions to see the contributors on this repository.
 				</Blockquote>
 			</DetailSection>
 		);
