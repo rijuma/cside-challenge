@@ -7,6 +7,7 @@ import { HtmlContent } from "../ui/html-content";
 import { Contributors } from "./contributors";
 import styles from "./index.module.scss";
 import { Issues } from "./issues";
+import { StarButton } from "./star-button";
 
 export const Repository: FC = () => {
 	const repository = useRepository();
@@ -51,7 +52,9 @@ export const Repository: FC = () => {
 			</Flex>
 			<Text asChild color="gold" size="2">
 				<Flex gap="2" wrap="wrap" align="center" mt="2">
-					<Box>{starCount} Stars</Box>
+					<Flex gap="2" wrap="wrap" align="center">
+						{starCount} Stars <StarButton />
+					</Flex>
 					<Separator orientation="vertical" />
 					<Box>{forkCount} Forks</Box>
 					<Separator orientation="vertical" />

@@ -12,6 +12,7 @@ export type Repository = {
 	issueCount: number;
 	mainBranch: string;
 	starCount: number;
+	starred: boolean;
 	contributors:
 		| {
 				username: string;

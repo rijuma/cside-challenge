@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<bfe1cd31473c4c9ad77550af09f62f5e>>
+ * @generated SignedSource<<c122583fe14b372243115327e30d1d6f>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -47,6 +47,7 @@ export type repositoryQuery$data = {
     };
     readonly stargazerCount: number;
     readonly url: any;
+    readonly viewerHasStarred: boolean;
     readonly " $fragmentSpreads": FragmentRefs<"repositoryIssuesPaginatedFragment">;
   } | null | undefined;
 };
@@ -129,7 +130,14 @@ v8 = {
   "name": "forkCount",
   "storageKey": null
 },
-v9 = [
+v9 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "viewerHasStarred",
+  "storageKey": null
+},
+v10 = [
   {
     "alias": null,
     "args": null,
@@ -138,7 +146,7 @@ v9 = [
     "storageKey": null
   }
 ],
-v10 = {
+v11 = {
   "alias": "branches",
   "args": [
     {
@@ -151,10 +159,10 @@ v10 = {
   "kind": "LinkedField",
   "name": "refs",
   "plural": false,
-  "selections": (v9/*: any*/),
+  "selections": (v10/*: any*/),
   "storageKey": "refs(refPrefix:\"refs/heads/\")"
 },
-v11 = {
+v12 = {
   "kind": "InlineFragment",
   "selections": [
     {
@@ -164,38 +172,38 @@ v11 = {
       "kind": "LinkedField",
       "name": "history",
       "plural": false,
-      "selections": (v9/*: any*/),
+      "selections": (v10/*: any*/),
       "storageKey": null
     }
   ],
   "type": "Commit",
   "abstractKey": null
 },
-v12 = {
+v13 = {
   "alias": "issueCount",
   "args": null,
   "concreteType": "IssueConnection",
   "kind": "LinkedField",
   "name": "issues",
   "plural": false,
-  "selections": (v9/*: any*/),
-  "storageKey": null
-},
-v13 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "avatarUrl",
+  "selections": (v10/*: any*/),
   "storageKey": null
 },
 v14 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "__typename",
+  "name": "avatarUrl",
   "storageKey": null
 },
 v15 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "__typename",
+  "storageKey": null
+},
+v16 = {
   "kind": "Literal",
   "name": "orderBy",
   "value": {
@@ -203,20 +211,20 @@ v15 = {
     "field": "UPDATED_AT"
   }
 },
-v16 = [
+v17 = [
   {
     "kind": "Literal",
     "name": "first",
     "value": 10
   },
-  (v15/*: any*/),
+  (v16/*: any*/),
   {
     "kind": "Literal",
     "name": "states",
     "value": "OPEN"
   }
 ],
-v17 = {
+v18 = {
   "kind": "InlineFragment",
   "selections": [
     (v2/*: any*/)
@@ -224,29 +232,29 @@ v17 = {
   "type": "Node",
   "abstractKey": "__isNode"
 },
-v18 = {
+v19 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "bodyHTML",
   "storageKey": null
 },
-v19 = [
+v20 = [
   {
     "kind": "Literal",
     "name": "first",
     "value": 5
   },
-  (v15/*: any*/)
+  (v16/*: any*/)
 ],
-v20 = {
+v21 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "cursor",
   "storageKey": null
 },
-v21 = {
+v22 = {
   "alias": null,
   "args": null,
   "concreteType": "PageInfo",
@@ -304,7 +312,8 @@ return {
           (v6/*: any*/),
           (v7/*: any*/),
           (v8/*: any*/),
-          (v10/*: any*/),
+          (v9/*: any*/),
+          (v11/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -322,14 +331,14 @@ return {
                 "name": "target",
                 "plural": false,
                 "selections": [
-                  (v11/*: any*/)
+                  (v12/*: any*/)
                 ],
                 "storageKey": null
               }
             ],
             "storageKey": null
           },
-          (v12/*: any*/),
+          (v13/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -346,7 +355,7 @@ return {
                 "name": "nodes",
                 "plural": true,
                 "selections": [
-                  (v13/*: any*/),
+                  (v14/*: any*/),
                   (v3/*: any*/),
                   (v4/*: any*/),
                   (v5/*: any*/)
@@ -393,7 +402,7 @@ return {
             "name": "owner",
             "plural": false,
             "selections": [
-              (v14/*: any*/),
+              (v15/*: any*/),
               (v5/*: any*/),
               (v2/*: any*/)
             ],
@@ -402,7 +411,8 @@ return {
           (v6/*: any*/),
           (v7/*: any*/),
           (v8/*: any*/),
-          (v10/*: any*/),
+          (v9/*: any*/),
+          (v11/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -420,8 +430,8 @@ return {
                 "name": "target",
                 "plural": false,
                 "selections": [
-                  (v14/*: any*/),
-                  (v11/*: any*/),
+                  (v15/*: any*/),
+                  (v12/*: any*/),
                   (v2/*: any*/)
                 ],
                 "storageKey": null
@@ -430,7 +440,7 @@ return {
             ],
             "storageKey": null
           },
-          (v12/*: any*/),
+          (v13/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -447,7 +457,7 @@ return {
                 "name": "nodes",
                 "plural": true,
                 "selections": [
-                  (v13/*: any*/),
+                  (v14/*: any*/),
                   (v3/*: any*/),
                   (v4/*: any*/),
                   (v5/*: any*/),
@@ -460,7 +470,7 @@ return {
           },
           {
             "alias": null,
-            "args": (v16/*: any*/),
+            "args": (v17/*: any*/),
             "concreteType": "IssueConnection",
             "kind": "LinkedField",
             "name": "issues",
@@ -512,8 +522,8 @@ return {
                         "name": "author",
                         "plural": false,
                         "selections": [
+                          (v15/*: any*/),
                           (v14/*: any*/),
-                          (v13/*: any*/),
                           {
                             "alias": "username",
                             "args": null,
@@ -521,7 +531,7 @@ return {
                             "name": "login",
                             "storageKey": null
                           },
-                          (v17/*: any*/)
+                          (v18/*: any*/)
                         ],
                         "storageKey": null
                       },
@@ -576,13 +586,13 @@ return {
                         "kind": "LinkedField",
                         "name": "comments",
                         "plural": false,
-                        "selections": (v9/*: any*/),
+                        "selections": (v10/*: any*/),
                         "storageKey": null
                       },
-                      (v18/*: any*/),
+                      (v19/*: any*/),
                       {
                         "alias": null,
-                        "args": (v19/*: any*/),
+                        "args": (v20/*: any*/),
                         "concreteType": "IssueCommentConnection",
                         "kind": "LinkedField",
                         "name": "comments",
@@ -605,7 +615,7 @@ return {
                                 "plural": false,
                                 "selections": [
                                   (v2/*: any*/),
-                                  (v18/*: any*/),
+                                  (v19/*: any*/),
                                   {
                                     "alias": null,
                                     "args": null,
@@ -621,29 +631,29 @@ return {
                                     "name": "author",
                                     "plural": false,
                                     "selections": [
-                                      (v14/*: any*/),
+                                      (v15/*: any*/),
                                       (v4/*: any*/),
-                                      (v13/*: any*/),
+                                      (v14/*: any*/),
                                       (v5/*: any*/),
-                                      (v17/*: any*/)
+                                      (v18/*: any*/)
                                     ],
                                     "storageKey": null
                                   },
-                                  (v14/*: any*/)
+                                  (v15/*: any*/)
                                 ],
                                 "storageKey": null
                               },
-                              (v20/*: any*/)
+                              (v21/*: any*/)
                             ],
                             "storageKey": null
                           },
-                          (v21/*: any*/)
+                          (v22/*: any*/)
                         ],
                         "storageKey": "comments(first:5,orderBy:{\"direction\":\"DESC\",\"field\":\"UPDATED_AT\"})"
                       },
                       {
                         "alias": null,
-                        "args": (v19/*: any*/),
+                        "args": (v20/*: any*/),
                         "filters": [
                           "orderBy"
                         ],
@@ -653,21 +663,21 @@ return {
                         "name": "comments"
                       },
                       (v2/*: any*/),
-                      (v14/*: any*/)
+                      (v15/*: any*/)
                     ],
                     "storageKey": null
                   },
-                  (v20/*: any*/)
+                  (v21/*: any*/)
                 ],
                 "storageKey": null
               },
-              (v21/*: any*/)
+              (v22/*: any*/)
             ],
             "storageKey": "issues(first:10,orderBy:{\"direction\":\"DESC\",\"field\":\"UPDATED_AT\"},states:\"OPEN\")"
           },
           {
             "alias": null,
-            "args": (v16/*: any*/),
+            "args": (v17/*: any*/),
             "filters": [
               "states",
               "orderBy"
@@ -683,16 +693,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "d0a55982cf523b0206cb531de340d22c",
+    "cacheID": "7e16ff074281e093b675459e63d9606a",
     "id": null,
     "metadata": {},
     "name": "repositoryQuery",
     "operationKind": "query",
-    "text": "query repositoryQuery(\n  $owner: String!\n  $slug: String!\n) {\n  repository(owner: $owner, name: $slug) {\n    id\n    name\n    url\n    owner {\n      __typename\n      login\n      id\n    }\n    descriptionHTML\n    stargazerCount\n    forkCount\n    branches: refs(refPrefix: \"refs/heads/\") {\n      totalCount\n    }\n    defaultBranchRef {\n      name\n      target {\n        __typename\n        ... on Commit {\n          history {\n            totalCount\n          }\n        }\n        id\n      }\n      id\n    }\n    issueCount: issues {\n      totalCount\n    }\n    collaborators {\n      nodes {\n        avatarUrl\n        name\n        url\n        login\n        id\n      }\n    }\n    ...repositoryIssuesPaginatedFragment\n  }\n}\n\nfragment issueCommentsPaginatedFragment on Issue {\n  comments(first: 5, orderBy: {field: UPDATED_AT, direction: DESC}) {\n    edges {\n      node {\n        id\n        bodyHTML\n        updatedAt\n        author {\n          __typename\n          url\n          avatarUrl\n          login\n          ... on Node {\n            __isNode: __typename\n            id\n          }\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment repositoryIssuesPaginatedFragment on Repository {\n  issues(first: 10, states: OPEN, orderBy: {field: UPDATED_AT, direction: DESC}) {\n    edges {\n      node {\n        number\n        url\n        title\n        createdAt\n        author {\n          __typename\n          avatarUrl\n          username: login\n          ... on Node {\n            __isNode: __typename\n            id\n          }\n        }\n        tags: labels(first: 99) {\n          nodes {\n            color\n            name\n            description\n            id\n          }\n        }\n        commentCount: comments {\n          totalCount\n        }\n        bodyHTML\n        ...issueCommentsPaginatedFragment\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
+    "text": "query repositoryQuery(\n  $owner: String!\n  $slug: String!\n) {\n  repository(owner: $owner, name: $slug) {\n    id\n    name\n    url\n    owner {\n      __typename\n      login\n      id\n    }\n    descriptionHTML\n    stargazerCount\n    forkCount\n    viewerHasStarred\n    branches: refs(refPrefix: \"refs/heads/\") {\n      totalCount\n    }\n    defaultBranchRef {\n      name\n      target {\n        __typename\n        ... on Commit {\n          history {\n            totalCount\n          }\n        }\n        id\n      }\n      id\n    }\n    issueCount: issues {\n      totalCount\n    }\n    collaborators {\n      nodes {\n        avatarUrl\n        name\n        url\n        login\n        id\n      }\n    }\n    ...repositoryIssuesPaginatedFragment\n  }\n}\n\nfragment issueCommentsPaginatedFragment on Issue {\n  comments(first: 5, orderBy: {field: UPDATED_AT, direction: DESC}) {\n    edges {\n      node {\n        id\n        bodyHTML\n        updatedAt\n        author {\n          __typename\n          url\n          avatarUrl\n          login\n          ... on Node {\n            __isNode: __typename\n            id\n          }\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment repositoryIssuesPaginatedFragment on Repository {\n  issues(first: 10, states: OPEN, orderBy: {field: UPDATED_AT, direction: DESC}) {\n    edges {\n      node {\n        number\n        url\n        title\n        createdAt\n        author {\n          __typename\n          avatarUrl\n          username: login\n          ... on Node {\n            __isNode: __typename\n            id\n          }\n        }\n        tags: labels(first: 99) {\n          nodes {\n            color\n            name\n            description\n            id\n          }\n        }\n        commentCount: comments {\n          totalCount\n        }\n        bodyHTML\n        ...issueCommentsPaginatedFragment\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
   }
 };
 })();
 
-(node as any).hash = "5a8f3bf78aa2709604b2416622c967a3";
+(node as any).hash = "5e2a12e1fe8ba42654b041ed6f29160f";
 
 export default node;

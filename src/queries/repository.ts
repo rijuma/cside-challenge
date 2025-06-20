@@ -16,6 +16,7 @@ export const repositoryQuery = graphql`
       descriptionHTML,
       stargazerCount,
       forkCount,
+			viewerHasStarred,
       branches:refs(refPrefix:"refs/heads/") {
         totalCount
       }
@@ -68,6 +69,7 @@ export const useRepositoryData = (
 		collaborators,
 		defaultBranchRef,
 		forkCount,
+		viewerHasStarred,
 		stargazerCount: starCount,
 		issueCount: issues,
 	} = repository;
@@ -95,6 +97,7 @@ export const useRepositoryData = (
 		commitCount,
 		contributors,
 		forkCount,
+		starred: viewerHasStarred,
 		issueCount,
 		mainBranch,
 		starCount,
